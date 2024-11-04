@@ -9,6 +9,7 @@
     <style>
         body {
             background-color: #f2f2f2;
+            font-family: 'Arial', sans-serif;
         }
         .header {
             background-color: #e91a5f;
@@ -21,86 +22,112 @@
         .navbar {
             margin-top: 10px;
         }
-        .hero {
-            background: url('https://via.placeholder.com/1200x400') no-repeat center center;
-            background-size: cover;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .navbar-nav .nav-item .nav-link {
             color: white;
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 8px 15px;
+            border-radius: 5px;
         }
-        .hero p {
-            font-size: 1.2rem;
-            margin-top: 10px;
+        .navbar-nav .nav-item .nav-link:hover {
+            background-color: #ff6f91;
+            color: #fffbe7;
         }
         .card {
             margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
             border: none;
+            transition: transform 0.3s;
+            background-color: #fff; /* Fondo blanco para las tarjetas */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+        }
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra más intensa al hacer hover */
         }
         .card img {
-            height: 200px;
+            height: 220px;
             object-fit: cover;
+        }
+        .card-title {
+            color: #e91a5f; /* Color rosado para los títulos de las tarjetas */
+        }
+        .card-text {
+            color: #555; /* Color gris oscuro para el texto */
         }
         .footer {
             background-color: #343a40;
             color: white;
             padding: 20px 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #ffc75f;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .btn-primary {
+            background-color:#e91a5f; /* Color de fondo del botón */
+            border: none; /* Sin borde */
+        }
+        .btn-primary:hover {
+            background-color:#ff6f91; /* Color rosado más oscuro al hacer hover */
         }
     </style>
 </head>
 <body>
 
-<header class="header text-center">
-    <h1>Sistema de Gestión de Recetas</h1>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="recetas.html">Recetas</a></li>
-                <li class="nav-item"><a class="nav-link" href="categorias.html">Categorías</a></li>
-                <li class="nav-item"><a class="nav-link" href="acerca.html">Acerca de</a></li>
-                <li class="nav-item"><a class="nav-link" href="agregar.html">Agregar receta</a></li>
-                <li class="nav-item"><a class="nav-link" href="iniciar_sesion.html">Iniciar Sesión</a></li>
-            </ul>
-        </div>
-    </nav>
+<header class="header">
+    <div class="container d-flex flex-column align-items-center">
+        <h1 class="text-center mb-0">Sistema de Gestión de Recetas</h1>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="recetas.html"><i class="fas fa-utensils"></i> Recetas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="agregar.html"><i class="fas fa-plus-circle"></i> Agregar receta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="acerca.html"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iniciar_sesion.html"><i class="fas fa-sign-in-alt"></i> salir</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </header>
 
-    <!-- Carrusel de imágenes -->
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="Imagen 1">
-            </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="Imagen 2">
-            </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="Imagen 3">
-            </div>
+<!-- Carrusel de imágenes -->
+<div id="carouselExampleIndicators" class="carousel slide mt-4" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="Imagen 1">
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Anterior</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Siguiente</span>
-        </a>
+        <div class="carousel-item">
+            <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="Imagen 2">
+        </div>
+        <div class="carousel-item">
+            <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="Imagen 3">
+        </div>
     </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Siguiente</span>
+    </a>
+</div>
 
+<!-- Sección de Recetas Destacadas -->
 <div class="container mt-4">
     <h2>Recetas Destacadas</h2>
     <div class="row">
@@ -108,20 +135,71 @@
             <div class="card shadow-sm">
                 <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
                 <div class="card-body">
-                    <h5 class="card-title">Título de la Receta</h5>
+                    <h5 class="card-title">Título de la Receta 1</h5>
                     <p class="card-text">Descripción breve de la receta.</p>
                     <a href="#" class="btn btn-primary">Ver Receta</a>
                 </div>
             </div>
         </div>
-        <!-- Más tarjetas de recetas aquí -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
+                <div class="card-body">
+                    <h5 class="card-title">Título de la Receta 2</h5>
+                    <p class="card-text">Descripción breve de la receta.</p>
+                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
+                <div class="card-body">
+                    <h5 class="card-title">Título de la Receta 3</h5>
+                    <p class="card-text">Descripción breve de la receta.</p>
+                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjetas adicionales -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
+                <div class="card-body">
+                    <h5 class="card-title">Título de la Receta 4</h5>
+                    <p class="card-text">Descripción breve de la receta.</p>
+                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
+                <div class="card-body">
+                    <h5 class="card-title">Título de la Receta 5</h5>
+                    <p class="card-text">Descripción breve de la receta.</p>
+                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
+                <div class="card-body">
+                    <h5 class="card-title">Título de la Receta 6</h5>
+                    <p class="card-text">Descripción breve de la receta.</p>
+                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<footer class="footer mt-4 text-center">
+<!-- Footer -->
+<footer class="footer mt-4">
     <div class="container">
         <p>&copy; 2024 Sistema de Gestión de Recetas. Todos los derechos reservados.</p>
-        <p><a href="#" class="text-light">Política de Privacidad</a> | <a href="#" class="text-light">Términos y Condiciones</a></p>
+        <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
     </div>
 </footer>
 

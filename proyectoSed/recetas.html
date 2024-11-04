@@ -3,69 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recetas - Sistema de gestión de recetas</title>
+    <title>Sistema de Gestión de Recetas</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f2f2f2;
+            font-family: 'Arial', sans-serif;
         }
         .header {
             background-color: #e91a5f;
             color: white;
             padding: 20px 0;
         }
+        .header h1 {
+            margin: 0;
+        }
+        .navbar {
+            margin-top: 10px;
+        }
+        .navbar-nav .nav-item .nav-link {
+            color: white;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        .navbar-nav .nav-item .nav-link:hover {
+            background-color: #ff6f91;
+            color: #fffbe7;
+        }
+        .search-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+        .search-section input {
+            width: 350px;
+            border-radius: 30px;
+            padding: 12px;
+            border: 1px solid #ff9671;
+        }
+        .search-section button {
+            margin-left: 10px;
+            border-radius: 30px;
+            background-color: #ff9671;
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            font-weight: bold;
+        }
+        .category-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .category-section h4 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #e91a5f;
+        }
+        .category-button {
+            margin: 5px;
+            border: none;
+            color: white;
+            background-color: #e91a5f;
+            border-radius: 20px;
+            padding: 10px 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .category-button:hover {
+            background-color: #ff6f91;
+            transform: scale(1.05);
+        }
+        .card {
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            transition: transform 0.3s;
+            background-color: #fff; /* Fondo blanco para las tarjetas */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+        }
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra más intensa al hacer hover */
+        }
+        .card img {
+            height: 220px;
+            object-fit: cover;
+        }
+        .card-title {
+            color: #e91a5f; /* Color rosado para los títulos de las tarjetas */
+        }
+        .card-text {
+            color: #555; /* Color gris oscuro para el texto */
+        }
+        .btn-primary {
+            background-color:#e91a5f; /* Color de fondo del botón */
+            border: none; /* Sin borde */
+        }
+        .btn-primary:hover {
+            background-color:#ff6f91; /* Color rosado más oscuro al hacer hover */
+        }
         .footer {
             background-color: #343a40;
             color: white;
             padding: 20px 0;
+            text-align: center;
         }
-
+        .footer a {
+            color: #ffc75f;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
-<header class="header text-center">
-    <h1>Sistema de Gestión de Recetas</h1>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="recetas.html">Recetas</a></li>
-                <li class="nav-item"><a class="nav-link" href="categorias.html">Categorías</a></li>
-                <li class="nav-item"><a class="nav-link" href="acerca.html">Acerca de</a></li>
-                <li class="nav-item"><a class="nav-link" href="agregar.html">Agregar receta</a></li>
-                <li class="nav-item"><a class="nav-link" href="iniciar_sesion.html">Iniciar Sesión</a></li>
-            </ul>
-        </div>
-    </nav>
+<header class="header">
+    <div class="container d-flex flex-column align-items-center">
+        <h1 class="text-center mb-0">Sistema de Gestión de Recetas</h1>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="recetas.html"><i class="fas fa-utensils"></i> Recetas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="agregar.html"><i class="fas fa-plus-circle"></i> Agregar receta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="acerca.html"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iniciar_sesion.html"><i class="fas fa-sign-in-alt"></i> salir</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </header>
 
-<div class="container mt-4">
-    <h2>Recetas</h2>
-    <div class="row">
+<div class="container mt-5">
+    <!-- Sección de búsqueda -->
+    <div class="search-section">
+        <input type="text" placeholder="Buscar recetas..." aria-label="Buscar recetas">
+        <button class="btn">Buscar</button>
+    </div>
+
+    <!-- Sección de categorías -->
+    <div class="category-section">
+        <h4>Explora por Categorías</h4>
+        <button class="btn category-button">Entrantes</button>
+        <button class="btn category-button">Platos Principales</button>
+        <button class="btn category-button">Postres</button>
+        <button class="btn category-button">Bebidas</button>
+        <button class="btn category-button">Ensaladas</button>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Tarjetas de recetas -->
         <div class="col-md-4">
             <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 1">
                 <div class="card-body">
-                    <h5 class="card-title">Título de la Receta</h5>
-                    <p class="card-text">Descripción breve de la receta.</p>
+                    <h5 class="card-title">Receta Deliciosa 1</h5>
+                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
                     <a href="#" class="btn btn-primary">Ver Receta</a>
                 </div>
             </div>
         </div>
-        <!-- Más tarjetas de recetas aquí -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 2">
+                <div class="card-body">
+                    <h5 class="card-title">Receta Deliciosa 2</h5>
+                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
+                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 3">
+                <div class="card-body">
+                    <h5 class="card-title">Receta Deliciosa 3</h5>
+                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
+                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 4">
+                <div class="card-body">
+                    <h5 class="card-title">Receta Deliciosa 4</h5>
+                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
+                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 5">
+                <div class="card-body">
+                    <h5 class="card-title">Receta Deliciosa 5</h5>
+                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
+                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 6">
+                <div class="card-body">
+                    <h5 class="card-title">Receta Deliciosa 6</h5>
+                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
+                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<footer class="footer mt-4 text-center">
-    <div class="container">
-        <p>&copy; 2024 Sistema de Gestión de Recetas. Todos los derechos reservados.</p>
-        <p><a href="#" class="text-light">Política de Privacidad</a> | <a href="#" class="text-light">Términos y Condiciones</a></p>
-    </div>
+<footer class="footer mt-5">
+    <p>&copy; 2024 Sistema de Gestión de Recetas. Todos los derechos reservados.</p>
+    <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

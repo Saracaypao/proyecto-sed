@@ -3,49 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayuda - Sistema de Gestión de Recetas</title>
+    <title>Agregar Receta - Sistema de Gestión de Recetas</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f2f2f2;
+            background-color: #fff5f8;
+            font-family: 'Arial', sans-serif;
         }
         .header {
             background-color: #e91a5f;
             color: white;
             padding: 20px 0;
         }
+        .header h1 {
+            margin: 0;
+        }
+        .navbar {
+            margin-top: 10px;
+        }
+        .navbar-nav .nav-item .nav-link {
+            color: white;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        .navbar-nav .nav-item .nav-link:hover {
+            background-color: #ff6f91;
+            color: #fffbe7;
+        }
         .footer {
             background-color: #343a40;
             color: white;
             padding: 20px 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #ffc75f;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .form-section {
+            margin: 50px auto;
+            padding: 30px;
+            background: linear-gradient(145deg, #ffe3ea, #ffffff);
+            border-radius: 25px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.7);
+            max-width: 800px;
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .form-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #e91a5f;
+            text-align: center;
+            text-shadow: 1px 1px 4px rgba(233, 26, 95, 0.3);
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #555;
+        }
+        .form-control, .form-control-file {
+            border-radius: 15px;
+            border: 2px solid #e91a5f;
+            transition: box-shadow 0.3s;
+        }
+        .form-control:focus, .form-control-file:focus {
+            box-shadow: 0 0 10px rgba(233, 26, 95, 0.3);
+        }
+        .btn-primary {
+            background-color: #e91a5f;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #d41651;
+            transform: translateY(-3px);
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-<header class="header text-center">
-    <h1>Sistema de Gestión de Recetas</h1>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="recetas.html">Recetas</a></li>
-                <li class="nav-item"><a class="nav-link" href="categorias.html">Categorías</a></li>
-                <li class="nav-item"><a class="nav-link" href="acerca.html">Acerca de</a></li>
-                <li class="nav-item"><a class="nav-link" href="agregar.html">Agregar receta</a></li>
-                <li class="nav-item"><a class="nav-link" href="iniciar_sesion.html">Iniciar Sesión</a></li>
-            </ul>
-        </div>
-    </nav>
+<header class="header">
+    <div class="container d-flex flex-column align-items-center">
+        <h1 class="text-center mb-0">Sistema de Gestión de Recetas</h1>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="recetas.html"><i class="fas fa-utensils"></i> Recetas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="agregar.html"><i class="fas fa-plus-circle"></i> Agregar receta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="acerca.html"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iniciar_sesion.html"><i class="fas fa-sign-in-alt"></i> salir</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </header>
 
-<div class="container mt-4">
-    <h2>Ayuda</h2>
-    <p>Si necesitas asistencia con el uso del sistema, por favor contacta a nuestro equipo de soporte a través del correo: soporte@recetassistema.com</p>
+<div class="container">
+    <div class="form-section">
+        <h2>Agregar Nueva Receta</h2>
+        <form>
+            <div class="form-group">
+                <label for="nombreReceta">Nombre de la Receta</label>
+                <input type="text" class="form-control" id="nombreReceta" placeholder="Escribe el nombre de la receta" required>
+            </div>
+            <div class="form-group">
+                <label for="ingredientes">Ingredientes</label>
+                <textarea class="form-control" id="ingredientes" rows="4" placeholder="Lista de ingredientes" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="preparacion">Instrucciones de Preparación</label>
+                <textarea class="form-control" id="preparacion" rows="4" placeholder="Describe los pasos de preparación" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="imagenReceta">Imagen de la Receta</label>
+                <input type="file" class="form-control-file" id="imagenReceta" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary d-block mx-auto">Agregar Receta</button>
+        </form>
+    </div>
 </div>
 
 <footer class="footer mt-4 text-center">
