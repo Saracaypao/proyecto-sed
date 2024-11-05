@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gestión de Recetas</title>
+    <title>Inicio - Mi recetario</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href= "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f2f2f2;
-            font-family: 'Arial', sans-serif;
+            font-family: "Nunito Sans", sans-serif;
         }
         .header {
             background-color: #e91a5f;
             color: white;
             padding: 20px 0;
+            margin-bottom: 0;
         }
         .header h1 {
             margin: 0;
+            font-family: "Nunito Sans", sans-serif;
+            text-transform: uppercase;
         }
         .navbar {
             margin-top: 10px;
+            font-family: "Nunito Sans", sans-serif;
         }
         .navbar-nav .nav-item .nav-link {
             color: white;
@@ -32,6 +37,13 @@
             background-color: #ff6f91;
             color: #fffbe7;
         }
+        .carousel {
+            margin-top: 0; /* Elimina el margen superior */
+        }
+        h2 {
+            color: #080304b9;
+        }
+
         .card {
             margin-bottom: 20px;
             border-radius: 15px;
@@ -50,7 +62,7 @@
             object-fit: cover;
         }
         .card-title {
-            color: #e91a5f; /* Color rosado para los títulos de las tarjetas */
+            color: #c74e77; /* Color rosado para los títulos de las tarjetas */
         }
         .card-text {
             color: #555; /* Color gris oscuro para el texto */
@@ -71,6 +83,7 @@
         .btn-primary {
             background-color:#e91a5f; /* Color de fondo del botón */
             border: none; /* Sin borde */
+            border-radius: 0;
         }
         .btn-primary:hover {
             background-color:#ff6f91; /* Color rosado más oscuro al hacer hover */
@@ -81,7 +94,7 @@
 
 <header class="header">
     <div class="container d-flex flex-column align-items-center">
-        <h1 class="text-center mb-0">Sistema de Gestión de Recetas</h1>
+        <h1 class="text-center mb-0">Mi recetario</h1>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -92,7 +105,7 @@
                     <li class="nav-item"><a class="nav-link" href="recetas.html"><i class="fas fa-utensils"></i> Recetas</a></li>
                     <li class="nav-item"><a class="nav-link" href="agregar.html"><i class="fas fa-plus-circle"></i> Agregar receta</a></li>
                     <li class="nav-item"><a class="nav-link" href="acerca.html"><i class="fas fa-info-circle"></i> Acerca de</a></li>
-                    <li class="nav-item"><a class="nav-link" href="iniciar_sesion.html"><i class="fas fa-sign-in-alt"></i> salir</a></li>
+                    <li class="nav-item"><a class="nav-link" href="landingpage.html"><i class="fas fa-sign-in-alt"></i> salir</a></li>
                 </ul>
             </div>
         </nav>
@@ -100,7 +113,7 @@
 </header>
 
 <!-- Carrusel de imágenes -->
-<div id="carouselExampleIndicators" class="carousel slide mt-4" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -129,7 +142,7 @@
 
 <!-- Sección de Recetas Destacadas -->
 <div class="container mt-4">
-    <h2>Recetas Destacadas</h2>
+    <h2 >Recetas destacadas</h2>
     <div class="row">
         <div class="col-md-4">
             <div class="card shadow-sm">
@@ -137,7 +150,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Título de la Receta 1</h5>
                     <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                    <a href="#" class="btn btn-primary">Ver receta</a>
                 </div>
             </div>
         </div>
@@ -147,7 +160,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Título de la Receta 2</h5>
                     <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                    <a href="#" class="btn btn-primary">Ver receta</a>
                 </div>
             </div>
         </div>
@@ -157,7 +170,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Título de la Receta 3</h5>
                     <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                    <a href="#" class="btn btn-primary">Ver receta</a>
                 </div>
             </div>
         </div>
@@ -168,7 +181,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Título de la Receta 4</h5>
                     <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                    <a href="#" class="btn btn-primary">Ver receta</a>
                 </div>
             </div>
         </div>
@@ -178,7 +191,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Título de la Receta 5</h5>
                     <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                    <a href="#" class="btn btn-primary">Ver receta</a>
                 </div>
             </div>
         </div>
@@ -188,7 +201,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Título de la Receta 6</h5>
                     <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver Receta</a>
+                    <a href="#" class="btn btn-primary">Ver receta</a>
                 </div>
             </div>
         </div>
@@ -198,7 +211,7 @@
 <!-- Footer -->
 <footer class="footer mt-4">
     <div class="container">
-        <p>&copy; 2024 Sistema de Gestión de Recetas. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Mi recetario. Todos los derechos reservados.</p>
         <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
     </div>
 </footer>

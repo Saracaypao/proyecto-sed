@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Receta - Sistema de Gestión de Recetas</title>
+    <title>Agregar receta - Mi recetario</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href= "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #fff5f8;
-            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            font-family: 'Nunito Sans', sans-serif;
         }
         .header {
             background-color: #e91a5f;
@@ -18,6 +19,7 @@
         }
         .header h1 {
             margin: 0;
+            text-transform: uppercase;
         }
         .navbar {
             margin-top: 10px;
@@ -32,61 +34,75 @@
             background-color: #ff6f91;
             color: #fffbe7;
         }
-        .footer {
-            background-color: #343a40;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        .footer a {
-            color: #ffc75f;
-            text-decoration: none;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
+
         .form-section {
             margin: 50px auto;
             padding: 30px;
-            background: linear-gradient(145deg, #ffe3ea, #ffffff);
-            border-radius: 25px;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.7);
             max-width: 800px;
             animation: fadeIn 1s ease-out;
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+
         .form-section h2 {
-            font-size: 2.2rem;
+            text-transform: uppercase;
+            font-size: 1.7rem;
             margin-bottom: 20px;
-            color: #e91a5f;
-            text-align: center;
-            text-shadow: 1px 1px 4px rgba(233, 26, 95, 0.3);
+            color: #080304b9;
+            text-align: start;
         }
         .form-group label {
-            font-weight: bold;
-            color: #555;
+            color: #424242;
+            font-weight: 300;
         }
-        .form-control, .form-control-file {
-            border-radius: 15px;
-            border: 2px solid #e91a5f;
-            transition: box-shadow 0.3s;
+        /* Inputs cuadrados, sin bordes y color gris tenue */
+        .form-control {
+            background-color: #e9ecef; /* Gris tenue */
+            border: none;
+            border-radius: 0; /* Cuadrado */
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: #495057;
+            padding: 10px; /* Ajuste de padding para apariencia */
+            transition: background-color 0.2s;
         }
+        /* Placeholder estilo */
+        .form-control::placeholder {
+            color: #5a636b;
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+        .form-control-file {
+            background-color: #e9ecef; /* Fondo gris tenue */
+            padding: 6px 12px; /* Espaciado interno */
+            border-radius: 0px; /* Borde redondeado */
+            color: #5a636b; /* Color de texto */
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .form-control-file::file-selector-button {
+            border: 0px solid #ced4da; /* Borde gris */
+            padding: 6px 12px; /* Espaciado interno */
+            margin-right: 10px; /* Espacio a la derecha */
+            background-color: #e9ecef; /* Fondo gris */
+            color: #5a636b; /* Color de texto */
+            border-radius: 0; 
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        /* Remover el color de fondo blanco, borde azul y sombra en foco */
         .form-control:focus, .form-control-file:focus {
-            box-shadow: 0 0 10px rgba(233, 26, 95, 0.3);
+            background-color: #e9ecef; /* Mantener el fondo gris tenue */
+            border: 3px solid #adb5bd; /* Borde gris tenue */
+            outline: none; /* Remover el borde de enfoque por defecto */
+            box-shadow: none; /* Remover la sombra azul */
+            transition: none;
         }
+
         .btn-primary {
             background-color: #e91a5f;
             border: none;
-            border-radius: 25px;
+            border-radius: 0;
             padding: 10px 20px;
             transition: background-color 0.3s, transform 0.2s;
         }
@@ -100,13 +116,20 @@
             padding: 20px 0;
             text-align: center;
         }
+        .footer a {
+            color: #ffc75f;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
 <header class="header">
     <div class="container d-flex flex-column align-items-center">
-        <h1 class="text-center mb-0">Sistema de Gestión de Recetas</h1>
+        <h1 class="text-center mb-0">Mi recetario</h1>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -117,7 +140,7 @@
                     <li class="nav-item"><a class="nav-link" href="recetas.html"><i class="fas fa-utensils"></i> Recetas</a></li>
                     <li class="nav-item"><a class="nav-link" href="agregar.html"><i class="fas fa-plus-circle"></i> Agregar receta</a></li>
                     <li class="nav-item"><a class="nav-link" href="acerca.html"><i class="fas fa-info-circle"></i> Acerca de</a></li>
-                    <li class="nav-item"><a class="nav-link" href="iniciar_sesion.html"><i class="fas fa-sign-in-alt"></i> salir</a></li>
+                    <li class="nav-item"><a class="nav-link" href="landingpage.html"><i class="fas fa-sign-in-alt"></i> salir</a></li>
                 </ul>
             </div>
         </nav>
@@ -126,10 +149,10 @@
 
 <div class="container">
     <div class="form-section">
-        <h2>Agregar Nueva Receta</h2>
+        <h2>Agregar nueva receta</h2>
         <form>
             <div class="form-group">
-                <label for="nombreReceta">Nombre de la Receta</label>
+                <label for="nombreReceta">Nombre de la receta</label>
                 <input type="text" class="form-control" id="nombreReceta" placeholder="Escribe el nombre de la receta" required>
             </div>
             <div class="form-group">
@@ -137,26 +160,21 @@
                 <textarea class="form-control" id="ingredientes" rows="4" placeholder="Lista de ingredientes" required></textarea>
             </div>
             <div class="form-group">
-                <label for="preparacion">Instrucciones de Preparación</label>
+                <label for="preparacion">Instrucciones de preparación</label>
                 <textarea class="form-control" id="preparacion" rows="4" placeholder="Describe los pasos de preparación" required></textarea>
             </div>
             <div class="form-group">
-                <label for="imagenReceta">Imagen de la Receta</label>
+                <label for="imagenReceta">Imagen de la receta</label>
                 <input type="file" class="form-control-file" id="imagenReceta" accept="image/*">
             </div>
-            <button type="submit" class="btn btn-primary d-block mx-auto">Agregar Receta</button>
+            <button type="submit" class="btn btn-primary d-block mx-auto">Agregar receta</button>
         </form>
     </div>
 </div>
 
-<footer class="footer mt-4 text-center">
-    <div class="container">
-        <p>&copy; 2024 Sistema de Gestión de Recetas. Todos los derechos reservados.</p>
-        <p>
-            <a href="#" class="text-light">Política de Privacidad</a> | 
-            <a href="#" class="text-light">Términos y Condiciones</a>
-        </p>
-    </div>
+<footer class="footer mt-5">
+    <p>&copy; 2024 Mi recetario. Todos los derechos reservados.</p>
+    <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
