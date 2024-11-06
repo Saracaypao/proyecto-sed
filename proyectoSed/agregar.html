@@ -34,14 +34,12 @@
             background-color: #ff6f91;
             color: #fffbe7;
         }
-
         .form-section {
             margin: 50px auto;
             padding: 30px;
             max-width: 800px;
             animation: fadeIn 1s ease-out;
         }
-
         .form-section h2 {
             text-transform: uppercase;
             font-size: 1.7rem;
@@ -53,52 +51,48 @@
             color: #424242;
             font-weight: 300;
         }
-        /* Inputs cuadrados, sin bordes y color gris tenue */
+        /* inputs y otros texts cuadrados y sin bordes*/
         .form-control {
-            background-color: #e9ecef; /* Gris tenue */
+            background-color: #e9ecef; 
             border: none;
-            border-radius: 0; /* Cuadrado */
+            border-radius: 0; 
             font-weight: 300;
             font-size: 0.9rem;
             color: #495057;
-            padding: 10px; /* Ajuste de padding para apariencia */
+            padding: 10px; 
             transition: background-color 0.2s;
         }
-        /* Placeholder estilo */
         .form-control::placeholder {
             color: #5a636b;
             font-weight: 300;
             font-size: 0.9rem;
         }
         .form-control-file {
-            background-color: #e9ecef; /* Fondo gris tenue */
-            padding: 6px 12px; /* Espaciado interno */
-            border-radius: 0px; /* Borde redondeado */
-            color: #5a636b; /* Color de texto */
+            background-color: #e9ecef; 
+            padding: 6px 12px; 
+            border-radius: 0px; 
+            color: #5a636b; 
             font-size: 0.9rem;
             outline: none;
         }
-
         .form-control-file::file-selector-button {
-            border: 0px solid #ced4da; /* Borde gris */
-            padding: 6px 12px; /* Espaciado interno */
-            margin-right: 10px; /* Espacio a la derecha */
-            background-color: #e9ecef; /* Fondo gris */
-            color: #5a636b; /* Color de texto */
+            border: 0px solid #ced4da; 
+            padding: 6px 12px; 
+            margin-right: 10px; 
+            background-color: #e9ecef; 
+            color: #5a636b; 
             border-radius: 0; 
             cursor: pointer;
             transition: background-color 0.2s;
         }
-
-        /* Remover el color de fondo blanco, borde azul y sombra en foco */
+        /* al darle click se forma un borde gris */
         .form-control:focus, .form-control-file:focus {
-            background-color: #e9ecef; /* Mantener el fondo gris tenue */
-            border: 3px solid #adb5bd; /* Borde gris tenue */
-            outline: none; /* Remover el borde de enfoque por defecto */
-            box-shadow: none; /* Remover la sombra azul */
+            background-color: #e9ecef; 
+            border: 3px solid #adb5bd; 
+            outline: none; 
+            box-shadow: none; 
             transition: none;
         }
-
         .btn-primary {
             background-color: #e91a5f;
             border: none;
@@ -123,6 +117,38 @@
         .footer a:hover {
             text-decoration: underline;
         }
+        .form-select {
+            --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+            display: block;
+            width: 100%;
+            padding: 0.75rem 4.5rem 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: #5a636b; 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: #e9ecef;
+            background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+            background-repeat: no-repeat;
+            background-position: right 1.5rem center;
+            background-size: 16px 12px;
+            border: none;
+            border-radius: 0;
+            outline: none; 
+            box-shadow: none; 
+            transition: background-color 0.2s;
+        }
+        /* al darle click se forma un borde gris */
+        .form-select:focus {
+            background-color: #e9ecef; 
+            border: 3px solid #adb5bd; 
+            outline: none; 
+            box-shadow: none; 
+            transition: none;
+        }
+        
     </style>
 </head>
 <body>
@@ -155,6 +181,20 @@
                 <label for="nombreReceta">Nombre de la receta</label>
                 <input type="text" class="form-control" id="nombreReceta" placeholder="Escribe el nombre de la receta" required>
             </div>
+            <div class="form-group">
+                <label for="descripciónReceta">Descripción de la receta</label>
+                <textarea class="form-control" id="descripciónReceta" rows="4" placeholder="Descripción" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="categoriaReceta" >Categoría de la receta</label>
+                <select class="form-select" id="categoriaReceta">
+                  <option>Entradas</option>
+                  <option>Platos principales</option>
+                  <option>Complementos</option>
+                  <option>Bebidas</option>
+                  <option>Postres</option>
+                </select>
+              </div>
             <div class="form-group">
                 <label for="ingredientes">Ingredientes</label>
                 <textarea class="form-control" id="ingredientes" rows="4" placeholder="Lista de ingredientes" required></textarea>

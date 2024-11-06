@@ -71,12 +71,11 @@
         }
         .modal-content .btn {
             align-self: stretch;
-            margin-top: auto; /* Esto obliga al botón a ir al fondo del formulario */
+            margin-top: auto; /* esto hace que el botón vaya al fondo del formulario */
         }
         .modal-content h2 {
             text-transform: uppercase;
         }
-        
         .options {
             display: flex;
             justify-content: space-between;
@@ -84,23 +83,22 @@
             color: #555;
         }
         .options a {
-            color: #e91a5f; /* Color rosado */
+            color: #e91a5f; 
             text-decoration: none;
         }
         .options a:hover {
             text-decoration: underline;
         }
-        /* Inputs cuadrados, sin bordes y color gris tenue */
+        /* inputs y otros texts cuadrados y sin bordes*/
         .form-control {
-            background-color: #e9ecef; /* Gris tenue */
+            background-color: #e9ecef;
             border: none;
-            border-radius: 0; /* Cuadrado */
+            border-radius: 0; 
             font-weight: 300;
             font-size: 0.9rem;
             color: #495057;
-            padding: 10px; /* Ajuste de padding para apariencia */
+            padding: 10px; 
         }
-        /* Placeholder estilo */
         .form-control::placeholder {
             color: #adb5bd;
             font-weight: 300;
@@ -110,15 +108,13 @@
         .rs-link {
             color:  #ec4d82 !important;
         }
-
         .rs-link:hover {
             text-decoration: underline;
         }
-
     </style>
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Mi recetario</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,7 +132,7 @@
         </div>
     </nav>
 
-    <!-- Carousel -->
+    <!-- carousel -->
     <div id="carouselExample" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active" style="background-image: url('imagen1.jpeg');">
@@ -165,7 +161,7 @@
         </a>
     </div>
 
-    <!-- Modal de Iniciar Sesión -->
+    <!-- modal de iniciar sesión -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -183,14 +179,14 @@
                         <label><input type="checkbox" class="custom-checkbox"> Recordarme</label>
                         <a href="#">¿Olvidaste tu contraseña?</a>
                     </div>
-                    <button type="submit" class="btn btn-success btn-block">Entrar</button>
+                    <button type="submit" class="btn btn-success btn-block">Ingresar</button>
                 </form>
                 <p class="text-center mt-3">¿No tienes una cuenta? <a href="#" class="rs-link" onclick="showRegisterModal()">Regístrate aquí</a></p>
             </div>
         </div>
     </div>
 
-    <!-- Modal de Registro -->
+    <!-- modal de registro -->
     <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -221,21 +217,21 @@
 
     <script>
         function handleLogin(event) {
-            event.preventDefault(); // Prevenir el envío del formulario
-            // Aquí puedes agregar lógica adicional para validar el inicio de sesión si es necesario
+            event.preventDefault(); // previniendo el envío del formulario
+            // lógica adicional para validar el inicio de sesión si es necesario
             
-            // Redirigir a index.html
+            // redirigir a index.html
             window.location.href = "index.html";
         }
 
         function showRegisterModal() {
-            $('#loginModal').modal('hide'); // Cierra el modal de inicio de sesión
-            $('#registerModal').modal('show'); // Muestra el modal de registro
+            $('#loginModal').modal('hide'); // cierra el modal de inicio de sesión
+            $('#registerModal').modal('show'); // muestra el modal de registro
         }
 
         function showSignUpModal() {
-            $('#registerModal').modal('hide'); // Cierra el modal de registro
-            $('#loginModal').modal('show'); // Muestra el modal de inicio de sesión
+            $('#registerModal').modal('hide'); // cierra el modal de registro
+            $('#loginModal').modal('show'); // muestra el modal de inicio de sesión
         }
 
     </script>
