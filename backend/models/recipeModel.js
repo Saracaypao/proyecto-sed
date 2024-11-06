@@ -8,7 +8,7 @@ const recetaSchema = new Schema({
         trim: true,
     },
     ingredientes: {
-        type: [String], // Array de ingredientes
+        type: [String],
         required: true,
     },
     preparacion: {
@@ -17,13 +17,8 @@ const recetaSchema = new Schema({
         trim: true,
     },
     imagen: {
-        type: String, // URL de la imagen
+        type: String,
         required: false,
-    },
-    creador: {
-        type: Schema.Types.ObjectId, // Referencia al modelo de usuario
-        required: true,
-        ref: 'User', // Nombre del modelo de usuario
     },
     creadoEn: {
         type: Date,
@@ -35,7 +30,7 @@ const recetaSchema = new Schema({
     },
 });
 
-// Middleware para actualizar la fecha de actualización al guardar
+// Middleware para actualizar la fecha de actualización
 recetaSchema.pre('save', function (next) {
     this.actualizadoEn = Date.now();
     next();

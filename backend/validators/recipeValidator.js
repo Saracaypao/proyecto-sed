@@ -3,27 +3,16 @@ const validators = {};
 validators.validateRecipe = (data) => {
     const errors = {};
 
-    // Validar título
-    if (!data.titulo || data.titulo.trim() === '') {
-        errors.titulo = "El título es requerido.";
-    } else if (data.titulo.length > 100) {
-        errors.titulo = "La longitud máxima del título es de 100 caracteres.";
+    if (!data.nombreReceta || data.nombreReceta.trim() === '') {
+        errors.nombreReceta = "El nombre de la receta es requerido.";
     }
 
-    // Validar ingredientes
     if (!data.ingredientes || !Array.isArray(data.ingredientes) || data.ingredientes.length === 0) {
         errors.ingredientes = "Se requieren al menos un ingrediente.";
-    } else {
-        data.ingredientes.forEach((ingrediente, index) => {
-            if (typeof ingrediente !== 'string' || ingrediente.trim() === '') {
-                errors[`ingredientes[${index}]`] = "Cada ingrediente debe ser una cadena no vacía.";
-            }
-        });
     }
 
-    // Validar instrucciones
-    if (!data.instrucciones || data.instrucciones.trim() === '') {
-        errors.instrucciones = "Las instrucciones son requeridas.";
+    if (!data.preparacion || data.preparacion.trim() === '') {
+        errors.preparacion = "La preparación es requerida.";
     }
 
     return {

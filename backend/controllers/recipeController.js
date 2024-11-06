@@ -1,35 +1,33 @@
-const Receta = require('../models/recipeModel'); 
+const Receta = require('../models/recipeModel');
 
 const controller = {};
 
 controller.agregarReceta = async (req, res) => {
     try {
         let body = '';
-
-        // Escuchar el evento 'data' para obtener el cuerpo de la solicitud
         req.on('data', chunk => {
             body += chunk.toString();
         });
 
-        // Cuando se termine de recibir el cuerpo
         req.on('end', async () => {
-            const { nombreReceta, ingredientes, preparacion } = JSON.parse(body);
+            try {
+                const { nombreReceta, ingredientes, preparacion } = JSON.parse(body);
 
-            // Aquí debes crear una nueva receta
-            const nuevaReceta = new Receta({
-                nombre: nombreReceta,
-                ingredientes: ingredientes,
-                preparacion: preparacion,
-                // Si deseas manejar la imagen, necesitarás un manejo adicional para subir archivos
-                imagen: '', // Maneja la lógica de la imagen según tu implementación
-            });
+                const nuevaReceta = new Receta({
+                    nombreReceta,
+                    ingredientes,
+                    preparacion,
+                    imagen: '' // Opcionalmente, agregar lógica para manejar la imagen
+                });
 
-            // Guardar la nueva receta en la base de datos
-            await nuevaReceta.save();
+                await nuevaReceta.save();
 
-            // Enviar respuesta de éxito
-            res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ mensaje: 'Receta agregada exitosamente' }));
+                res.writeHead(201, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ mensaje: 'Receta agregada exitosamente' }));
+            } catch (parseError) {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ mensaje: 'Error en el formato JSON', error: parseError.message }));
+            }
         });
     } catch (error) {
         console.error(error);

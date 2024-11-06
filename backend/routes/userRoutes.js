@@ -1,46 +1,38 @@
 const http = require('http');
 const url = require('url');
-const { registrarUsuario } = require('../controllers/userController');  // Asegúrate de que esta sea la función correcta
-const runValidation = require('../validators/indexMiddleware');
-const { createUserValidator } = require('../validators/userValidator');
+const { registrarUsuario } = require('../controllers/userController');
+const { validateUser } = require('../validators/userValidator'); // Validación de usuario
+const User = require('../models/userModel'); // Modelo de usuario (suponiendo que tienes este modelo)
 
-// Define las rutas para los usuarios
 const userRoutes = (req, res) => {
-    const parsedUrl = url.parse(req.url, true);
-    const { pathname } = parsedUrl;
-    const method = req.method;
+    const parsedUrl = require('url').parse(req.url, true);
 
-    // Ruta para crear un nuevo usuario
-    if (method === 'POST' && pathname === '/newUser') {
-        // Validación y controlador para crear usuario
-        createUserValidator(req, res, () => {
-            runValidation(req, res, () => {
-                registrarUsuario(req, res);  // Llama a la función para registrar el usuario
-            });
+    if (parsedUrl.pathname === '/api/user/newUser' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk;
         });
 
-    // Ruta para obtener todos los usuarios
-    } else if (method === 'GET' && pathname === '/users') {
-        registrarUsuario.findAll(req, res);  // Llama a la función para obtener todos los usuarios
-
-    // Ruta para obtener un usuario por ID
-    } else if (method === 'GET' && pathname.startsWith('/userById/')) {
-        const userId = pathname.split('/')[2];  // Extrae el ID del usuario de la URL
-        req.params = { id: userId };
-        registrarUsuario.findOneById(req, res);  // Llama a la función para obtener el usuario por ID
-
-    // Ruta para actualizar un usuario por ID
-    } else if (method === 'PUT' && pathname.startsWith('/updateUser/')) {
-        const userId = pathname.split('/')[2];
-        req.params = { id: userId };
-        registrarUsuario.update(req, res);  // Llama a la función para actualizar el usuario
-
-    // Ruta no encontrada
+        req.on('end', () => {
+            req.body = JSON.parse(body);
+            validateUser(req, res, () => { // Validar datos antes de crear el usuario
+                // Crear un nuevo usuario
+                const newUser = new User(req.body);
+                newUser.save()
+                    .then(user => {
+                        res.writeHead(201, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ message: 'Usuario creado', user }));
+                    })
+                    .catch(error => {
+                        res.writeHead(500, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: 'Error al crear el usuario', details: error.message }));
+                    });
+            });
+        });
     } else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Ruta no encontrada' }));
     }
 };
 
-// Exportar las rutas de usuario
 module.exports = userRoutes;
