@@ -4,43 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Administrador</title>
-    <link rel="stylesheet" href="path/to/bootstrap.css">
+    <title>Dashboard Superadministrador</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Gestión de Recetas</a>
-        <div class="collapse navbar-collapse">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Recetas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Usuarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Categorías</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Configuración</a></li>
                 <li class="nav-item"><a class="nav-link" href="/logout">Salir</a></li>
             </ul>
         </div>
     </nav>
-
+    
     <div class="container mt-5">
-        <h2 class="mb-4">Bienvenido, Administrador</h2>
+        <h2 class="mb-4">Bienvenido, Superadministrador</h2>
         <div class="row">
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Usuarios</h5>
+                        <p class="card-text">Gestiona los usuarios del sistema.</p>
+                        <a href="#" class="btn btn-primary">Ver Usuarios</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Recetas</h5>
-                        <p class="card-text">Gestiona las recetas y realiza modificaciones.</p>
+                        <p class="card-text">Revisa y aprueba recetas.</p>
                         <a href="#" class="btn btn-primary">Gestionar Recetas</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Comentarios</h5>
-                        <p class="card-text">Modera los comentarios de las recetas.</p>
-                        <a href="#" class="btn btn-primary">Ver Comentarios</a>
+                        <h5 class="card-title">Configuración</h5>
+                        <p class="card-text">Configura las categorías y ajustes del sitio.</p>
+                        <a href="#" class="btn btn-primary">Ir a Configuración</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
