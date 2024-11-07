@@ -1,20 +1,22 @@
+const { logIn, whoAmI } = require('../controllers/authController'); // Importar controladores
+const { authentication } = require('../middlewares/authMiddlewares'); // Middleware de autenticación
 const http = require('http');
-const authController = require('../controllers/authController');
-const { authentication } = require('../middlewares/authMiddlewares');
 
-const server = http.createServer(async (req, res) => {
+const authRoutes = (req, res) => {
     const { url, method } = req;
 
-    // Rutas de Autenticación
+    // Ruta para login (POST)
     if (method === 'POST' && url === '/logIn') {
-        await authController.logIn(req, res);
-    } else if (method === 'GET' && url === '/whoAmI') {
-        await authentication(req, res, () => authController.whoAmI(req, res));
-    } else {
+        logIn(req, res); // Llama a la función logIn del controlador
+    }
+    // Ruta para obtener información del usuario (GET)
+    else if (method === 'GET' && url === '/whoAmI') {
+        authentication(req, res, () => whoAmI(req, res)); // Autenticación y luego respuesta
+    }
+    else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Ruta no encontrada' }));
     }
-});
+};
 
-// Exporta el servidor directamente
-module.exports = server;
+module.exports = authRoutes;

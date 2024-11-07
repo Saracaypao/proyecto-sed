@@ -1,9 +1,8 @@
-const url = require('url');
-const userRoutes = require("./userRoutes");
-const recipeRoutes = require("./recipeRoutes");
-const authRoutes = require("./authRoutes");
+const http = require('http');
+const userRoutes = require('./userRoutes');
+const recipeRoutes = require('./recipeRoutes');
+const authRoutes = require('./authRoutes'); // Asegúrate de importar authRoutes
 
-// Función que maneja las rutas de la API
 const apiRouter = (req, res) => {
     const parsedUrl = require('url').parse(req.url, true);
     const { pathname } = parsedUrl;
@@ -11,13 +10,16 @@ const apiRouter = (req, res) => {
 
     // Delegar las rutas de usuario
     if (pathname.startsWith('/api/user')) {
-        userRoutes(req, res); // Delegar a las rutas de usuario
+        userRoutes(req, res);
     }
-    // Delegar las rutas de recetas (si existe)
+    // Delegar las rutas de recetas
     else if (pathname.startsWith('/api/recipe')) {
-        recipeRoutes(req, res); // Delegar a las rutas de recetas
+        recipeRoutes(req, res);
     }
-    // Ruta no encontrada
+    // Delegar las rutas de autenticación (logIn y whoAmI)
+    else if (pathname.startsWith('/logIn') || pathname.startsWith('/whoAmI')) {
+        authRoutes(req, res); // Delegar a las rutas de autenticación
+    }
     else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Ruta no encontrada' }));

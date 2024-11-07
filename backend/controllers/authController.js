@@ -3,15 +3,14 @@ const userModel = require('../models/userModel');
 
 const logIn = async (req, res) => {
     try {
-        // Leer el cuerpo de la solicitud
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
         });
 
         req.on('end', async () => {
-            const { usuario, contrasena } = JSON.parse(body);
-            const user = await userModel.findOne({ usuario });
+            const { correo, contrasena } = JSON.parse(body);
+            const user = await userModel.findOne({ correo });
 
             if (!user) {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
@@ -57,9 +56,9 @@ const logIn = async (req, res) => {
 
 const whoAmI = async (req, res) => {
     try {
-        const { _id, usuario, correo, roles } = req.user;
+        const { _id, nombre, correo, roles } = req.user;
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ _id, usuario, correo, roles }));
+        res.end(JSON.stringify({ _id, nombre, correo, roles }));
     } catch (error) {
         console.error(error);
         res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -67,11 +66,7 @@ const whoAmI = async (req, res) => {
     }
 };
 
-// Definir el objeto controller con las funciones
-const controller = {
+module.exports = {
     logIn,
     whoAmI
 };
-
-// Exportar el objeto controller
-module.exports = controller;
