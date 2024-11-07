@@ -4,54 +4,114 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Superadministrador</title>
-    <link rel="stylesheet" href="path/to/bootstrap.css">
+    <title>Dashboard Administrador</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Nunito Sans", sans-serif;
+        }
+        .navbar {
+            background-color: #1a1a1a !important;
+        }
+        .navbar-brand, .nav-link, h1 {
+            font-family: "Nunito Sans", sans-serif;
+        }
+        .navbar-brand {
+            text-transform: uppercase;
+        }
+        h2 {
+            font-size: 2rem;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        .stat-card {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .chart {
+            max-width: 800px; /* ancho máximo */
+            height: 450px; /* altura para que quepa el gráfico */
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto; /* centra todo */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* evita desbordamiento */
+        }
+        canvas {
+            width: 100% !important; /* para que el canvas no se salga del card */
+            height: auto; /* para que el canvas se ajuste */
+        }
+        h5 {
+            font-size: 1.5rem;
+        }
+        
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Gestión de Recetas</a>
-        <div class="collapse navbar-collapse">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Mi Recetario</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Usuarios</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Categorías</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Configuración</a></li>
-                <li class="nav-item"><a class="nav-link" href="/logout">Salir</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Recetas</a></li>
+                <li class="nav-item"><a class="nav-link" href="landingpage.html">Salir</a></li>
             </ul>
         </div>
     </nav>
-    
-    <div class="container mt-5">
+
+    <div class="container">
         <h2 class="mb-4">Bienvenido, Superadministrador</h2>
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Usuarios</h5>
-                        <p class="card-text">Gestiona los usuarios del sistema.</p>
-                        <a href="#" class="btn btn-primary">Ver Usuarios</a>
-                    </div>
+            <div class="col-md-6">
+                <div class="stat-card">
+                    <h5>Usuarios</h5>
+                    <h3>1,234</h3>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Recetas</h5>
-                        <p class="card-text">Revisa y aprueba recetas.</p>
-                        <a href="#" class="btn btn-primary">Gestionar Recetas</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Configuración</h5>
-                        <p class="card-text">Configura las categorías y ajustes del sitio.</p>
-                        <a href="#" class="btn btn-primary">Ir a Configuración</a>
-                    </div>
+            <div class="col-md-6">
+                <div class="stat-card">
+                    <h5>Recetas</h5>
+                    <h3>567</h3>
                 </div>
             </div>
         </div>
+        
+        <div class="d-flex justify-content-center">
+            <div class="chart">
+                <h5 class="text-center">Cantidad de Recetas por Categoría</h5>
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Ejemplo de gráfico de "Cantidad de Recetas por Categoría"
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+        const categoryChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Postres', 'Entradas', 'Platos Principales', 'Complementos', 'Bebidas'],
+                datasets: [{
+                    data: [300, 150, 200, 170, 55],
+                    backgroundColor: ['#ffc107', '#28a745', '#007bff', '#ff6f91', '#c74e77']
+                }]
+            }
+        });
+    </script>
 </body>
 </html>
