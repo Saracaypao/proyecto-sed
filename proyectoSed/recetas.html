@@ -47,7 +47,6 @@
             border: 1px solid #ff9671; 
             height: 50px; 
         }
-
         .search-section button {
             margin-left: 10px; /* espacio que hay en el input y el botón */
             border: none; 
@@ -58,11 +57,25 @@
             height: 50px; 
             text-transform: uppercase;
         }
-
         .search-section button:hover {
-            background-color: #525151;
+            background-color: #fa7f53;
             transform: scale(1.05); 
             color: white;
+        }
+        .search-section button:focus {
+            border: 3px solid #fa7f53;
+            outline: none; 
+            box-shadow: none; 
+            transition: none;
+        }
+        .search-section input:focus {
+            width: 350px; 
+            border-radius: 0px; 
+            padding: 12px; 
+            border: 2px solid #fa7f53;
+            outline: none; 
+            box-shadow: none; 
+            transition: none;
         }
         .category-section {
             margin-top: 30px;
@@ -90,7 +103,13 @@
             background-color: #ee754a;
             transform: scale(1.05); 
             color: white;
-        }   
+        } 
+        .category-button:focus {
+            border: 3px solid #fa7f53;
+            outline: none; 
+            box-shadow:none; 
+            transition: none;
+        }  
         .card {
             margin-bottom: 20px;
             border-radius: 15px;
@@ -121,6 +140,12 @@
         }
         .btn-primary:hover {
             background-color:#ff6f91; 
+        }
+        .btn-primary:focus {
+            transform: none;
+            transition: none;
+            background-color:#eb0954; 
+            box-shadow: none;
         }
         .footer {
             background-color: #343a40;
