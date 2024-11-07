@@ -10,53 +10,77 @@
     <style>
         body {
             font-family: "Nunito Sans", sans-serif;
+            background-color: #f4f6f9;
         }
         .navbar {
             background-color: #1a1a1a !important;
-        }
-        .navbar-brand, .nav-link, h1 {
-            font-family: "Nunito Sans", sans-serif;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .navbar-brand {
             text-transform: uppercase;
-        }
-        h2 {
-            font-size: 2rem;
+            font-weight: 700;
         }
         .container {
-            margin-top: 20px;
+            margin-top: 40px;
+        }
+        h2 {
+            font-weight: 700;
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 30px;
         }
         .card {
             border: none;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
         }
         .stat-card {
+            padding: 30px;
             background-color: #343a40;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
+            color: #fff;
+            border-radius: 12px;
             text-align: center;
-            margin-bottom: 20px;
+            transition: transform 0.2s ease-in-out;
+        }
+        .stat-card h5 {
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+        .stat-card h3 {
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+        .bg-recetas {
+            background-color: #1f2d3d;
+        }
+        .bg-categorias {
+            background-color: #4e5d6c;
+        }
+        .btn-primary {
+            background-color: #1a1a1a;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #343a40;
         }
         .chart {
-            max-width: 800px; /* ancho máximo */
-            height: 450px; /* altura para que quepa el gráfico */
+            max-width: 800px;
+            height: 450px;
             background-color: #fff;
             border-radius: 10px;
             padding: 20px;
-            margin: 20px auto; /* centra todo */
+            margin: 20px auto;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            overflow: hidden; /* evita desbordamiento */
+            overflow: hidden;
         }
         canvas {
-            width: 100% !important; /* para que el canvas no se salga del card */
-            height: auto; /* para que el canvas se ajuste */
+            width: 100% !important;
+            height: auto;
         }
-        h5 {
-            font-size: 1.5rem;
-        }
-        
     </style>
 </head>
 <body>
@@ -73,22 +97,45 @@
     </nav>
 
     <div class="container">
-        <h2 class="mb-4">Bienvenido, Superadministrador</h2>
+        <h2>Bienvenido, Super Administrador</h2>
         <div class="row">
-            <div class="col-md-6">
-                <div class="stat-card">
-                    <h5>Usuarios</h5>
-                    <h3>1,234</h3>
+            <div class="col-md-6 mb-4">
+                <div class="stat-card bg-recetas">
+                    <h5>Total de usuarios</h5>
+                    <h3>1,567</h3>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="stat-card">
-                    <h5>Recetas</h5>
-                    <h3>567</h3>
+            <div class="col-md-6 mb-4">
+                <div class="stat-card bg-categorias">
+                    <h5>Total de Recetas</h5>
+                    <h3>89</h3>
                 </div>
             </div>
         </div>
-        
+
+        <!-- Opciones de Administración -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gestionar Usuarios</h5>
+                        <p class="card-text">Agrega, edita o elimina usuarios para gestionar las cuentas en la plataforma.</p>
+                        <a href="usuariosSuperAdmin.html" class="btn btn-primary">Ir a Usuarios</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gestionar Categorías</h5>
+                        <p class="card-text">Agrega, edita o elimina recetas en la plataforma para organizar y actualizar el contenido del recetario.</p>
+                        <a href="recetasSuperAdmin.html" class="btn btn-primary">Ir a Recetas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico de Categorías -->
         <div class="d-flex justify-content-center">
             <div class="chart">
                 <h5 class="text-center">Cantidad de Recetas por Categoría</h5>
@@ -97,7 +144,6 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Ejemplo de gráfico de "Cantidad de Recetas por Categoría"

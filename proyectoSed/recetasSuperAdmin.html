@@ -23,6 +23,33 @@
     .container {
         margin-top: 30px;
     }
+    /* Modificación aquí: cambiamos el fondo de .card-header */
+    .card-header {
+        background-color: #1f2d3d; /* Color agregado */
+        color: #ffffff; /* Texto blanco */
+    }
+    /* Modificación aquí: color de fondo para la sección "Agregar categoría" */
+    #categoryForm {
+        background-color: #4e5d6c; /* Color de fondo */
+        padding: 20px;
+        border-radius: 8px;
+    }
+    #categoryForm .form-group label {
+        color: #ffffff; /* Texto blanco en los labels */
+    }
+    #categoryForm .form-control {
+        background-color: #ffffff; /* Fondo blanco para los inputs */
+    }
+    /* Modificación aquí: botón amarillo para "Agregar categoría" */
+    #categoryForm button {
+        background-color: #ffc107; /* Botón amarillo */
+        border-color: #ffc107; /* Bordes del botón amarillo */
+        color: #fff; /* Texto en blanco */
+    }
+    #categoryForm button:hover {
+        background-color: #e0a800; /* Sombra más oscura al pasar el ratón */
+        border-color: #e0a800;
+    }
 </style>
 <body>
     <!-- Navbar -->
@@ -43,7 +70,7 @@
         
         <!-- Aprobación de Recetas -->
         <div class="card mb-4">
-            <div class="card-header bg-dark text-white">
+            <div class="card-header">
                 <h5>Aprobación de recetas</h5>
             </div>
             <div class="card-body">
@@ -73,7 +100,7 @@
 
         <!-- Gestión de Categorías -->
         <div class="card">
-            <div class="card-header bg-dark text-white">
+            <div class="card-header">
                 <h5>Gestión de categorías</h5>
             </div>
             <div class="card-body">
@@ -82,7 +109,7 @@
                         <label for="categoryName">Nombre de la categoría</label>
                         <input type="text" class="form-control" id="categoryName" placeholder="Ejemplo: Sopas">
                     </div>
-                    <button type="submit" class="btn btn-primary">Agregar categoría</button>
+                    <button type="submit" class="btn">Agregar categoría</button>
                 </form>
                 <hr>
                 <h6>Categorías existentes</h6>
@@ -199,4 +226,4 @@
         });
     </script>
 </body>
-</html
+</html>
