@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios - Dashboard Administrador</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: "Nunito Sans", sans-serif;
+        }
+        .navbar {
+            background-color: #1a1a1a !important;
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff;
+        }
+        .navbar-brand {
+            text-transform: uppercase;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .btn-action {
+            margin-right: 5px;
+        }
+        .btn-primary{
+            
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Mi Recetario</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="dashboardSuperAdmin.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link active" href="usuariosSuperAdmin.html">Usuarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="recetasSuperAdmin.html">Recetas</a></li>
+                <li class="nav-item"><a class="nav-link" href="landingpage.html">Salir</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Gestión de usuarios</h2>
+        <button class="btn btn-success mb-3" data-toggle="modal" data-target="#addUserModal">Agregar usuario</button>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Juan Pérez</td>
+                    <td>juan.perez@example.com</td>
+                    <td>Administrador</td>
+                    <td>
+                        <button class="btn btn-primary btn-action" data-toggle="modal" data-target="#editUserModal">Editar</button>
+                        <button class="btn btn-danger btn-action" onclick="confirmDelete(1)">Eliminar</button>
+                    </td>
+                </tr>
+                <!-- Más filas de ejemplo -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para agregar usuario -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Agregar Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario de agregar usuario -->
+                    <form>
+                        <div class="form-group">
+                            <label for="userName">Nombre</label>
+                            <input type="text" class="form-control" id="userName" placeholder="Ingrese nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="userEmail">Email</label>
+                            <input type="email" class="form-control" id="userEmail" placeholder="Ingrese email">
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Contraseña</label>
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Contraseña">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar contraseña</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmar contraseña">
+                        </div>
+                        <div class="form-group">
+                            <label for="userRole">Rol</label>
+                            <select class="form-control" id="userRole">
+                                <option>Administrador</option>
+                                <option>Usuario</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Modal para editar usuario -->
+        <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="editUserName">Nombre</label>
+                                <input type="text" class="form-control" id="editUserName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editUserEmail">Email</label>
+                                <input type="email" class="form-control" id="editUserEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editUserRole">Rol</label>
+                                <select class="form-control" id="editUserRole">
+                                    <option>Usuario</option>
+                                    <option>Administrador</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script>
+        function confirmDelete(userId) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Eliminado',
+                        'El usuario ha sido eliminado.',
+                        'success'
+                    );
+                    // Aquí se puede agregar el código para eliminar el usuario
+                }
+            });
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
