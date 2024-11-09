@@ -12,12 +12,13 @@ controller.agregarReceta = async (req, res) => {
 
         req.on('end', async () => {
             try {
-                const { nombreReceta, ingredientes, preparacion } = JSON.parse(body);
+                const { nombreReceta, ingredientes, preparacion, categoria } = JSON.parse(body);
 
                 const nuevaReceta = new Receta({
                     nombreReceta,
                     ingredientes,
                     preparacion,
+                    categoria,
                     imagen: '' // Opcionalmente, agregar lógica para manejar la imagen
                 });
 
@@ -58,13 +59,21 @@ controller.obtenerTodasRecetas = async (req, res) => {
     }
 };
 
-// Función para buscar recetas por filtro
+// Función para buscar recetas por filtros, incluyendo categoría
 controller.buscarRecetasPorFiltro = async (req, res) => {
-    const { nombreReceta, ingredientes } = req.query;
+    const { nombreReceta, ingredientes, categoria } = req.query;
     const filtro = {};
 
+    // Filtro por nombreReceta si existe
     if (nombreReceta) filtro.nombreReceta = new RegExp(nombreReceta, 'i');
+
+    // Filtro por ingredientes si existe
     if (ingredientes) filtro.ingredientes = { $in: [ingredientes] };
+
+    // Filtro por categoria, asegurándose de que el valor sea insensible a mayúsculas/minúsculas
+    if (categoria) {
+        filtro.categoria = { $regex: new RegExp(categoria, 'i') }; // Compara sin importar mayúsculas/minúsculas
+    }
 
     try {
         const recetas = await Receta.find(filtro);
@@ -75,6 +84,7 @@ controller.buscarRecetasPorFiltro = async (req, res) => {
         res.end(JSON.stringify({ mensaje: 'Error al buscar recetas', error: error.message }));
     }
 };
+
 
 // Función para actualizar una receta específica
 controller.actualizarReceta = async (req, res) => {

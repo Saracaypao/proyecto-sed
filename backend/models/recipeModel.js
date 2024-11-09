@@ -20,6 +20,11 @@ const recetaSchema = new Schema({
         type: String,
         required: false,
     },
+    categoria: {
+        type: String,
+        enum: ['entradas', 'platos fuertes', 'complementos', 'bebidas', 'postres'],
+        required: true,
+    },
     creadoEn: {
         type: Date,
         default: Date.now,
