@@ -29,7 +29,7 @@ const userSchema = new Schema({
     },
     roles: {
         type: [String],
-        default: []
+        default: ['user'], // Asignamos el rol predeterminado de 'user'
     },
 }, { timestamps: true });
 

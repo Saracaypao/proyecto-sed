@@ -1,4 +1,3 @@
-// Función para validar los datos de un usuario
 function validateUser(req, res, next) {
     const { nombre, correo, contrasena, confirmarContrasena } = req.body;
 
@@ -12,15 +11,20 @@ function validateUser(req, res, next) {
         return res.status(400).json({ error: 'Las contraseñas no coinciden' });
     }
 
-    // Validar el formato del correo
-    const correoRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    // Validar el formato del correo (solo @ y .com al final)
+    const correoRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.(com)$/;
     if (!correoRegex.test(correo)) {
-        return res.status(400).json({ error: 'Correo no válido' });
+        return res.status(400).json({ error: 'Correo no válido. Debe terminar en .com' });
+    }
+
+    // Validar contraseñas seguras
+    const contrasenaRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;  // Al menos 8 caracteres, una letra y un número
+    if (!contrasenaRegex.test(contrasena)) {
+        return res.status(400).json({ error: 'La contraseña debe tener al menos 8 caracteres, una letra y un número' });
     }
 
     // Si todo está bien, continuar con la ejecución
     next();
 }
 
-// Exportar la función para usarla en otras partes de la aplicación
 module.exports = { validateUser };
