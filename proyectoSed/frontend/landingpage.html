@@ -6,113 +6,13 @@
     <title>Mi recetario</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: "Nunito Sans", sans-serif;
-        }
-        .navbar {
-            background-color: #1a1a1a !important;
-        }
-        .navbar-brand, .nav-link, h1 {
-            font-family: "Nunito Sans", sans-serif;
-            text-transform: uppercase;
-        }
-        .carousel-item {
-            height: 100vh;
-            background-size: cover;
-            background-position: center;
-        }
-        .overlay {
-            background: rgba(0, 0, 0, 0.5);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .hero-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            text-align: center;
-        }
-        .btn-success {
-            background-color: #e91a5f !important;
-            border-color: #e91a5f !important;
-            border-radius: 0;
-            
-        }
-        .btn-outline-light{
-            border-radius: 0;
-            
-        }
-        .form-control {
-            background-color: #f8f9fa;
-        }
-        .modal-content {
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            max-width: 500px;
-            margin: auto;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-        }
-        .modal-content form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            flex-grow: 1;
-        }
-        .modal-content .form-group {
-            margin-bottom: 0.5rem;
-        }
-        .modal-content .btn {
-            align-self: stretch;
-            margin-top: auto; /* esto hace que el botón vaya al fondo del formulario */
-        }
-        .modal-content h2 {
-            text-transform: uppercase;
-        }
-        .options {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: #555;
-        }
-        .options a {
-            color: #e91a5f; 
-            text-decoration: none;
-        }
-        .options a:hover {
-            text-decoration: underline;
-        }
-        /* inputs y otros texts cuadrados y sin bordes*/
-        .form-control {
-            background-color: #e9ecef;
-            border: none;
-            border-radius: 0; 
-            font-weight: 300;
-            font-size: 0.9rem;
-            color: #495057;
-            padding: 10px; 
-        }
-        .form-control::placeholder {
-            color: #adb5bd;
-            font-weight: 300;
-            font-size: 0.9rem;
-            font-family: sans-serif;
-        }
-        .rs-link {
-            color:  #ec4d82 !important;
-        }
-        .rs-link:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link href="./css/landingPageStyles.css" rel="stylesheet">
 </head>
+<script src="./js/login.js"></script>
+<script src="./js/register.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <body>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -135,7 +35,7 @@
     <!-- carousel -->
     <div id="carouselExample" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active" style="background-image: url('imagen1.jpeg');">
+            <div class="carousel-item active" style="background-image: url('./assets/imagen1.jpeg');">
                 <div class="overlay"></div>
                 <div class="hero-text">
                     <h1>Descubre una infinidad de recetas</h1>
@@ -143,7 +43,7 @@
                     <a href="#" class="btn btn-success" onclick="showRegisterModal()">Empieza ahora</a>
                 </div>
             </div>
-            <div class="carousel-item" style="background-image: url('imagen2.jpg');">
+            <div class="carousel-item" style="background-image: url('./assets/imagen2.jpg');">
                 <div class="overlay"></div>
                 <div class="hero-text">
                     <h1>Comparte tus recetas con la comunidad</h1>
@@ -191,10 +91,10 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <h2 class="text-center">Registrarse</h2>
-                <form>
+                <form onsubmit="return handleRegister(event);">
                     <div class="form-group">
                         <label for="registerUser">Usuario</label>
-                        <input type="email" class="form-control" id="registerUser" placeholder="Ingrese su usuario">
+                        <input type="text" class="form-control" id="registerUser" placeholder="Ingrese su usuario">
                     </div>
                     <div class="form-group">
                         <label for="registerEmail">Correo Electrónico</label>
@@ -214,30 +114,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function handleLogin(event) {
-            event.preventDefault(); // previniendo el envío del formulario
-            // lógica adicional para validar el inicio de sesión si es necesario
-            
-            // redirigir a index.html
-            window.location.href = "index.html";
-        }
-
-        function showRegisterModal() {
-            $('#loginModal').modal('hide'); // cierra el modal de inicio de sesión
-            $('#registerModal').modal('show'); // muestra el modal de registro
-        }
-
-        function showSignUpModal() {
-            $('#registerModal').modal('hide'); // cierra el modal de registro
-            $('#loginModal').modal('show'); // muestra el modal de inicio de sesión
-        }
-
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

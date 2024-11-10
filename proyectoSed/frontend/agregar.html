@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar receta - Mi recetario</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href= "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="./css/agregarStyles.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+    <div class="container d-flex flex-column align-items-center">
+        <h1 class="text-center mb-0">Mi recetario</h1>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="recetas.html"><i class="fas fa-utensils"></i> Recetas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="agregar.html"><i class="fas fa-plus-circle"></i> Agregar receta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="acerca.html"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                    <li class="nav-item"><a class="nav-link" href="landingpage.html"><i class="fas fa-sign-in-alt"></i> salir</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <div class="form-section">
+        <h2>Agregar nueva receta</h2>
+        <form>
+            <div class="form-group">
+                <label for="nombreReceta">Nombre de la receta</label>
+                <input type="text" class="form-control" id="nombreReceta" placeholder="Escribe el nombre de la receta" required>
+            </div>
+            <div class="form-group">
+                <label for="descripciónReceta">Descripción de la receta</label>
+                <textarea class="form-control" id="descripciónReceta" rows="4" placeholder="Descripción" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="categoriaReceta" >Categoría de la receta</label>
+                <select class="form-select" id="categoriaReceta">
+                  <option>Entradas</option>
+                  <option>Platos principales</option>
+                  <option>Complementos</option>
+                  <option>Bebidas</option>
+                  <option>Postres</option>
+                </select>
+              </div>
+            <div class="form-group">
+                <label for="ingredientes">Ingredientes</label>
+                <textarea class="form-control" id="ingredientes" rows="4" placeholder="Lista de ingredientes" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="preparacion">Instrucciones de preparación</label>
+                <textarea class="form-control" id="preparacion" rows="4" placeholder="Describe los pasos de preparación" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="imagenReceta">Imagen de la receta</label>
+                <input type="file" class="form-control-file" id="imagenReceta" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary d-block mx-auto">Agregar receta</button>
+        </form>
+    </div>
+</div>
+
+<footer class="footer mt-5">
+    <p>&copy; 2024 Mi recetario. Todos los derechos reservados.</p>
+    <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
