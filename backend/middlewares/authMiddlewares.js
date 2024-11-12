@@ -2,18 +2,36 @@ const debug = require('debug')('app:auth-middleware');
 const { verifyToken, secretKey } = require('../utils/jwt.tools');
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
-
 const ROLES = require('../data/roles.js');
 
 const middlewares = {};
 const PREFIX = 'Bearer';
+
+// Middleware para procesar el JSON en el body de la solicitud
+middlewares.parseJSONBody = (req, res, next) => {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+
+    req.on('end', () => {
+        try {
+            req.body = JSON.parse(body);
+            console.log("Body parsed:", req.body);
+            next();
+        } catch (error) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ mensaje: 'Error en el formato JSON', error: error.message }));
+        }
+    });
+};
 
 middlewares.authentication = async (req, res, next) => {
     try {
         const { authorization } = req.headers;
 
         if (!authorization) {
-            console.log("no auth")
+            console.log("no auth");
             res.writeHead(401, { 'Content-Type': 'application/json' });
             return res.end(JSON.stringify({ error: 'Usuario no autenticado' }));
         }
@@ -21,37 +39,33 @@ middlewares.authentication = async (req, res, next) => {
         const [prefix, token] = authorization.split(' ');
 
         if (prefix !== PREFIX || !token) {
-            console.log("no prefix")
+            console.log("no prefix");
             res.writeHead(401, { 'Content-Type': 'application/json' });
             return res.end(JSON.stringify({ error: 'Usuario no autenticado' }));
         }
 
         const payload = await verifyToken(token);
-        console.log("payload", payload)
+        console.log("payload", payload);
         if (!payload) {
-            console.log("no payload")
-
+            console.log("no payload");
             res.writeHead(401, { 'Content-Type': 'application/json' });
             return res.end(JSON.stringify({ error: 'Usuario no autenticado' }));
         }
 
         const decoded = jwt.verify(token, secretKey);
-        console.log(decoded)
+        console.log(decoded);
 
-        const userId = decoded.userId; 
+        const userId = decoded.userId;
         const user = await User.findById(userId);
         if (!user) {
-            //BINGO!!!!!
-            console.log("no user")
-
+            console.log("no user");
             res.writeHead(401, { 'Content-Type': 'application/json' });
             return res.end(JSON.stringify({ error: 'Usuario no autenticado' }));
         }
 
         const isTokenValid = user.tokens.includes(token);
         if (!isTokenValid) {
-            console.log("no token valid")
-
+            console.log("no token valid");
             res.writeHead(401, { 'Content-Type': 'application/json' });
             return res.end(JSON.stringify({ error: 'Usuario no autenticado' }));
         }
@@ -67,7 +81,6 @@ middlewares.authentication = async (req, res, next) => {
     }
 };
 
-
 middlewares.authorization = (roleRequired = ROLES.SYSADMIN) => {
     return (req, res, next) => {
         try {
@@ -80,8 +93,8 @@ middlewares.authorization = (roleRequired = ROLES.SYSADMIN) => {
                 return res.end(JSON.stringify({ error: 'Prohibido' }));
             }
 
-            console.log("returning...")
-            next()
+            console.log("returning...");
+            next();
         } catch (error) {
             console.error(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
