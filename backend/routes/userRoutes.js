@@ -9,8 +9,10 @@ const userRoutes = (req, res) => {
 
     // Ruta para crear un nuevo usuario
     if (parsedUrl.pathname === '/api/user/newUser' && req.method === 'POST') {
+
         authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
             authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
+                console.log("Auth passed")
                 let body = '';
                 req.on('data', chunk => {
                     body += chunk; // Recibe los datos en trozos
