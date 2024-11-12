@@ -42,6 +42,69 @@ controller.agregarReceta = async (req, res) => {
     }
 };
 
+controller.aceptarReceta = async (req, res) => {
+    try {
+        const { recipeId } = req.body; // Asegúrate de que recipeId se pase correctamente en el cuerpo
+
+        if (!recipeId) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ error: 'Se requiere el ID de la receta' }));
+        }
+
+        const recipe = await Receta.findById(recipeId);
+        if (!recipe) {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ error: 'Receta no encontrada' }));
+        }
+
+        // Cambiar el estado de la receta a 'aprobada'
+        recipe.estado = 'aprobada';
+        
+        // Guardar el cambio en la base de datos
+        const recetaActualizada = await recipe.save();
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Receta aprobada correctamente', recipe: recetaActualizada }));
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Error al aprobar la receta', details: error.message }));
+    }
+};
+
+// Función para rechazar una receta
+controller.rechazarReceta = async (req, res) => {
+    try {
+        console.log("req.body:", req.body);  // Verifica si req.body tiene el valor esperado
+        
+        const { recipeId } = req.body || {};  // Destructuración con fallback vacío
+
+        if (!recipeId) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ error: 'Se requiere el ID de la receta' }));
+        }
+
+        const recipe = await Receta.findById(recipeId);
+        if (!recipe) {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ error: 'Receta no encontrada' }));
+        }
+
+        // Cambiar el estado de la receta a 'rechazada'
+        recipe.estado = 'rechazada';
+
+        // Guardar el cambio en la base de datos
+        const recetaActualizada = await recipe.save();
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Receta rechazada correctamente', recipe: recetaActualizada }));
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Error al rechazar la receta', details: error.message }));
+    }
+};
+
 // Función para obtener todas las recetas
 controller.obtenerTodasRecetas = async (req, res) => {
     try {
