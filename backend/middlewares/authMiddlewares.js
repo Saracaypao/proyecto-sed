@@ -7,10 +7,8 @@ const ROLES = require('../data/roles.js');
 const middlewares = {};
 const PREFIX = 'Bearer';
 
-middlewares.authentication = async (req, res) => {
+middlewares.authentication = async (req, res, next) => {
     try {
-        debug('User authentication');
-
         const { authorization } = req.headers;
 
         if (!authorization) {
@@ -32,7 +30,6 @@ middlewares.authentication = async (req, res) => {
         }
 
         const userId = payload.userId; 
-
         const user = await User.findById(userId);
         if (!user) {
             res.writeHead(401, { 'Content-Type': 'application/json' });
@@ -48,14 +45,14 @@ middlewares.authentication = async (req, res) => {
         req.user = user;
         req.token = token;
 
-        console.log('Token:', token);
-        console.log('Decoded Payload:', payload);
+        next(); // Continúa con el siguiente middleware o controlador
     } catch (error) {
         console.error(error);
         res.writeHead(500, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ ok: false, error: error.message || 'Error interno del servidor' }));
+        return res.end(JSON.stringify({ error: error.message || 'Error interno del servidor' }));
     }
 };
+
 
 middlewares.authorization = (roleRequired = ROLES.SYSADMIN) => {
     return (req, res) => {

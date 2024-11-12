@@ -1,11 +1,18 @@
 const modeloUsuario = require('../models/userModel');
 
 // Función para registrar un usuario
-// Función para registrar un usuario
 const registrarUsuario = async (req, res) => {
-    const { nombre, correo, contrasena, confirmarContrasena, rol = 'user' } = req.body;  // Destructuración correcta del cuerpo de la solicitud
+    const { nombre, correo, contrasena, confirmarContrasena, rol = 'user' } = req.body;
+    const currentUser = req.user; // Usuario autenticado
 
-    // Verificar si la contraseña y la confirmación de la contraseña coinciden
+    // Verificar que el usuario autenticado tenga el rol de 'super_admin' si intenta crear un 'admin'
+    if (rol === 'admin' && (!currentUser || !currentUser.roles.includes('super_admin'))) {
+        res.writeHead(403, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: "No tienes permiso para crear un usuario administrador." }));
+        return;
+    }
+
+    // Verificar que las contraseñas coincidan  
     if (contrasena !== confirmarContrasena) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: "Las contraseñas no coinciden." }));
@@ -21,12 +28,12 @@ const registrarUsuario = async (req, res) => {
             return;
         }
 
-        // Crear un nuevo usuario con el rol especificado
+        // Crear un nuevo usuario
         const nuevoUsuario = new modeloUsuario({
             nombre,
             correo,
             contrasena,
-            roles: [rol] // Asignar el rol al nuevo usuario
+            roles: [rol]  // Asignar el rol al nuevo usuario
         });
 
         await nuevoUsuario.save();
@@ -36,11 +43,61 @@ const registrarUsuario = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-            ok: false,
-            msg: 'Error interno del servidor',
-            error: error.message || 'Error interno del servidor',
-        }));
+        res.end(JSON.stringify({ ok: false, msg: 'Error interno del servidor', error: error.message || 'Error interno del servidor' }));
+    }
+};
+
+// Función para aceptar una receta
+const aceptarReceta = async (req, res) => {
+    const recetaId = req.body.recetaId;
+    const currentUser = req.user;
+
+    if (!currentUser.roles.includes('super_admin')) {
+        res.writeHead(403, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: "Permiso denegado: solo super_admin puede aceptar recetas." }));
+        return;
+    }
+
+    try {
+        const receta = await Receta.findByIdAndUpdate(recetaId, { estado: 'aprobada' });
+        if (receta) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ mensaje: "Receta aceptada con éxito." }));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: "Receta no encontrada." }));
+        }
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: "Error al aceptar la receta", details: error.message }));
+    }
+};
+
+// Función para rechazar una receta
+const rechazarReceta = async (req, res) => {
+    const recetaId = req.body.recetaId;
+    const currentUser = req.user;
+
+    if (!currentUser.roles.includes('super_admin')) {
+        res.writeHead(403, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: "Permiso denegado: solo super_admin puede rechazar recetas." }));
+        return;
+    }
+
+    try {
+        const receta = await Receta.findByIdAndUpdate(recetaId, { estado: 'rechazada' });
+        if (receta) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ mensaje: "Receta rechazada con éxito." }));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: "Receta no encontrada." }));
+        }
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: "Error al rechazar la receta", details: error.message }));
     }
 };
 
@@ -77,4 +134,4 @@ const eliminarUsuario = async (req, res) => {
     }
 };
 
-module.exports = { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario };
+module.exports = { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario, aceptarReceta, rechazarReceta };

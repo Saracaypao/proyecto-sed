@@ -25,6 +25,12 @@ const recetaSchema = new Schema({
         enum: ['entradas', 'platos fuertes', 'complementos', 'bebidas', 'postres'],
         required: true,
     },
+    estado: {
+        type: String,
+        enum: ['pendiente', 'aprobada', 'rechazada'],
+        default: 'pendiente',
+    },
+    autor: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario' },
     creadoEn: {
         type: Date,
         default: Date.now,
