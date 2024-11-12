@@ -1,6 +1,6 @@
 const http = require('http');
 const url = require('url');
-const { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario } = require('../controllers/userController'); // Importamos las funciones del controlador
+const { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario, editarUsuario  } = require('../controllers/userController'); // Importamos las funciones del controlador
 const { authentication, authorization } = require('../middlewares/authMiddlewares');
 
 
@@ -31,7 +31,27 @@ const userRoutes = (req, res) => {
     }
     // Ruta para eliminar un usuario
     else if (parsedUrl.pathname.startsWith('/api/user/deleteUser') && req.method === 'DELETE') {
-        eliminarUsuario(req, res); // Llamamos al controlador que maneja la eliminación del usuario
+        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
+            authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
+                eliminarUsuario(req, res); // Llamamos al controlador que maneja la eliminación del usuario
+            });
+        });
+    }
+    // Ruta para editar un usuario
+    else if (parsedUrl.pathname.startsWith('/api/user/editUser') && req.method === 'PUT') {
+        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
+            authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
+                let body = '';
+                req.on('data', chunk => {
+                    body += chunk; // Recibe los datos en trozos
+                });
+
+                req.on('end', () => {
+                    req.body = JSON.parse(body);
+                    editarUsuario(req, res); // Llamamos al controlador que maneja la edición del usuario
+                });
+            });
+        });
     }
     else {
         res.writeHead(404, { 'Content-Type': 'application/json' });

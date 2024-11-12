@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const modeloUsuario = require('../models/userModel');
 
 // Función para registrar un usuario
@@ -47,57 +48,50 @@ const registrarUsuario = async (req, res) => {
     }
 };
 
-// Función para aceptar una receta
-const aceptarReceta = async (req, res) => {
-    const recetaId = req.body.recetaId;
+const editarUsuario = async (req, res) => {
+    const userId = req.url.split('/').pop(); // Obtener el ID del usuario desde la URL
+    const { nombre, correo, rol } = req.body;
     const currentUser = req.user;
 
-    if (!currentUser.roles.includes('super_admin')) {
+    // Verificar que el usuario autenticado intente editar su propio perfil o que sea super_admin
+    if (currentUser._id !== userId && (!currentUser.roles.includes('super_admin'))) {
         res.writeHead(403, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: "Permiso denegado: solo super_admin puede aceptar recetas." }));
+        res.end(JSON.stringify({ error: "Permiso denegado: no puedes editar otro usuario." }));
         return;
     }
 
     try {
-        const receta = await Receta.findByIdAndUpdate(recetaId, { estado: 'aprobada' });
-        if (receta) {
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ mensaje: "Receta aceptada con éxito." }));
-        } else {
+        const usuario = await modeloUsuario.findById(userId);
+        
+        if (!usuario) {
             res.writeHead(404, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: "Receta no encontrada." }));
+            res.end(JSON.stringify({ error: "Usuario no encontrado." }));
+            return;
         }
+
+        // Si el usuario autenticado es super_admin, puede editar cualquier usuario (incluyendo el rol de admin)
+        if (currentUser.roles.includes('super_admin') && rol && rol !== usuario.roles[0]) {
+            // Asegurarse de que el super_admin no cambie el rol de un super_admin a otro rol
+            if (rol === 'super_admin') {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: "No se puede cambiar el rol a super_admin." }));
+                return;
+            }
+        }
+
+        // Actualizar el usuario con la nueva información
+        usuario.nombre = nombre || usuario.nombre;
+        usuario.correo = correo || usuario.correo;
+        usuario.roles = [rol || usuario.roles[0]]; // Solo se puede cambiar el rol si el super_admin lo permite
+
+        await usuario.save();
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ mensaje: "Usuario editado con éxito.", usuario }));
     } catch (error) {
         console.error(error);
         res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: "Error al aceptar la receta", details: error.message }));
-    }
-};
-
-// Función para rechazar una receta
-const rechazarReceta = async (req, res) => {
-    const recetaId = req.body.recetaId;
-    const currentUser = req.user;
-
-    if (!currentUser.roles.includes('super_admin')) {
-        res.writeHead(403, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: "Permiso denegado: solo super_admin puede rechazar recetas." }));
-        return;
-    }
-
-    try {
-        const receta = await Receta.findByIdAndUpdate(recetaId, { estado: 'rechazada' });
-        if (receta) {
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ mensaje: "Receta rechazada con éxito." }));
-        } else {
-            res.writeHead(404, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: "Receta no encontrada." }));
-        }
-    } catch (error) {
-        console.error(error);
-        res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: "Error al rechazar la receta", details: error.message }));
+        res.end(JSON.stringify({ error: 'Error al editar el usuario', details: error.message }));
     }
 };
 
@@ -117,16 +111,43 @@ const obtenerTodosUsuarios = async (req, res) => {
 // Función para eliminar un usuario
 const eliminarUsuario = async (req, res) => {
     const userId = req.url.split('/').pop(); // Obtener el ID del usuario desde la URL
+    const currentUser = req.user;
+
+    // Verificar si el userId es un ObjectId válido
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: "ID de usuario no válido." }));
+        return;
+    }
+
+    // Verificar que el usuario autenticado intente eliminar su propio perfil o que sea super_admin
+    if (currentUser._id !== userId && !currentUser.roles.includes('super_admin')) {
+        res.writeHead(403, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: "Permiso denegado: no puedes eliminar otro usuario." }));
+        return;
+    }
 
     try {
-        const resultado = await modeloUsuario.findByIdAndDelete(userId);
-        if (resultado) {
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ mensaje: 'Usuario eliminado con éxito' }));
-        } else {
+        // Verificar si el usuario a eliminar existe
+        const usuario = await modeloUsuario.findById(userId);
+        if (!usuario) {
             res.writeHead(404, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: 'Usuario no encontrado' }));
+            res.end(JSON.stringify({ error: "Usuario no encontrado." }));
+            return;
         }
+
+        // Verificar que no se intente eliminar a un super_admin
+        if (usuario.roles.includes('super_admin') && currentUser._id !== userId) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: "No puedes eliminar a un super_admin." }));
+            return;
+        }
+
+        // Eliminar el usuario
+        await modeloUsuario.findByIdAndDelete(userId);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ mensaje: 'Usuario eliminado con éxito' }));
     } catch (error) {
         console.error(error);
         res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -134,4 +155,4 @@ const eliminarUsuario = async (req, res) => {
     }
 };
 
-module.exports = { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario, aceptarReceta, rechazarReceta };
+module.exports = { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario, editarUsuario };
