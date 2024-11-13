@@ -155,4 +155,25 @@ const eliminarUsuario = async (req, res) => {
     }
 };
 
-module.exports = { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario, editarUsuario };
+// Función para obtener solo los administradores
+const obtenerAdmins = async (req, res) => {
+    const currentUser = req.user;
+
+    if (!currentUser.roles.includes('super_admin')) {
+        return res.writeHead(403, { 'Content-Type': 'application/json' })
+                   .end(JSON.stringify({ error: "Permiso denegado: solo los super_admin pueden obtener administradores." }));
+    }
+
+    try {
+        const admins = await modeloUsuario.find({ roles: 'admin' });
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ admins }));
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Error al obtener los administradores', details: error.message }));
+    }
+};
+
+
+module.exports = { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario, editarUsuario, obtenerAdmins };

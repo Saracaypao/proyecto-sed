@@ -1,6 +1,6 @@
 const http = require('http');
 const url = require('url');
-const { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario, editarUsuario  } = require('../controllers/userController'); // Importamos las funciones del controlador
+const { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario, editarUsuario, obtenerAdmins } = require('../controllers/userController'); // Importamos las funciones del controlador
 const { authentication, authorization } = require('../middlewares/authMiddlewares');
 
 
@@ -50,6 +50,14 @@ const userRoutes = (req, res) => {
                     req.body = JSON.parse(body);
                     editarUsuario(req, res); // Llamamos al controlador que maneja la edición del usuario
                 });
+            });
+        });
+    }
+    // Ruta para obtener todos los usuarios con rol 'admin'
+    else if (parsedUrl.pathname === '/api/user/admins' && req.method === 'GET') {
+        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
+            authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
+                obtenerAdmins(req, res); // Llamamos al controlador que maneja la obtención de administradores
             });
         });
     }
