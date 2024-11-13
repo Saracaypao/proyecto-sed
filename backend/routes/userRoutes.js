@@ -9,20 +9,26 @@ const userRoutes = (req, res) => {
 
     // Ruta para crear un nuevo usuario
     if (parsedUrl.pathname === '/api/user/newUser' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk; // Recibe los datos en trozos
+        });
 
-        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
-            authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
-                console.log("Auth passed")
-                let body = '';
-                req.on('data', chunk => {
-                    body += chunk; // Recibe los datos en trozos
-                });
+        req.on('end', () => {
+            req.body = JSON.parse(body);
 
-                req.on('end', () => {
-                    req.body = JSON.parse(body);
-                    registrarUsuario(req, res); // Llamamos al controlador que maneja el registro del usuario
+            // Si el rol es admin, requiere autenticación del super_admin
+            if (req.body.rol === 'admin') {
+                authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
+                    authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
+                        console.log("Auth passed");
+                        registrarUsuario(req, res); // Llamamos al controlador que maneja el registro del usuario
+                    });
                 });
-            });
+            } else {
+                // No requiere autenticación si el rol no es admin
+                registrarUsuario(req, res);
+            }
         });
     }
     // Ruta para obtener todos los usuarios

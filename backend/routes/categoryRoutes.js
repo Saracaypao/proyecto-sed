@@ -1,6 +1,6 @@
 const http = require('http');
 const url = require('url');
-const { agregarCategoria, editarCategoria } = require('../controllers/categoryController');
+const { agregarCategoria, editarCategoria, eliminarCategoria } = require('../controllers/categoryController');
 const { authentication, authorization } = require('../middlewares/authMiddlewares');
 
 const categoryRoutes = (req, res) => {
@@ -9,7 +9,7 @@ const categoryRoutes = (req, res) => {
     // Ruta para agregar una nueva categoría
     if (parsedUrl.pathname === '/api/category/newCategory' && req.method === 'POST') {
         authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
-            authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
+            authorization(['admin', 'super_admin'])(req, res, () => {  // Verificar si el usuario es admin o super_admin
                 let body = '';
                 req.on('data', chunk => {
                     body += chunk; // Recibe los datos en trozos
@@ -25,7 +25,7 @@ const categoryRoutes = (req, res) => {
     // Ruta para editar una categoría
     else if (parsedUrl.pathname.startsWith('/api/category/editCategory') && req.method === 'PUT') {
         authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
-            authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
+            authorization(['admin', 'super_admin'])(req, res, () => {  // Verificar si el usuario es admin o super_admin
                 let body = '';
                 req.on('data', chunk => {
                     body += chunk; // Recibe los datos en trozos
@@ -35,6 +35,14 @@ const categoryRoutes = (req, res) => {
                     req.body = JSON.parse(body);
                     editarCategoria(req, res); // Llamamos al controlador que maneja la edición de categorías
                 });
+            });
+        });
+    }
+    // Ruta para eliminar una categoría
+    else if (parsedUrl.pathname.startsWith('/api/category/deleteCategory') && req.method === 'DELETE') {
+        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
+            authorization(['admin', 'super_admin'])(req, res, () => {  // Verificar si el usuario es admin o super_admin
+                eliminarCategoria(req, res); // Llamamos al controlador que maneja la eliminación de categorías
             });
         });
     }
