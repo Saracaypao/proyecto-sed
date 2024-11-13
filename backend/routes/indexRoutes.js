@@ -1,6 +1,7 @@
 const http = require('http');
 const userRoutes = require('./userRoutes');
 const recipeRoutes = require('./recipeRoutes');
+const categoryRoutes = require('./categoryRoutes')
 const authRoutes = require('./authRoutes'); // Asegúrate de importar authRoutes
 
 const apiRouter = (req, res) => {
@@ -15,6 +16,9 @@ const apiRouter = (req, res) => {
     // Delegar las rutas de recetas
     else if (pathname.startsWith('/api/recipe')) {
         recipeRoutes(req, res);
+    }
+    else if (pathname.startsWith('/api/category')) {
+        categoryRoutes(req, res);
     }
     // Delegar las rutas de autenticación (logIn y whoAmI)
     else if (pathname.startsWith('/logIn') || pathname.startsWith('/whoAmI')) {

@@ -34,20 +34,23 @@ const recipeRoutes = (req, res) => {
         recipeController.eliminarReceta(req, res);
     }
     else if (method === 'POST' && path === '/api/recipe/aceptarReceta') {
-        middlewares.parseJSONBody(req, res, () => {  // Asegúrate de usar el middleware aquí
+        middlewares.parseJSONBody(req, res, () => {  // Usamos este middleware para procesar el cuerpo JSON
             middlewares.authentication(req, res, () => {
-                middlewares.authorization('super_admin')(req, res, () => {
-                    recipeController.aceptarReceta(req, res);  // Cambié rechazarReceta por aceptarReceta
+                // Acepta 'admin' y 'super_admin' para aprobar la receta
+                middlewares.authorization(['admin', 'super_admin'])(req, res, () => {
+                    recipeController.aceptarReceta(req, res);  // Llamamos al controlador para aceptar la receta
                 });
             });
         });
     }    
-    // Ruta para rechazar una receta (solo super_admin)
+    
+    // Ruta para rechazar una receta (solo admin y super_admin)
     else if (method === 'POST' && path === '/api/recipe/rechazarReceta') {
-        middlewares.parseJSONBody(req, res, () => {  // Asegúrate de usar este middleware
+        middlewares.parseJSONBody(req, res, () => {  // Usamos este middleware para procesar el cuerpo JSON
             middlewares.authentication(req, res, () => {
-                middlewares.authorization('super_admin')(req, res, () => {
-                    recipeController.rechazarReceta(req, res);
+                // Acepta 'admin' y 'super_admin' para rechazar la receta
+                middlewares.authorization(['admin', 'super_admin'])(req, res, () => {
+                    recipeController.rechazarReceta(req, res);  // Llamamos al controlador para rechazar la receta
                 });
             });
         });

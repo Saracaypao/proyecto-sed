@@ -33,6 +33,14 @@ const userSchema = new Schema({
     },
 }, { timestamps: true });
 
+// Middleware para asignar rol predeterminado si no se especifica
+userSchema.pre('save', function(next) {
+    if (!this.roles || this.roles.length === 0 || this.roles[0] === '') {
+        this.roles = ['user']; // Asignamos el rol 'user' por defecto
+    }
+    next();
+});
+
 userSchema.methods = {
     encryptContrasena: function (contrasena) {
         if (!contrasena) return '';
