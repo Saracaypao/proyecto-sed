@@ -63,12 +63,12 @@
         </a>
     </div>
 
-<!-- Modal de iniciar sesión -->
+<!-- modal de iniciar sesión -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <h2 class="text-center">Iniciar Sesión</h2>
-            <form id="loginForm" onsubmit="return handleLogin(event);">
+            <form onsubmit="return handleLogin(event);">
                 <div class="form-group">
                     <label for="user">Correo</label>
                     <input type="text" class="form-control" id="correoLogin" placeholder="Ingrese su correo" required>
@@ -77,14 +77,11 @@
                     <label for="password">Contraseña</label>
                     <input type="password" class="form-control" id="contrasenaLogin" placeholder="Contraseña" required>
                 </div>
-                <div id="error-message" class="alert alert-danger d-none" role="alert">
-                    Usuario o contraseña incorrectos, o usuario no registrado.
-                </div>
                 <div class="options">
                     <label><input type="checkbox" class="custom-checkbox"> Recordarme</label>
                     <a href="#">¿Olvidaste tu contraseña?</a>
                 </div>
-                <button type="submit" class="btn btn-success btn-block" id="loginBtn">Ingresar</button>
+                <button type="submit" class="btn btn-success btn-block">Ingresar</button>
             </form>
             <p class="text-center mt-3">¿No tienes una cuenta? <a href="#" class="rs-link" onclick="showRegisterModal()">Regístrate aquí</a></p>
         </div>
@@ -149,91 +146,75 @@ window.onload = () => {
 };
 </script> 
 
-    <!-- modal de registro -->
-    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <h2 class="text-center">Registrarse</h2>
-                <form onsubmit="return handleRegister(event);">
-                    <div class="form-group">
-                        <label for="registerUser">Nombre</label>
-                        <input type="text" class="form-control" id="registerUser" placeholder="Ingrese su usuario">
-                    </div>
-                    <div class="form-group">
-                        <label for="registerEmail">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="correoRegister" placeholder="Ingrese su correo">
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword">Contraseña</label>
-                        <input type="password" class="form-control" id="contrasenaRegister" placeholder="Contraseña">
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirmar contraseña</label>
-                        <input type="password" class="form-control" id="confirmarContrasena" placeholder="Confirmar contraseña">
-                    </div>
-                    <button type="submit" class="btn btn-success btn-block">Registrar</button>
-                </form>
-                <p class="text-center mt-3">¿Ya tienes una cuenta? <a href="#" class="rs-link" onclick="showSignUpModal()">Inicia sesión aquí</a></p>
-            </div>
+  <!-- modal de registro -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <h2 class="text-center">Registrarse</h2>
+            <div id="registerMessage"></div>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerUser">Usuario</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese su usuario">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correoRegister" placeholder="Ingrese su correo">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contraseña</label>
+                    <input type="password" class="form-control" id="contrasenaRegister" placeholder="Contraseña">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar contraseña</label>
+                    <input type="password" class="form-control" id="confirmarContrasena" placeholder="Confirmar contraseña">
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Registrar</button>
+            </form>
+            <p class="text-center mt-3">¿Ya tienes una cuenta? <a href="#" class="rs-link" onclick="showSignUpModal()">Inicia sesión aquí</a></p>
         </div>
     </div>
+</div>
 
     <script>
     // Función para manejar el envío del formulario de registro
     function handleRegister(event) {
-        event.preventDefault();  // Prevenir la acción por defecto del formulario (recarga de página)
+    event.preventDefault();  // Prevenir la acción por defecto del formulario (recarga de página)
 
-        // Obtener los valores de los campos
-        const nombre = document.getElementById('nombre').value;
-        const correo = document.getElementById('correoRegister').value;
-        const contrasena = document.getElementById('contrasenaRegister').value;
-        const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+    const nombre = document.getElementById('nombre').value;
+    const correo = document.getElementById('correoRegister').value;
+    const contrasena = document.getElementById('contrasenaRegister').value;
+    const confirmarContrasena = document.getElementById('confirmarContrasena').value;
 
-        // Validar si las contraseñas coinciden
-        if (contrasena !== confirmarContrasena) {
-            console.log('Las contraseñas no coinciden.');
-            alert('Las contraseñas no coinciden.');
-            return;
-        }
+    // Validar si las contraseñas coinciden
+    if (contrasena !== confirmarContrasena) {
+        console.log('Las contraseñas no coinciden.');
+        alert('Las contraseñas no coinciden.');
+        return;
+    }
 
-        // Log de los datos antes de enviar la solicitud
-        console.log('Enviando los siguientes datos al backend:', { nombre, correo, contrasena, confirmarContrasena });
-
-        // Enviar los datos al backend
-        fetch('http://localhost:3000/api/user/newUser', {
+    // Enviar los datos al backend
+    fetch('http://localhost:3000/api/user/newUser', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ nombre, correo, contrasena, confirmarContrasena })
-
-        })
-        .then(response => {
-            console.log('Respuesta recibida del backend:', response);  // Mensaje de respuesta
-            return response.json();
-        })
-        .then(data => {
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Respuesta recibida del backend:', data);
         const messageElement = document.getElementById('registerMessage');
-
-        // Log de los datos que recibimos del backend
-        console.log('Datos recibidos del backend:', data);
-
-        // Verifica si el backend está enviando un mensaje correctamente
         if (data.mensaje) {
             messageElement.innerHTML = `<div class="alert alert-success">${data.mensaje}</div>`;
-            console.log('Registro exitoso:', data.mensaje);
-            document.getElementById('registerForm').reset();
         } else {
             messageElement.innerHTML = `<div class="alert alert-danger">Error al registrar el usuario</div>`;
-            console.log('Error en el registro:', data.mensaje || 'Mensaje de error no disponible');
         }
-        })
-        .catch(error => {
-            const messageElement = document.getElementById('registerMessage');
-            messageElement.innerHTML = `<div class="alert alert-danger">Error al registrar el usuario. Intenta nuevamente.</div>`;
-            console.error('Error al registrar el usuario:', error);
-        });
-    }
+    })
+    .catch(error => {
+        console.error('Error al registrar el usuario:', error);
+    });
+}
 </script>
 
     <script>
