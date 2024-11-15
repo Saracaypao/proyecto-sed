@@ -5,58 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Administrador - Recetas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="./css/recetasSuperadminStyles.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<style>
-    body {
-        font-family: "Nunito Sans", sans-serif;
-    }
-    .navbar {
-        background-color: #1a1a1a !important;
-    }
-    .navbar-brand, .nav-link {
-        color: #ffffff;
-    }
-    .navbar-brand {
-        text-transform: uppercase;
-    }
-    .container {
-        margin-top: 30px;
-    }
-    h2 {
-        font-weight: 700;
-        color: #343a40;
-        text-align: start;
-        margin-bottom: 20px;
-    }
-    /* Modificación aquí: cambiamos el fondo de .card-header */
-    .card-header {
-        background-color: #1f2d3d; /* Color agregado */
-        color: #ffffff; /* Texto blanco */
-    }
-    /* Modificación aquí: color de fondo para la sección "Agregar categoría" */
-    #categoryForm {
-        background-color: #4e5d6c; /* Color de fondo */
-        padding: 20px;
-        border-radius: 8px;
-    }
-    #categoryForm .form-group label {
-        color: #ffffff; /* Texto blanco en los labels */
-    }
-    #categoryForm .form-control {
-        background-color: #ffffff; /* Fondo blanco para los inputs */
-    }
-    /* Modificación aquí: botón amarillo para "Agregar categoría" */
-    #categoryForm button {
-        background-color: #ffc107; /* Botón amarillo */
-        border-color: #ffc107; /* Bordes del botón amarillo */
-        color: #fff; /* Texto en blanco */
-    }
-    #categoryForm button:hover {
-        background-color: #e0a800; /* Sombra más oscura al pasar el ratón */
-        border-color: #e0a800;
-    }
-</style>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
