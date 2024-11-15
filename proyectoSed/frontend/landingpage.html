@@ -207,6 +207,11 @@ window.onload = () => {
         const messageElement = document.getElementById('registerMessage');
         if (data.mensaje) {
             messageElement.innerHTML = `<div class="alert alert-success">${data.mensaje}</div>`;
+            // Vaciar los campos del formulario
+            document.getElementById('nombre').value = '';
+            document.getElementById('correoRegister').value = '';
+            document.getElementById('contrasenaRegister').value = '';
+            document.getElementById('confirmarContrasena').value = '';
         } else {
             messageElement.innerHTML = `<div class="alert alert-danger">Error al registrar el usuario</div>`;
         }
