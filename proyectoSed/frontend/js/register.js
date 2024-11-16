@@ -1,20 +1,46 @@
 
+// función para manejar el envío del formulario de registro
 function handleRegister(event) {
-    event.preventDefault(); // previniendo el envío del formulario
-    // lógica adicional para validar el inicio de sesión si es necesario
-    
-    // redirigir a index.html
-    window.location.href = "index.html";
+event.preventDefault();  // Prevenir la acción por defecto del formulario (recarga de página)
+
+const nombre = document.getElementById('nombre').value;
+const correo = document.getElementById('correoRegister').value;
+const contrasena = document.getElementById('contrasenaRegister').value;
+const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+
+// validar si las contraseñas coinciden
+if (contrasena !== confirmarContrasena) {
+    console.log('Las contraseñas no coinciden.');
+    alert('Las contraseñas no coinciden.');
+    return;
 }
 
-function showRegisterModal() {
-    $('#loginModal').modal('hide'); // cierra el modal de inicio de sesión
-    $('#registerModal').modal('show'); // muestra el modal de registro
-}
-
-function showSignUpModal() {
-    $('#registerModal').modal('hide'); // cierra el modal de registro
-    $('#loginModal').modal('show'); // muestra el modal de inicio de sesión
+// enviar los datos al backend
+fetch('http://localhost:3000/api/user/newUser', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ nombre, correo, contrasena, confirmarContrasena })
+})
+.then(response => response.json())
+.then(data => {
+    console.log('Respuesta recibida del backend:', data);
+    const messageElement = document.getElementById('registerMessage');
+    if (data.mensaje) {
+        messageElement.innerHTML = `<div class="alert alert-success">${data.mensaje}</div>`;
+        // vaciar los campos del formulario
+        document.getElementById('nombre').value = '';
+        document.getElementById('correoRegister').value = '';
+        document.getElementById('contrasenaRegister').value = '';
+        document.getElementById('confirmarContrasena').value = '';
+    } else {
+        messageElement.innerHTML = `<div class="alert alert-danger">Error al registrar el usuario</div>`;
+    }
+})
+.catch(error => {
+    console.error('Error al registrar el usuario:', error);
+});
 }
 
 

@@ -67,6 +67,7 @@
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+            <div id="loginMessage" class="alert d-none text-center" role="alert"></div>
             <h2 class="text-center">Iniciar Sesión</h2>
             <form onsubmit="return handleLogin(event);">
                 <div class="form-group">
@@ -87,64 +88,6 @@
         </div>
     </div>
 </div>
-
-<script>
-// Clase Auth para manejar la lógica de autenticación
-class Auth {
-    async logIn(correo, contrasena) {
-        try {
-            const response = await fetch('http://localhost:3000/logIn', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ correo, contrasena })
-            });
-            
-            if (response.ok) {
-                const data = await response.json();
-                localStorage.setItem('token', data.token); // Guardar el token en localStorage
-                return response.status; // Devolver el código de estado
-            } else {
-                return response.status; // Manejar errores
-            }
-        } catch (error) {
-            console.error("Error en la solicitud de inicio de sesión:", error);
-            return 500; // Código para error del servidor
-        }
-    }
-}
-
-// Función principal para manejar el login
-async function handleLogin(event) {
-    event.preventDefault(); // Prevenir el comportamiento por defecto
-
-    // Obtener los valores del formulario
-    const correo = document.getElementById('correoLogin').value;
-    const contrasena = document.getElementById('contrasenaLogin').value;
-
-    if (!correo || !contrasena) {
-        alert("Por favor, completa todos los campos.");
-        return;
-    }
-
-    const auth = new Auth();
-    const responseStatus = await auth.logIn(correo, contrasena);
-
-    if (responseStatus === 200) {
-        localStorage.setItem('correo', correo); 
-        alert("Inicio de sesión exitoso. Redirigiendo...");
-        setTimeout(() => {
-            window.location.href = "landingpage.html";
-        }, 1500);
-    } else {
-        alert("Error al iniciar sesión. Verifica tus datos.");
-    }
-}
-
-// Al cargar la página, eliminar el token previo
-window.onload = () => {
-    localStorage.removeItem('token');
-};
-</script> 
 
   <!-- modal de registro -->
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
@@ -175,74 +118,6 @@ window.onload = () => {
         </div>
     </div>
 </div>
-
-    <script>
-    // Función para manejar el envío del formulario de registro
-    function handleRegister(event) {
-    event.preventDefault();  // Prevenir la acción por defecto del formulario (recarga de página)
-
-    const nombre = document.getElementById('nombre').value;
-    const correo = document.getElementById('correoRegister').value;
-    const contrasena = document.getElementById('contrasenaRegister').value;
-    const confirmarContrasena = document.getElementById('confirmarContrasena').value;
-
-    // Validar si las contraseñas coinciden
-    if (contrasena !== confirmarContrasena) {
-        console.log('Las contraseñas no coinciden.');
-        alert('Las contraseñas no coinciden.');
-        return;
-    }
-
-    // Enviar los datos al backend
-    fetch('http://localhost:3000/api/user/newUser', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ nombre, correo, contrasena, confirmarContrasena })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Respuesta recibida del backend:', data);
-        const messageElement = document.getElementById('registerMessage');
-        if (data.mensaje) {
-            messageElement.innerHTML = `<div class="alert alert-success">${data.mensaje}</div>`;
-            // Vaciar los campos del formulario
-            document.getElementById('nombre').value = '';
-            document.getElementById('correoRegister').value = '';
-            document.getElementById('contrasenaRegister').value = '';
-            document.getElementById('confirmarContrasena').value = '';
-        } else {
-            messageElement.innerHTML = `<div class="alert alert-danger">Error al registrar el usuario</div>`;
-        }
-    })
-    .catch(error => {
-        console.error('Error al registrar el usuario:', error);
-    });
-}
-</script>
-
-    <script>
-        function handleLogin(event) {
-            event.preventDefault(); // previniendo el envío del formulario
-            // lógica adicional para validar el inicio de sesión si es necesario
-            
-            // redirigir a index.html
-            window.location.href = "index.html";
-        }
-
-        function showRegisterModal() {
-            $('#loginModal').modal('hide'); // cierra el modal de inicio de sesión
-            $('#registerModal').modal('show'); // muestra el modal de registro
-        }
-
-        function showSignUpModal() {
-            $('#registerModal').modal('hide'); // cierra el modal de registro
-            $('#loginModal').modal('show'); // muestra el modal de inicio de sesión
-        }
-
-    </script>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
