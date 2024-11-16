@@ -11,7 +11,7 @@ const confirmarContrasena = document.getElementById('confirmarContrasena').value
 // validar si las contraseñas coinciden
 if (contrasena !== confirmarContrasena) {
     console.log('Las contraseñas no coinciden.');
-    alert('Las contraseñas no coinciden.');
+    showRegisterMessage("Las contraseñas no coinciden. Por favor, verifica e intenta nuevamente.", "danger");
     return;
 }
 
@@ -28,19 +28,33 @@ fetch('http://localhost:3000/api/user/newUser', {
     console.log('Respuesta recibida del backend:', data);
     const messageElement = document.getElementById('registerMessage');
     if (data.mensaje) {
-        messageElement.innerHTML = `<div class="alert alert-success">${data.mensaje}</div>`;
+        showRegisterMessage(data.mensaje, "success");
         // vaciar los campos del formulario
         document.getElementById('nombre').value = '';
         document.getElementById('correoRegister').value = '';
         document.getElementById('contrasenaRegister').value = '';
         document.getElementById('confirmarContrasena').value = '';
     } else {
-        messageElement.innerHTML = `<div class="alert alert-danger">Error al registrar el usuario</div>`;
+        showRegisterMessage("Error al registrar el usuario. Inténtalo más tarde.", "danger");
     }
 })
 .catch(error => {
     console.error('Error al registrar el usuario:', error);
+    showRegisterMessage("Error de servidor. Intenta nuevamente más tarde.", "danger");
 });
+}
+
+// función para mostrar mensajes estilizados en el registro
+function showRegisterMessage(message, type) {
+    const registerMessage = document.getElementById('registerMessage');
+    registerMessage.className = `alert alert-${type} text-center`;  // define el tipo de alerta (roja o verde)
+    registerMessage.textContent = message;  // establece el mensaje
+    registerMessage.classList.remove('d-none');  // muestra el mensaje
+
+    // ocultar el mensaje después de 3 segundos
+    setTimeout(() => {
+        registerMessage.classList.add('d-none');
+    }, 3000);
 }
 
 

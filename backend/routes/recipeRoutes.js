@@ -8,54 +8,54 @@ const recipeRoutes = (req, res) => {
     const method = req.method;
     const path = parsedUrl.pathname;
 
-    // Ruta para agregar una receta
+    // ruta para agregar una receta
     if (method === 'POST' && path === '/api/recipe/newRecetas') {
         recipeController.agregarReceta(req, res);
     }
-    // Ruta para obtener todas las recetas
+    // ruta para obtener todas las recetas
     else if (method === 'GET' && path === '/api/recipe/allRecetas') {
         recipeController.obtenerTodasRecetas(req, res);
     }
-    // Ruta para buscar recetas por filtros
+    // ruta para buscar recetas por filtros
     else if (method === 'GET' && path === '/api/recipe/search') {
         req.query = parsedUrl.query;
         recipeController.buscarRecetasPorFiltro(req, res);
     }
-    // Ruta para actualizar una receta específica
+    // ruta para actualizar una receta específica
     else if (method === 'PUT' && path.startsWith('/api/recipe/update/')) {
         const recetaId = path.split('/')[4];
         req.params = { id: recetaId };
         recipeController.actualizarReceta(req, res);
     }
-    // Ruta para eliminar una receta específica
+    // ruta para eliminar una receta específica
     else if (method === 'DELETE' && path.startsWith('/api/recipe/delete/')) {
         const recetaId = path.split('/')[4];
         req.params = { id: recetaId };
         recipeController.eliminarReceta(req, res);
     }
     else if (method === 'POST' && path === '/api/recipe/aceptarReceta') {
-        middlewares.parseJSONBody(req, res, () => {  // Usamos este middleware para procesar el cuerpo JSON
+        middlewares.parseJSONBody(req, res, () => {  // usamos este middleware para procesar el cuerpo JSON
             middlewares.authentication(req, res, () => {
-                // Acepta 'admin' y 'super_admin' para aprobar la receta
+                // acepta 'admin' y 'super_admin' para aprobar la receta
                 middlewares.authorization(['admin', 'super_admin'])(req, res, () => {
-                    recipeController.aceptarReceta(req, res);  // Llamamos al controlador para aceptar la receta
+                    recipeController.aceptarReceta(req, res);  // llamamos al controlador para aceptar la receta
                 });
             });
         });
     }    
     
-    // Ruta para rechazar una receta (solo admin y super_admin)
+    // ruta para rechazar una receta (solo admin y super_admin)
     else if (method === 'POST' && path === '/api/recipe/rechazarReceta') {
-        middlewares.parseJSONBody(req, res, () => {  // Usamos este middleware para procesar el cuerpo JSON
+        middlewares.parseJSONBody(req, res, () => {  // usamos este middleware para procesar el cuerpo JSON
             middlewares.authentication(req, res, () => {
-                // Acepta 'admin' y 'super_admin' para rechazar la receta
+                // acepta 'admin' y 'super_admin' para rechazar la receta
                 middlewares.authorization(['admin', 'super_admin'])(req, res, () => {
-                    recipeController.rechazarReceta(req, res);  // Llamamos al controlador para rechazar la receta
+                    recipeController.rechazarReceta(req, res);  // llamamos al controlador para rechazar la receta
                 });
             });
         });
     }    
-    // Ruta no encontrada
+    // ruta no encontrada
     else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ mensaje: 'Ruta no encontrada' }));

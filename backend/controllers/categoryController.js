@@ -1,11 +1,11 @@
 const Categoria = require('../models/categoryModel');
 
-// Función para agregar una nueva categoría
+// función para agregar una nueva categoria
 const agregarCategoria = async (req, res) => {
     const { nombre } = req.body;
     const currentUser = req.user;
 
-    // Verificar que el usuario sea admin o super_admin
+    // verificar que el usuario sea admin o super_admin
     if (!currentUser.roles.includes('super_admin') && !currentUser.roles.includes('admin')) {
         res.writeHead(403, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: "Permiso denegado: solo admin y super_admin pueden agregar categorías." }));
@@ -13,7 +13,7 @@ const agregarCategoria = async (req, res) => {
     }
 
     try {
-        // Crear una nueva categoría
+        // crear una nueva categoría
         const nuevaCategoria = new Categoria({ nombre });
         await nuevaCategoria.save();
 
@@ -26,13 +26,13 @@ const agregarCategoria = async (req, res) => {
     }
 };
 
-// Función para editar una categoría existente
+// función para editar una categoria existente
 const editarCategoria = async (req, res) => {
     const categoriaId = req.url.split('/').pop(); // Obtener el ID de la categoría desde la URL
     const { nombre } = req.body;
     const currentUser = req.user;
 
-    // Verificar que el usuario sea admin o super_admin
+    // verificar que el usuario sea admin o super_admin
     if (!currentUser.roles.includes('super_admin') && !currentUser.roles.includes('admin')) {
         res.writeHead(403, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: "Permiso denegado: solo admin y super_admin pueden editar categorías." }));
@@ -40,7 +40,7 @@ const editarCategoria = async (req, res) => {
     }
 
     try {
-        // Buscar la categoría por ID
+        // buscar la categoria por id
         const categoria = await Categoria.findById(categoriaId);
         if (!categoria) {
             res.writeHead(404, { 'Content-Type': 'application/json' });
@@ -48,7 +48,7 @@ const editarCategoria = async (req, res) => {
             return;
         }
 
-        // Actualizar la categoría con la nueva información
+        // actualizar la categoria con la nueva informacion
         categoria.nombre = nombre || categoria.nombre;
 
         await categoria.save();
@@ -62,12 +62,12 @@ const editarCategoria = async (req, res) => {
     }
 };
 
-// Función para eliminar una categoría existente
+// función para eliminar una categoria existente
 const eliminarCategoria = async (req, res) => {
     const categoriaId = req.url.split('/').pop(); // Obtener el ID de la categoría desde la URL
     const currentUser = req.user;
 
-    // Verificar que el usuario sea admin o super_admin
+    // verificar que el usuario sea admin o super_admin
     if (!currentUser.roles.includes('super_admin') && !currentUser.roles.includes('admin')) {
         res.writeHead(403, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: "Permiso denegado: solo admin y super_admin pueden eliminar categorías." }));
@@ -75,7 +75,7 @@ const eliminarCategoria = async (req, res) => {
     }
 
     try {
-        // Buscar la categoría por ID
+        // buscar la categoria por id
         const categoria = await Categoria.findByIdAndDelete(categoriaId);
         if (!categoria) {
             res.writeHead(404, { 'Content-Type': 'application/json' });

@@ -1,3 +1,5 @@
+
+
 // clase Auth para manejar la lógica de autenticación
 class Auth {
     async logIn(correo, contrasena) {
@@ -31,7 +33,7 @@ async function handleLogin(event) {
     const contrasena = document.getElementById('contrasenaLogin').value;
 
     if (!correo || !contrasena) {
-        alert("Por favor, completa todos los campos.");
+        showLoginMessage("Por favor, completa todos los campos.", "danger");
         return;
     }
 
@@ -42,10 +44,27 @@ async function handleLogin(event) {
         localStorage.setItem('correo', correo); 
         showLoginMessage("Inicio de sesión exitoso.", "success");
         setTimeout(() => {
+            const prueba = (token) => {
+                const arrayToken = token.split('.');
+                const tokenPayload = JSON.parse(atob(arrayToken[1]));
+                return tokenPayload
+            }
+            const token = localStorage.getItem('token');
+            if (prueba(token).roles.includes("super_admin")) {
+                console.log(prueba);
+                window.location.href = "dashboardSuperAdmin.html";
+                return 
+            }
+            if (prueba(token).roles.includes("admin")) {
+                window.location.href = "dashboardAdmin.html";
+                return
+            }
             window.location.href = "index.html";
         }, 1500);
+    } else if (responseStatus === 401) {
+        showLoginMessage("Credenciales incorrectas. Por favor, verifica tu correo y contraseña.", "danger");
     } else {
-        alert("Error al iniciar sesión. Verifica tus datos.");
+        showLoginMessage("Error en el servidor. Inténtalo más tarde.", "danger");
     }
 }
 
@@ -60,7 +79,7 @@ function showLoginMessage(message, type) {
     loginMessage.textContent = message;
     loginMessage.classList.remove('d-none');
 
-    // Ocultar el mensaje después de 3 segundos
+    // ocultar el mensaje después de 3 segundos
     setTimeout(() => {
         loginMessage.classList.add('d-none');
     }, 3000);

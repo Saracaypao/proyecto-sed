@@ -2,6 +2,7 @@ const http = require('http');
 const url = require('url');
 const { registrarUsuario, obtenerTodosUsuarios, eliminarUsuario, editarUsuario, obtenerAdmins } = require('../controllers/userController');
 const { authentication, authorization } = require('../middlewares/authMiddlewares');
+const { getUserRole } = require('../controllers/authController');
 
 const userRoutes = (req, res) => {
     const parsedUrl = url.parse(req.url, true);
@@ -66,9 +67,15 @@ const userRoutes = (req, res) => {
             });
         });
     }
+    //ruta para obtener roles
+    else if (parsedUrl.pathname === '/api/user/roles' && req.method === 'GET') {
+        authentication(req, res, () => {
+            getUserRole(req, res);
+        });
+    }
     else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Ruta no encontrada' }));
+        res.end(JSON.stringify({ error: 'Ruta no encontradaaaaaa' }));
     }
 };
 

@@ -7,7 +7,7 @@ const ROLES = require('../data/roles.js');
 const middlewares = {};
 const PREFIX = 'Bearer';
 
-// Middleware para procesar el JSON en el body de la solicitud
+// middleware para procesar el json en el body de la solicitud
 middlewares.parseJSONBody = (req, res, next) => {
     let body = '';
     req.on('data', chunk => {
@@ -65,7 +65,7 @@ middlewares.authentication = async (req, res, next) => {
         req.user = user;
         req.token = token;
 
-        
+        // quitar este console.log luego
         console.log('Token:', token);
         console.log('Decoded Payload:', payload);
 
@@ -80,7 +80,7 @@ middlewares.authentication = async (req, res, next) => {
 middlewares.authorization = (requiredRoles = [ROLES.SYSADMIN]) => {
     return (req, res, next) => {
         try {
-            // Asegura que `requiredRoles` sea siempre un array
+            // asegura que requiredRoles sea siempre un array
             if (!Array.isArray(requiredRoles)) {
                 requiredRoles = [requiredRoles];
             }
@@ -101,5 +101,6 @@ middlewares.authorization = (requiredRoles = [ROLES.SYSADMIN]) => {
         }
     };
 };
+
 
 module.exports = middlewares;

@@ -2,7 +2,7 @@ const Receta = require('../models/recipeModel');
 
 const controller = {};
 
-// Función para agregar una receta
+// función para agregar una receta
 controller.agregarReceta = async (req, res) => {
     try {
         let body = '';
@@ -19,7 +19,7 @@ controller.agregarReceta = async (req, res) => {
                     ingredientes,
                     preparacion,
                     categoria,
-                    imagen: '' // Opcionalmente, agregar lógica para manejar la imagen
+                    imagen: '' // hay que agregar lógica para manejar la imagen
                 });
 
                 await nuevaReceta.save();
@@ -44,7 +44,7 @@ controller.agregarReceta = async (req, res) => {
 
 controller.aceptarReceta = async (req, res) => {
     try {
-        const { recipeId } = req.body; // Asegúrate de que recipeId se pase correctamente en el cuerpo
+        const { recipeId } = req.body; // hay que asegurar de que recipeId se pase correctamente en el cuerpo
 
         if (!recipeId) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -57,10 +57,10 @@ controller.aceptarReceta = async (req, res) => {
             return res.end(JSON.stringify({ error: 'Receta no encontrada' }));
         }
 
-        // Cambiar el estado de la receta a 'aprobada'
+        // cambiar el estado de la receta a aprobada
         recipe.estado = 'aprobada';
         
-        // Guardar el cambio en la base de datos
+        // guardar el cambio en la base de datos
         const recetaActualizada = await recipe.save();
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -72,12 +72,12 @@ controller.aceptarReceta = async (req, res) => {
     }
 };
 
-// Función para rechazar una receta
+// función para rechazar una receta
 controller.rechazarReceta = async (req, res) => {
     try {
-        console.log("req.body:", req.body);  // Verifica si req.body tiene el valor esperado
+        console.log("req.body:", req.body);  // verifica si req.body tiene el valor esperado
         
-        const { recipeId } = req.body || {};  // Destructuración con fallback vacío
+        const { recipeId } = req.body || {};  // destructuración con fallback vacío
 
         if (!recipeId) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -90,10 +90,10 @@ controller.rechazarReceta = async (req, res) => {
             return res.end(JSON.stringify({ error: 'Receta no encontrada' }));
         }
 
-        // Cambiar el estado de la receta a 'rechazada'
+        // cambiar el estado de la receta a 'rechazada'
         recipe.estado = 'rechazada';
 
-        // Guardar el cambio en la base de datos
+        // guardar el cambio en la base de datos
         const recetaActualizada = await recipe.save();
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -105,7 +105,7 @@ controller.rechazarReceta = async (req, res) => {
     }
 };
 
-// Función para obtener todas las recetas
+// función para obtener todas las recetas
 controller.obtenerTodasRecetas = async (req, res) => {
     try {
         const recetas = await Receta.find();
@@ -122,20 +122,20 @@ controller.obtenerTodasRecetas = async (req, res) => {
     }
 };
 
-// Función para buscar recetas por filtros, incluyendo categoría
+// función para buscar recetas por filtros, incluyendo categoría
 controller.buscarRecetasPorFiltro = async (req, res) => {
     const { nombreReceta, ingredientes, categoria } = req.query;
     const filtro = {};
 
-    // Filtro por nombreReceta si existe
+    // filtro por nombreReceta si existe
     if (nombreReceta) filtro.nombreReceta = new RegExp(nombreReceta, 'i');
 
-    // Filtro por ingredientes si existe
+    // filtro por ingredientes si existe
     if (ingredientes) filtro.ingredientes = { $in: [ingredientes] };
 
-    // Filtro por categoria, asegurándose de que el valor sea insensible a mayúsculas/minúsculas
+    // filtro por categoria, asegurándose de que el valor sea insensible a mayusculas/minusculas
     if (categoria) {
-        filtro.categoria = { $regex: new RegExp(categoria, 'i') }; // Compara sin importar mayúsculas/minúsculas
+        filtro.categoria = { $regex: new RegExp(categoria, 'i') }; // compara sin importar mayisculas/minisculas
     }
 
     try {
@@ -149,7 +149,7 @@ controller.buscarRecetasPorFiltro = async (req, res) => {
 };
 
 
-// Función para actualizar una receta específica
+// función para actualizar una receta especifica
 controller.actualizarReceta = async (req, res) => {
     const recetaId = req.params.id;
     let body = '';
@@ -178,7 +178,7 @@ controller.actualizarReceta = async (req, res) => {
     });
 };
 
-// Función para eliminar una receta específica
+// función para eliminar una receta especifica
 controller.eliminarReceta = async (req, res) => {
     const recetaId = req.params.id;
 

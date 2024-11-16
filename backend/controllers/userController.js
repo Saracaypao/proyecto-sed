@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 const modeloUsuario = require('../models/userModel');
 
-// Función para registrar un usuario
+// función para registrar un usuario
 const registrarUsuario = async (req, res) => {
     const { nombre, correo, contrasena, confirmarContrasena, rol = 'user' } = req.body;
     const currentUser = req.user; // Usuario autenticado
 
-    // Verificar que el usuario autenticado tenga el rol de 'super_admin' si intenta crear un 'admin'
+    // verificar que el usuario autenticado tenga el rol de 'super_admin' si intenta crear un 'admin'
     if (rol === 'admin' && (!currentUser || !currentUser.roles.includes('super_admin'))) {
         res.writeHead(403, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: "No tienes permiso para crear un usuario administrador." }));
         return;
     }
 
-    // Verificar que las contraseñas coincidan  
+    // verificar que las contraseñas coincidan  
     if (contrasena !== confirmarContrasena) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: "Las contraseñas no coinciden." }));
@@ -21,7 +21,7 @@ const registrarUsuario = async (req, res) => {
     }
 
     try {
-        // Verificar si el usuario ya existe
+        // verificar si el usuario ya existe
         const usuarioExistente = await modeloUsuario.findOne({ correo });
         if (usuarioExistente) {
             res.writeHead(409, { 'Content-Type': 'application/json' });
@@ -29,12 +29,12 @@ const registrarUsuario = async (req, res) => {
             return;
         }
 
-        // Crear un nuevo usuario
+        // crear un nuevo usuario
         const nuevoUsuario = new modeloUsuario({
             nombre,
             correo,
             contrasena,
-            roles: [rol]  // Asignar el rol al nuevo usuario
+            roles: [rol]  // asigna el rol al nuevo usuario
         });
 
         await nuevoUsuario.save();
@@ -49,7 +49,7 @@ const registrarUsuario = async (req, res) => {
 };
 
 const editarUsuario = async (req, res) => {
-    const userId = req.url.split('/').pop(); // Obtener el ID del usuario desde la URL
+    const userId = req.url.split('/').pop(); // obtener el id del usuario desde la url
     const { nombre, correo, rol } = req.body;
     const currentUser = req.user;
 
@@ -69,7 +69,7 @@ const editarUsuario = async (req, res) => {
             return;
         }
 
-        // Si el usuario autenticado es super_admin, puede editar cualquier usuario (incluyendo el rol de admin)
+        // si el usuario autenticado es super_admin, puede editar cualquier usuario (incluyendo el rol de admin)
         if (currentUser.roles.includes('super_admin') && rol && rol !== usuario.roles[0]) {
             // Asegurarse de que el super_admin no cambie el rol de un super_admin a otro rol
             if (rol === 'super_admin') {
@@ -79,10 +79,10 @@ const editarUsuario = async (req, res) => {
             }
         }
 
-        // Actualizar el usuario con la nueva información
+        // actualizar el usuario con la nueva información
         usuario.nombre = nombre || usuario.nombre;
         usuario.correo = correo || usuario.correo;
-        usuario.roles = [rol || usuario.roles[0]]; // Solo se puede cambiar el rol si el super_admin lo permite
+        usuario.roles = [rol || usuario.roles[0]]; // solo se puede cambiar el rol si el super_admin lo permite
 
         await usuario.save();
 
@@ -95,10 +95,10 @@ const editarUsuario = async (req, res) => {
     }
 };
 
-// Función para obtener todos los usuarios
+// función para obtener todos los usuarios
 const obtenerTodosUsuarios = async (req, res) => {
     try {
-        const usuarios = await modeloUsuario.find(); // Obtén todos los usuarios de la base de datos
+        const usuarios = await modeloUsuario.find(); // obtén todos los usuarios de la base de datos
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ usuarios }));
     } catch (error) {
@@ -108,9 +108,9 @@ const obtenerTodosUsuarios = async (req, res) => {
     }
 };
 
-// Función para eliminar un usuario
+// función para eliminar un usuario
 const eliminarUsuario = async (req, res) => {
-    const userId = req.url.split('/').pop(); // Obtener el ID del usuario desde la URL
+    const userId = req.url.split('/').pop(); // obtener el id del usuario desde la url
     const currentUser = req.user;
 
     // Verificar si el userId es un ObjectId válido

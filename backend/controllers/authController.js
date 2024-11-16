@@ -55,7 +55,21 @@ const whoAmI = async (req, res) => {
     }
 };
 
+// para obtener el rol del usuario
+const getUserRole = async (req, res) => {
+    try {
+        const { _id, roles } = req.user;
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ _id, roles }));
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: false, error: 'Error interno del servidor' }));
+    }
+};
+
 module.exports = {
     logIn,
-    whoAmI
+    whoAmI,
+    getUserRole
 };
