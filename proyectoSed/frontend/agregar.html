@@ -7,8 +7,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href= "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="./css/agregarStyles.css" rel="stylesheet">
+    <link href="./css/agregarStyles.css" rel="stylesheet">  
 </head>
+    <script src="./js/login.js"></script>
+    <script src="./js/agregar.js"></script>
 <body>
 
 <header class="header">
@@ -40,12 +42,16 @@
                 <input type="text" class="form-control" id="nombreReceta" placeholder="Escribe el nombre de la receta" required>
             </div>
             <div class="form-group">
-                <label for="descripciónReceta">Descripción de la receta</label>
-                <textarea class="form-control" id="descripciónReceta" rows="4" placeholder="Descripción" required></textarea>
+                <label for="ingredientes">Ingredientes</label>
+                <textarea class="form-control" id="ingredientes" rows="4" placeholder="Lista de ingredientes" required></textarea>
             </div>
             <div class="form-group">
-                <label for="categoriaReceta" >Categoría de la receta</label>
-                <select class="form-select" id="categoriaReceta">
+                <label for="preparacion">Preparación de la receta</label>
+                <textarea class="form-control" id="preparacion" rows="4" placeholder="Descripción" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="categoria" >Categoría de la receta</label>
+                <select class="form-select" id="categoria">
                   <option>Entradas</option>
                   <option>Platos principales</option>
                   <option>Complementos</option>
@@ -54,16 +60,8 @@
                 </select>
               </div>
             <div class="form-group">
-                <label for="ingredientes">Ingredientes</label>
-                <textarea class="form-control" id="ingredientes" rows="4" placeholder="Lista de ingredientes" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="preparacion">Instrucciones de preparación</label>
-                <textarea class="form-control" id="preparacion" rows="4" placeholder="Describe los pasos de preparación" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="imagenReceta">Imagen de la receta</label>
-                <input type="file" class="form-control-file" id="imagenReceta" accept="image/*">
+                <label for="imagen">Imagen de la receta</label>
+                <input type="file" class="form-control-file" id="imagen" accept="image/*">
             </div>
             <button type="submit" class="btn btn-primary d-block mx-auto">Agregar receta</button>
         </form>

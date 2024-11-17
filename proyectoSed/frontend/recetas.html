@@ -8,6 +8,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href= "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="./css/recetasStyles.css" rel="stylesheet">
+    <script src="./js/login.js"></script>
+    <script src="./js/recetas.js"></script>
 </head>
 <body>
 
@@ -50,70 +52,10 @@
         </div>
     </div>
     
-    <div class="row mt-4">
-        <!-- Tarjetas de recetas -->
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 1">
-                <div class="card-body">
-                    <h5 class="card-title">Receta deliciosa 1</h5>
-                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
-                    <a href="recetaCompleta.html" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 2">
-                <div class="card-body">
-                    <h5 class="card-title">Receta deliciosa 2</h5>
-                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 3">
-                <div class="card-body">
-                    <h5 class="card-title">Receta deliciosa 3</h5>
-                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 4">
-                <div class="card-body">
-                    <h5 class="card-title">Receta deliciosa 4</h5>
-                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 5">
-                <div class="card-body">
-                    <h5 class="card-title">Receta deliciosa 5</h5>
-                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta 6">
-                <div class="card-body">
-                    <h5 class="card-title">Receta deliciosa 6</h5>
-                    <p class="card-text">Una breve descripción que atrae y deleita.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
+    <!-- Aquí se cargarán las recetas -->
+    <div class="row mt-4" id="listaRecetas">
+        <!-- Las recetas se cargarán dinámicamente desde el backend -->
     </div>
-</div>
 
 <footer class="footer mt-5">
     <p>&copy; 2024 Mi recetario. Todos los derechos reservados.</p>
