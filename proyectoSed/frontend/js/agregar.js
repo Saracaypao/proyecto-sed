@@ -1,57 +1,57 @@
+// Función para decodificar el token JWT
 function decodeToken(token) {
-    try {
-        const payload = token.split('.')[1];
-        const decoded = JSON.parse(atob(payload));
-        return decoded;
-    } catch (error) {
-        console.error("Error al decodificar el token:", error.message);
-        return null;
-    }
+    const payload = token.split('.')[1]; // Obtener la parte central del token
+    const decoded = JSON.parse(atob(payload)); // Decodificar base64
+    return decoded;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Verificar si el token está en localStorage
     const token = localStorage.getItem('token');
-
+    
     if (!token) {
         console.log("No estás logueado. Redirigiendo al login...");
-        window.location.href = '/login';
+        window.location.href = 'landingpage.html';  // Redirige al login
         return;
     }
 
     const decoded = decodeToken(token);
-    if (!decoded || !decoded.correo) {
-        console.error("Token inválido o sin campo 'correo'");
-        window.location.href = '/login';
-        return;
-    }
-
     const correoUsuario = decoded.correo;
-    const campoAutor = document.getElementById('autor');
-    if (campoAutor && correoUsuario) {
-        campoAutor.value = correoUsuario;
-    } else {
-        console.warn("Campo 'autor' o 'correoUsuario' no encontrado.");
-    }
 
     const form = document.querySelector('form');
+    
     if (form) {
-        form.addEventListener('submit', async (event) => {
+        form.addEventListener('submit', async function (event) {
             event.preventDefault();
 
-            const receta = {
-                nombreReceta: document.getElementById('nombreReceta').value,
-                ingredientes: document.getElementById('ingredientes').value.split('\n'),
-                preparacion: document.getElementById('preparacion').value,
-                categoria: document.getElementById('categoria').value,
-                descripcion: document.getElementById('descripcion').value,
-                porciones: document.getElementById('porciones').value,
-                autor: correoUsuario
-            };
+            // Recopila los datos del formulario
+            const nombreReceta = document.getElementById('nombreReceta').value;
+            const ingredientesRaw = document.getElementById('ingredientes').value.trim();
+            const preparacion = document.getElementById('preparacion').value;
+            const categoria = document.getElementById('categoria').value;
+            const porciones = document.getElementById('porciones').value;
+            const descripcion = document.getElementById('descripcion').value;
 
-            if (!receta.nombreReceta || !receta.ingredientes.length || !receta.categoria) {
-                alert("Por favor, completa todos los campos obligatorios.");
+            // Procesa los ingredientes para asegurarse de que sea un array no vacío
+            const ingredientes = ingredientesRaw ? ingredientesRaw.split('\n').map(i => i.trim()).filter(i => i.length > 0) : [];
+            
+            // Verifica que los datos del formulario estén completos antes de enviarlos
+            if (!nombreReceta || ingredientes.length === 0 || !preparacion || !categoria || !porciones || !descripcion) {
+                alert('Por favor, completa todos los campos.');
                 return;
             }
+
+            // Enviar los datos de la receta al servidor
+            const receta = {
+                nombreReceta,
+                ingredientes,  // Asegúrate de que ingredientes es un array válido
+                preparacion,
+                categoria,
+                porciones,
+                autor: correoUsuario,
+                imagen: '', // Puedes agregar la lógica de la imagen si es necesario
+                descripcion
+            };
 
             try {
                 const response = await fetch('http://localhost:3000/api/recipe/newRecetas', {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
                 alert(data.mensaje || 'Receta agregada exitosamente');
-                window.location.href = 'recetas.html';
+                window.location.href = 'recetas.html'; // Redirecciona al listado de recetas
             } catch (error) {
                 alert(`Error: ${error.message}`);
             }
