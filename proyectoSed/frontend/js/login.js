@@ -12,7 +12,9 @@ class Auth {
             
             if (response.ok) {
                 const data = await response.json();
+                const currentTime = Date.now(); // Hora actual en milisegundos
                 localStorage.setItem('token', data.token); // guardar el token en localstorage
+                localStorage.setItem('loginTime', currentTime); // Guardar hora de login
                 return response.status; // devolver el código de estado
             } else {
                 return response.status; // manejar errores
@@ -70,7 +72,20 @@ async function handleLogin(event) {
 
 // al cargar la página, eliminar el token previo
 window.onload = () => {
-    localStorage.removeItem('token');
+    const token = localStorage.getItem('token');
+    const loginTime = localStorage.getItem('loginTime');
+    
+    if (token && loginTime) {
+        const currentTime = Date.now();
+        const timeDifference = currentTime - loginTime;
+        const hourInMilliseconds = 60 * 60 * 1000; // Una hora en milisegundos
+
+        if (timeDifference > hourInMilliseconds) {
+            localStorage.removeItem('token'); // Eliminar token si ha pasado más de una hora
+            localStorage.removeItem('loginTime'); // Eliminar hora de login
+            window.location.href = "landingpage.html"; // Redirigir a login
+        }
+    }
 };
 
 function showLoginMessage(message, type) {
@@ -83,5 +98,11 @@ function showLoginMessage(message, type) {
     setTimeout(() => {
         loginMessage.classList.add('d-none');
     }, 3000);
+}
+
+function logOut() {
+    localStorage.removeItem('token'); // Eliminar el token
+    localStorage.removeItem('loginTime'); // Eliminar la hora de login
+    window.location.href = "landingpage.html"; // Redirigir a la página de login
 }
 

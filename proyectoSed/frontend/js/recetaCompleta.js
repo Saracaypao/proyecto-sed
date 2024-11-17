@@ -14,6 +14,7 @@
             // Llenar los detalles de la receta en la página
             document.getElementById('nombreReceta').innerText = receta.nombreReceta;
             document.getElementById('categoria').innerText = receta.categoria;
+            document.getElementById('autor').innerText = receta.autor; 
 
             // Ingredientes (verificar si existe)
             const ingredientsList = document.getElementById('ingredientes');

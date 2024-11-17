@@ -20,6 +20,11 @@ const recetaSchema = new Schema({
         type: String,
         default: '',
     },
+    autor: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Usuario", 
+        required: true,
+    },
     categoria: {
         type: String,   
         enum: ['Entradas', 'Platos principales', 'Complementos', 'Bebidas', 'Postres'],
@@ -30,10 +35,6 @@ const recetaSchema = new Schema({
         enum: ['pendiente', 'aprobada', 'rechazada'],
         default: 'pendiente',
     },
-    /*autor: {
-        type: String, // Cambiado a String para almacenar el nombre del usuario
-        required: true,
-    },*/
     creadoEn: {
         type: Date,
         default: Date.now,
