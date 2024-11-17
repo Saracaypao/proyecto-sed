@@ -37,19 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Verifica que los datos del formulario estén completos antes de enviarlos
             if (!nombreReceta || ingredientes.length === 0 || !preparacion || !categoria || !porciones || !descripcion) {
-                alert('Por favor, completa todos los campos.');
+                shownewRecipeMessage("Por favor, completa todos los campos.", "danger");
                 return;
             }
 
             // Enviar los datos de la receta al servidor
             const receta = {
                 nombreReceta,
-                ingredientes,  // Asegúrate de que ingredientes es un array válido
+                ingredientes,  
                 preparacion,
                 categoria,
                 porciones,
                 autor: correoUsuario,
-                imagen: '', // Puedes agregar la lógica de la imagen si es necesario
+                imagen: '', 
                 descripcion
             };
 
@@ -65,17 +65,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!response.ok) {
                     const error = await response.json();
+                    shownewRecipeMessage("Error al agregar la receta", "danger");
                     throw new Error(error.mensaje || 'Error al agregar la receta');
                 }
 
                 const data = await response.json();
-                alert(data.mensaje || 'Receta agregada exitosamente');
-                window.location.href = 'recetas.html'; // Redirecciona al listado de recetas
+                shownewRecipeMessage(data.mensaje, "success");
+                window.location.href = 'recetas.html';
             } catch (error) {
-                alert(`Error: ${error.message}`);
+                shownewRecipeMessage("Error de servidor. Intenta nuevamente más tarde.", "danger");
+                console.log(`Error: ${error.message}`);
             }
         });
     } else {
         console.error('Formulario no encontrado');
     }
 });
+
+
+// funcion para mostrar mensajes bonitos en el registro
+function shownewRecipeMessage(message, type) {
+    const newRecipeMessage = document.getElementById('newRecipeMessage');
+    newRecipeMessage.className = `alert alert-${type} text-center`;  // define el tipo de alerta (roja o verde)
+    newRecipeMessage.textContent = message;  // establece el mensaje
+    newRecipeMessage.classList.remove('d-none');  // muestra el mensaje
+
+    // oculta el mensaje después de 3 segundos
+    setTimeout(() => {
+        newRecipeMessage.classList.add('d-none');
+    }, 5000);
+}

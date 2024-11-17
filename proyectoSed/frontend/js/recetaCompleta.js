@@ -1,3 +1,17 @@
+function volver() {
+    const referrer = document.referrer; // url de la página anterior
+
+    // verificamos si la página anterior es la de inicio o la de recetas
+    if (referrer.includes('index.html')) {
+        window.location.href = 'index.html'; 
+    } else if (referrer.includes('recetas.html')) {
+        window.location.href = 'recetas.html'; 
+    } else {
+        // si no se puede determinar, redirige a un lugar predeterminado
+        window.location.href = 'recetas.html';
+    }
+}
+
 async function cargarRecetaCompleta() {
     const urlParams = new URLSearchParams(window.location.search);
     const recipeId = urlParams.get('id');

@@ -10,6 +10,7 @@
     <link href="./css/indexStyles.css" rel="stylesheet">
 </head>
     <script src="./js/login.js"></script>
+    <script src="./js/recetasHome.js"></script>
 <body>
 
 <header class="header">
@@ -41,13 +42,13 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="Imagen 1">
+            <img src="https://mercure-fukuokamunakata-resortandspa.jp/en/wp/wp-content/uploads/2024/07/b-buffet_point01.jpg" class="d-block w-100" alt="Imagen 1">
         </div>
         <div class="carousel-item">
-            <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="Imagen 2">
+            <img src="https://novotelokinawanaha.com/wp-content/uploads/sites/154/2019/10/20191017_ava01-1200x400.jpg" class="d-block w-100" alt="Imagen 2">
         </div>
         <div class="carousel-item">
-            <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="Imagen 3">
+            <img src="https://novotelokinawanaha.com/wp-content/uploads/sites/154/2019/10/20191017_ava02-1200x400.jpg" class="d-block w-100" alt="Imagen 3">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -60,73 +61,14 @@
     </a>
 </div>
 
-<!-- recetas destacadas -->
+<!-- se cargaran las ultimas 6 recetas -->
 <div class="container mt-4">
-    <h2 >Recetas destacadas</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
-                <div class="card-body">
-                    <h5 class="card-title">Título de la Receta 1</h5>
-                    <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
-                <div class="card-body">
-                    <h5 class="card-title">Título de la Receta 2</h5>
-                    <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
-                <div class="card-body">
-                    <h5 class="card-title">Título de la Receta 3</h5>
-                    <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
-        <!-- cards adicionales -->
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
-                <div class="card-body">
-                    <h5 class="card-title">Título de la Receta 4</h5>
-                    <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
-                <div class="card-body">
-                    <h5 class="card-title">Título de la Receta 5</h5>
-                    <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Receta">
-                <div class="card-body">
-                    <h5 class="card-title">Título de la Receta 6</h5>
-                    <p class="card-text">Descripción breve de la receta.</p>
-                    <a href="#" class="btn btn-primary">Ver receta</a>
-                </div>
-            </div>
-        </div>
+    <h2>Recetas más recientes</h2>
+    <div class="row" id="listaRecetas">
+        <!-- mandando a llamar del backend -->
     </div>
 </div>
+
 
 <!-- footer -->
 <footer class="footer mt-4">
@@ -139,5 +81,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="./js/carrusel.js"></script>
 </body>
 </html>

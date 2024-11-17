@@ -12,38 +12,48 @@
 <body>
 
 <header class="header">
-    <button class="btn-back" onclick="window.location.href='recetas.html'">
+    <button class="btn-back" onclick="volver()">
         <i class="fas fa-arrow-left"></i> Regresar
-    </button>
-    <h1>Receta Completa</h1>
+    </button>    
+    <h1>Receta completa</h1>
 </header>
 
 <div class="container">
     <div class="recipe-details">
-        <h2 id="nombreReceta" class="recipe-title">Nombre de la Receta</h2>
-        <p><strong>Categoría:</strong> <span id="categoria">Entradas</span></p>
-        <p><strong>Porciones:</strong> <span id="porciones">-</span></p>
+        <h1 id="nombreReceta" class="recipe-title">Nombre de la receta</h1>
+        <hr>
+
+        <h5><strong>Categoría</strong> </h5>
+        <p id="categoria" class="entradas-text">
+            <!-- Las instrucciones se cargarán aquí dinámicamente -->
+        </p>
         <hr>
         
-        <h4>Ingredientes:</h4>
+        <h5><strong>Porciones</strong> </h5>
+        <p id="porciones" class="porciones-text">
+            <!-- Las instrucciones se cargarán aquí dinámicamente -->
+        </p>
+        <hr>
+        
+        <h5><strong>Ingredientes</strong></h5>
         <ul id="ingredientes" class="ingredients-list">
             <!-- Los ingredientes se cargarán aquí dinámicamente -->
         </ul>
         <hr>
         
-        <h4>Instrucciones:</h4>
+        <h5><strong>Instrucciones</strong></h5>
         <p id="preparacion" class="instructions-text">
             <!-- Las instrucciones se cargarán aquí dinámicamente -->
         </p>
         <hr>
 
-        <h4>Descripción:</h4>
+        <h5><strong>Descripción</strong></h5>
         <p id="descripcion" class="description-text">
             <!-- La descripción se cargará aquí dinámicamente -->
         </p>
         <hr>
 
-        <p><strong>Autor:</strong> <span id="autor">Nombre del autor</span></p>
+        <h5><strong>Autor:</strong> <span id="autor">Nombre del autor</span></h5>
         <div class="d-flex justify-content-end">
             <button class="btn btn-edit" data-toggle="modal" data-target="#editRecipeModal">
                 <i class="fas fa-edit"></i> Editar Receta
