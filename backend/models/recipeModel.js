@@ -16,9 +16,15 @@ const recetaSchema = new Schema({
         required: true,
         trim: true,
     },
-    imagen: {
+    descripcion : {
         type: String,
-        default: '',
+        required: true,
+        trim: true,
+    },
+    porciones : {
+        type: String,
+        required: true,
+        trim: true,
     },
     autor: { 
         type: mongoose.Schema.Types.ObjectId,

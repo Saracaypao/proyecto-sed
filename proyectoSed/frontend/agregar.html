@@ -42,12 +42,20 @@
                 <input type="text" class="form-control" id="nombreReceta" placeholder="Escribe el nombre de la receta" required>
             </div>
             <div class="form-group">
-                <label for="ingredientes">Ingredientes</label>
+                <label for="ingredientes">Ingredientes de la receta</label>
                 <textarea class="form-control" id="ingredientes" rows="4" placeholder="Lista de ingredientes" required></textarea>
             </div>
             <div class="form-group">
+                <label for="descripcion">Descripción de la receta</label>
+                <textarea class="form-control" id="descripcion" rows="4" placeholder="Descripción" required></textarea>
+            </div>
+            <div class="form-group">
                 <label for="preparacion">Preparación de la receta</label>
-                <textarea class="form-control" id="preparacion" rows="4" placeholder="Descripción" required></textarea>
+                <textarea class="form-control" id="preparacion" rows="4" placeholder="preparacion" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="porciones">Porciones de la receta</label>
+                <input type="text" class="form-control" id="porciones" placeholder="Escribe las porciones a obtener de la receta" required>
             </div>
             <div class="form-group">
                 <label for="categoria" >Categoría de la receta</label>
@@ -59,10 +67,7 @@
                   <option>Postres</option>
                 </select>
               </div>
-            <div class="form-group">
-                <label for="imagen">Imagen de la receta</label>
-                <input type="file" class="form-control-file" id="imagen" accept="image/*">
-            </div>
+              
             <button type="submit" class="btn btn-primary d-block mx-auto">Agregar receta</button>
         </form>
     </div>

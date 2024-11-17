@@ -8,59 +8,42 @@ const controller = {};
 // Función para agregar una receta
 controller.agregarReceta = async (req, res) => {
     try {
-        console.log("Recibido request para agregar receta");
-
-        // Obtener el token desde el encabezado Authorization
         const token = req.headers['authorization']?.split(' ')[1];
-
         if (!token) {
             return res.writeHead(401, { 'Content-Type': 'application/json' })
                       .end(JSON.stringify({ mensaje: 'No autorizado, token no encontrado' }));
         }
 
-        // Verificar el token y obtener la información del usuario
         const decoded = await verifyToken(token);
-
-        // Depuración: Verificar el contenido del token
-        console.log("Token decodificado:", decoded);
-
         if (!decoded || !decoded.userId) {
             return res.writeHead(401, { 'Content-Type': 'application/json' })
                       .end(JSON.stringify({ mensaje: 'No autorizado, autor no encontrado' }));
         }
 
-        // Obtener el correo del usuario desde la base de datos utilizando userId
         const usuario = await Usuario.findById(decoded.userId);
         if (!usuario) {
             return res.writeHead(404, { 'Content-Type': 'application/json' })
                       .end(JSON.stringify({ mensaje: 'Usuario no encontrado' }));
         }
 
-        const autor = usuario.email; // Asumiendo que el campo de correo es "email"
-        console.log("Correo del autor:", autor);
-
         let body = '';
-        req.on('data', chunk => {
-            body += chunk.toString();
-        });
-
+        req.on('data', chunk => (body += chunk.toString()));
         req.on('end', async () => {
             try {
-                const { nombreReceta, ingredientes, preparacion, categoria } = JSON.parse(body);
-
-                // Validar los datos antes de guardar
-                if (!nombreReceta || !ingredientes || !preparacion || !categoria) {
+                const { nombreReceta, ingredientes, preparacion, descripcion, porciones, categoria } = JSON.parse(body);
+                if (!nombreReceta || !ingredientes || !preparacion || !descripcion || !porciones || !categoria) {
                     return res.writeHead(400, { 'Content-Type': 'application/json' })
-                        .end(JSON.stringify({ mensaje: 'Faltan campos requeridos' }));
+                              .end(JSON.stringify({ mensaje: 'Faltan campos requeridos' }));
                 }
 
                 const nuevaReceta = new Receta({
-                    autor: usuario._id, // Guarda el ObjectId del usuario como autor
+                    autor: usuario._id,
                     nombreReceta,
                     ingredientes,
                     preparacion,
+                    descripcion,
+                    porciones,
                     categoria,
-                    imagen: ''
                 });
 
                 await nuevaReceta.save();
@@ -72,6 +55,7 @@ controller.agregarReceta = async (req, res) => {
             }
         });
     } catch (error) {
+        console.error(error);
         res.writeHead(500, { 'Content-Type': 'application/json' })
            .end(JSON.stringify({ mensaje: 'Error interno del servidor', error: error.message }));
     }
@@ -152,6 +136,8 @@ controller.obtenerTodasRecetas = async (req, res) => {
             preparacion: receta.preparacion || 'Sin preparación',  // Asegúrate de que preparacion tenga valor por defecto
             autor: receta.autor ? receta.autor.nombre : 'Desconocido',
             categoria: receta.categoria || 'Sin categoría',  // Si la categoría no existe
+            descripcion: receta.descripcion || 'Sin descripción', 
+            porciones: receta.porciones || 'Sin porciones', 
         }));
 
         res.writeHead(200, { 'Content-Type': 'application/json' });

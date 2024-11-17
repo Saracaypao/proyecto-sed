@@ -1,61 +1,64 @@
-// Función para decodificar el token JWT
 function decodeToken(token) {
-    const payload = token.split('.')[1]; // Obtener la parte central del token
-    const decoded = JSON.parse(atob(payload)); // Decodificar base64
-    return decoded;
+    try {
+        const payload = token.split('.')[1];
+        const decoded = JSON.parse(atob(payload));
+        return decoded;
+    } catch (error) {
+        console.error("Error al decodificar el token:", error.message);
+        return null;
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Verificar si el token está en localStorage
     const token = localStorage.getItem('token');
-    
+
     if (!token) {
         console.log("No estás logueado. Redirigiendo al login...");
-        // Redirigir al usuario al login si no hay token
-        window.location.href = '/login';  // Redirige al login
-        return;  // Salir de la función si no hay token
-    } else {
-        console.log("Encabezado Authorization:", token); // Mostrar el token para verificar si se mantuvo
+        window.location.href = '/login';
+        return;
     }
 
-    // Decodificar el token para obtener el correo del usuario
     const decoded = decodeToken(token);
-    const correoUsuario = decoded.correo; // Suponiendo que 'correo' está en el token
+    if (!decoded || !decoded.correo) {
+        console.error("Token inválido o sin campo 'correo'");
+        window.location.href = '/login';
+        return;
+    }
 
-    // Colocar el correo del usuario en el campo "autor"
+    const correoUsuario = decoded.correo;
     const campoAutor = document.getElementById('autor');
-    if (campoAutor) {
-        campoAutor.value = correoUsuario; // Asigna el correo al campo autor
+    if (campoAutor && correoUsuario) {
+        campoAutor.value = correoUsuario;
+    } else {
+        console.warn("Campo 'autor' o 'correoUsuario' no encontrado.");
     }
 
     const form = document.querySelector('form');
-    
     if (form) {
-        form.addEventListener('submit', async function (event) {
-            event.preventDefault(); // Evita el envío predeterminado del formulario
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-            // Recopila los datos del formulario
-            const nombreReceta = document.getElementById('nombreReceta').value;
-            const ingredientes = document.getElementById('ingredientes').value.split('\n');
-            const preparacion = document.getElementById('preparacion').value;
-            const categoria = document.getElementById('categoria').value;
-    
-            // Envía la receta con el token
             const receta = {
-                nombreReceta,
-                ingredientes,
-                preparacion,
-                categoria,
-                autor: correoUsuario,  // Incluye el correo del autor en el objeto de la receta
-                imagen: '' // Puedes agregar lógica para manejar la imagen si es necesario
+                nombreReceta: document.getElementById('nombreReceta').value,
+                ingredientes: document.getElementById('ingredientes').value.split('\n'),
+                preparacion: document.getElementById('preparacion').value,
+                categoria: document.getElementById('categoria').value,
+                descripcion: document.getElementById('descripcion').value,
+                porciones: document.getElementById('porciones').value,
+                autor: correoUsuario
             };
+
+            if (!receta.nombreReceta || !receta.ingredientes.length || !receta.categoria) {
+                alert("Por favor, completa todos los campos obligatorios.");
+                return;
+            }
 
             try {
                 const response = await fetch('http://localhost:3000/api/recipe/newRecetas', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` // Agregar el token aquí
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify(receta)
                 });
@@ -67,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
                 alert(data.mensaje || 'Receta agregada exitosamente');
-                window.location.href = 'recetas.html'; // Redirecciona al listado de recetas
+                window.location.href = 'recetas.html';
             } catch (error) {
                 alert(`Error: ${error.message}`);
             }
