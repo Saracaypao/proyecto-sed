@@ -1,6 +1,7 @@
 const { verifyToken } = require('../utils/jwt.tools');
 const Receta = require('../models/recipeModel');
 const Usuario = require('../models/userModel'); // Importa el modelo de usuario
+const mongoose = require('mongoose');
 
 const controller = {};
 
@@ -46,6 +47,13 @@ controller.agregarReceta = async (req, res) => {
         req.on('end', async () => {
             try {
                 const { nombreReceta, ingredientes, preparacion, categoria } = JSON.parse(body);
+
+                // Validar los datos antes de guardar
+                if (!nombreReceta || !ingredientes || !preparacion || !categoria) {
+                    return res.writeHead(400, { 'Content-Type': 'application/json' })
+                        .end(JSON.stringify({ mensaje: 'Faltan campos requeridos' }));
+                }
+
                 const nuevaReceta = new Receta({
                     autor: usuario._id, // Guarda el ObjectId del usuario como autor
                     nombreReceta,
@@ -87,7 +95,7 @@ controller.aceptarReceta = async (req, res) => {
 
         // Cambiar el estado de la receta a aprobada
         recipe.estado = 'aprobada';
-        
+
         // Guardar el cambio en la base de datos
         const recetaActualizada = await recipe.save();
 
@@ -134,47 +142,52 @@ controller.rechazarReceta = async (req, res) => {
 // Función para obtener todas las recetas
 controller.obtenerTodasRecetas = async (req, res) => {
     try {
-        const recetas = await Receta.find().populate('autor', 'nombre'); // Asegúrate de que el campo 'autor' exista en Receta
+        const recetas = await Receta.find().populate('autor', 'nombre');
 
-        // Si no hay recetas, responde un mensaje adecuado
-        if (recetas.length === 0) {
-            return res.writeHead(404, { 'Content-Type': 'application/json' })
-                      .end(JSON.stringify({ mensaje: 'No hay recetas disponibles' }));
-        }
-
-        const recetasConAutor = recetas.map(receta => ({
+        // Verificar si cada receta tiene los campos completos
+        const recetasConDatosCompletos = recetas.map(receta => ({
             titulo: receta.nombreReceta,
-            descripcion: receta.descripcion,
-            autor: receta.autor?.nombre || 'Desconocido'  // Verificación del autor
+            ingredientes: receta.ingredientes.join(', '),  // Asumiendo que ingredientes es un array
+            preparacion: receta.preparacion || 'Sin preparación',  // Asegúrate de que preparacion tenga valor por defecto
+            autor: receta.autor ? receta.autor.nombre : 'Desconocido',
+            categoria: receta.categoria || 'Sin categoría',  // Si la categoría no existe
         }));
 
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-           .end(JSON.stringify({ recetas: recetasConAutor }));
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ recetas: recetasConDatosCompletos }));
     } catch (error) {
         console.error(error);
-        res.writeHead(500, { 'Content-Type': 'application/json' })
-           .end(JSON.stringify({ ok: false, msg: 'Error al obtener las recetas', error: error.message }));
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+            ok: false,
+            msg: 'Error al obtener las recetas',
+            error: error.message || 'Error interno del servidor',
+        }));
     }
 };
 
-// Función para obtener una receta por ID
+// Función para obtener receta por ID
 controller.obtenerRecetaPorId = async (req, res) => {
     try {
         const id = req.params.id;
         const receta = await Receta.findById(id).populate('autor', 'nombre'); // Poblamos 'autor' con el campo 'nombre'
 
         if (!receta) {
-            res.writeHead(404, { 'Content-Type': 'application/json' })
-               .end(JSON.stringify({ ok: false, msg: 'Receta no encontrada' }));
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ ok: false, msg: 'Receta no encontrada' }));
             return;
         }
 
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-           .end(JSON.stringify(receta));
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(receta));
     } catch (error) {
         console.error(error);
-        res.writeHead(500, { 'Content-Type': 'application/json' })
-           .end(JSON.stringify({ ok: false, msg: 'Error al obtener la receta', error: error.message }));
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+            ok: false,
+            msg: 'Error al obtener la receta',
+            error: error.message || 'Error interno del servidor',
+        }));
     }
 };
 
@@ -218,12 +231,35 @@ controller.actualizarReceta = async (req, res) => {
             }
 
             res.writeHead(200, { 'Content-Type': 'application/json' })
-               .end(JSON.stringify({ mensaje: 'Receta actualizada exitosamente', receta: recetaActualizada }));
+               .end(JSON.stringify({ mensaje: 'Receta actualizada', receta: recetaActualizada }));
         } catch (error) {
+            console.error(error);
             res.writeHead(500, { 'Content-Type': 'application/json' })
-               .end(JSON.stringify({ mensaje: 'Error al actualizar receta', error: error.message }));
+               .end(JSON.stringify({ mensaje: 'Error al actualizar la receta', error: error.message }));
         }
     });
+};
+
+// Función para eliminar una receta
+controller.eliminarReceta = async (req, res) => {
+    const recetaId = req.params.id;
+
+    try {
+        const recetaEliminada = await Receta.findByIdAndDelete(recetaId);
+
+        if (!recetaEliminada) {
+            res.writeHead(404, { 'Content-Type': 'application/json' })
+               .end(JSON.stringify({ mensaje: 'Receta no encontrada' }));
+            return;
+        }
+
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+           .end(JSON.stringify({ mensaje: 'Receta eliminada correctamente' }));
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' })
+           .end(JSON.stringify({ mensaje: 'Error al eliminar la receta', error: error.message }));
+    }
 };
 
 module.exports = controller;

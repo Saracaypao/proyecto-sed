@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error al cargar recetas:', error.message);
         }
-    }
-        
+    }    
+    
     // Llama a la función al cargar la página
     cargarRecetas();
 });
