@@ -55,16 +55,25 @@ const recipeRoutes = (req, res) => {
             });
         });
     }
+    
     // Ruta para obtener una receta específica por ID
     else if (method === 'GET' && path.startsWith('/api/recipe/')) {
         const recetaId = path.split('/').pop(); // Extrae el ID de la URL
+        console.log('ID recibido:', recetaId); // Agrega este log
         req.params = { id: recetaId };
+    
+        // Verificar si el ID es válido antes de pasar al controlador
+        if (!recetaId || recetaId === 'undefined') {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ error: 'ID inválido o no proporcionado' }));
+        }
+    
         recipeController.obtenerRecetaPorId(req, res);
     }
-    // Ruta no encontrada
-    else {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ mensaje: 'Ruta no encontrada' }));
+// Ruta no encontrada
+else {
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ mensaje: 'Ruta no encontrada' }));
     }
 };
 

@@ -146,6 +146,7 @@ controller.obtenerTodasRecetas = async (req, res) => {
 
         // Verificar si cada receta tiene los campos completos
         const recetasConDatosCompletos = recetas.map(receta => ({
+            id: receta._id,
             titulo: receta.nombreReceta,
             ingredientes: receta.ingredientes.join(', '),  // Asumiendo que ingredientes es un array
             preparacion: receta.preparacion || 'Sin preparación',  // Asegúrate de que preparacion tenga valor por defecto
@@ -166,15 +167,21 @@ controller.obtenerTodasRecetas = async (req, res) => {
     }
 };
 
-// Función para obtener receta por ID
 controller.obtenerRecetaPorId = async (req, res) => {
     try {
         const id = req.params.id;
-        const receta = await Receta.findById(id).populate('autor', 'nombre'); // Poblamos 'autor' con el campo 'nombre'
 
+        // Comprobar si el ID es válido
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'ID de receta no válido' }));
+            return;
+        }
+
+        const receta = await Receta.findById(id).populate('autor', 'nombre');
         if (!receta) {
             res.writeHead(404, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ ok: false, msg: 'Receta no encontrada' }));
+            res.end(JSON.stringify({ error: 'Receta no encontrada' }));
             return;
         }
 
@@ -183,13 +190,10 @@ controller.obtenerRecetaPorId = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-            ok: false,
-            msg: 'Error al obtener la receta',
-            error: error.message || 'Error interno del servidor',
-        }));
+        res.end(JSON.stringify({ error: 'Error al obtener la receta', details: error.message }));
     }
 };
+
 
 // Función para buscar recetas por filtros
 controller.buscarRecetasPorFiltro = async (req, res) => {

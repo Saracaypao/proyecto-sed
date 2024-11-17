@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 listaRecetas.innerHTML = ''; // Limpiar lista actual
     
                 // Recorremos las recetas y las mostramos
-                recetas.forEach((receta) => {
+                recetas.forEach((receta) => { 
                     // Asegúrate de que las propiedades existan
                     const ingredientes = Array.isArray(receta.ingredientes) ? receta.ingredientes.join(', ') : 'Sin ingredientes';
                     const preparacion = receta.preparacion || 'Sin descripción';
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <p class="card-text"><strong>Preparación:</strong> ${preparacion}</p>
                                     <p class="text-muted"><strong>Categoría:</strong> ${receta.categoria || 'Sin categoría'}</p>
                                     <p class="text-muted"><strong>Autor:</strong> ${autor}</p>
-                                    <a href="recetaCompleta.html?id=${receta._id}" class="btn btn-primary">Ver receta</a>
+                                    <a href="recetaCompleta.html?id=${receta.id}" class="btn btn-primary">Ver receta</a>
                                 </div>
                             </div>
                         </div>
