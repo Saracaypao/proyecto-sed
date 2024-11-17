@@ -122,6 +122,30 @@ controller.obtenerTodasRecetas = async (req, res) => {
     }
 };
 
+// función para obtener todas las recetas
+controller.obtenerRecetaPorId = async (req, res) => {
+    try {
+        const id = req.params.id;
+        
+        const receta = await Receta.findById(id);
+        if (!receta) {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ ok: false, msg: 'Receta no encontrada' }));
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(receta));
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+            ok: false,
+            msg: 'Error al obtener la receta',
+            error: error.message || 'Error interno del servidor',
+        }));
+    }
+};
+
 // función para buscar recetas por filtros, incluyendo categoría
 controller.buscarRecetasPorFiltro = async (req, res) => {
     const { nombreReceta, ingredientes, categoria } = req.query;
