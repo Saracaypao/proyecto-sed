@@ -167,3 +167,24 @@ body {
 .footer a:hover {
     text-decoration: underline;
 }
+.pagination {
+    margin-top: 20px;
+}
+.pagination li a {
+    color: #646464;
+    font-weight: bold;
+    border: 1px solid #646464;
+    border-radius: 0px;
+    padding: 8px 12px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.pagination li a:hover {
+    background-color: #646464;
+    color: white;
+}
+.pagination li.active a {
+    background-color: #646464;
+    color: white;
+    border-color: #646464;
+}
+

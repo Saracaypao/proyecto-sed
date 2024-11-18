@@ -8,6 +8,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href= "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="./css/recetasStyles.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
+    <script src="./js/recetas.js"></script>
 </head>
 <body>
 
@@ -49,6 +52,13 @@
             <button class="btn category-button">Postres</button>
         </div>
     </div>
+
+    <!-- contenedor de paginación -->
+    <div id="paginacion-container">
+        <div class="d-flex justify-content-start mt-4" id="paginacion">
+            <!-- botones de paginación generados dinámicamente -->
+        </div>
+    </div>   
     
     <!-- Aquí se cargarán las recetas -->
     <div class="row mt-4" id="listaRecetas">
@@ -61,12 +71,8 @@
     <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
 </footer>    
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<!-- vincula el archivo JS externo -->
-<script src="./js/recetas.js"></script>
 
 </body>
 </html>

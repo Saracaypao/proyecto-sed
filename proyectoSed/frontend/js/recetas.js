@@ -1,73 +1,61 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const listaRecetas = document.getElementById('listaRecetas');
+async function cargarRecetas() {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('Token no encontrado');
 
-    async function cargarRecetas() {
-        try {
-            const token = localStorage.getItem('token');  
+        const respuesta = await fetch('http://localhost:3000/api/recipe/allRecetas', {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${token}` },
+        });
 
-            // verificar si el token existe
-            if (!token) {
-                throw new Error('Token no encontrado');
-            }
+        if (!respuesta.ok) throw new Error('Error al obtener recetas');
 
-            const respuesta = await fetch('http://localhost:3000/api/recipe/allRecetas', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,  // incluir el token en los encabezados
-                }
-            });
+        const data = await respuesta.json();
+        const recetas = data.recetas;
 
-            if (!respuesta.ok) {
-                throw new Error('Error al obtener recetas');
-            }
+        if (!Array.isArray(recetas)) throw new Error('La propiedad "recetas" no es un array');
 
-            const data = await respuesta.json();  // obtener la respuesta completa
-            console.log("Recetas recibidas:", data); // ver la respuesta completa
-
-            // verificar si la propiedad 'recetas' es un array
-            if (!Array.isArray(data.recetas)) {
-                throw new Error('La propiedad "recetas" no es un array');
-            }
-
-            const recetas = data.recetas;  // acceder al array de recetas
-
-            if (listaRecetas) {
-                listaRecetas.innerHTML = ''; // limpiar lista actual
-
-                // recorremos las recetas y las mostramos
-                recetas.forEach((receta) => { 
-                    // validar propiedades de la receta
+        $('#paginacion').pagination({
+            dataSource: recetas,
+            pageSize: 6,
+            showNavigator: true,
+            formatNavigator: '<span id="navegador"><%= currentPage %> de <%= totalPage %></span>',
+            //formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> de <%= totalNumber %> recetas',
+            ulClassName: 'pagination justify-content-start', // clase para Bootstrap
+            showNavigator: true,
+            prevText: '&laquo;', // botón anterior
+            nextText: '&raquo;', // botón siguiente
+            position: 'top',
+            callback: function (data, pagination) {
+                const listaRecetas = document.getElementById('listaRecetas');
+                listaRecetas.innerHTML = ''; // limpia recetas previas
+                data.forEach((receta) => {
                     const titulo = receta.titulo || 'Sin título';
-                    const ingredientes = Array.isArray(receta.ingredientes) ? receta.ingredientes.join(', ') : 'Sin ingredientes';
-                    const preparacion = receta.preparacion || 'Sin descripción';
                     const categoria = receta.categoria || 'Sin categoría';
                     const descripcion = receta.descripcion || 'Sin descripción'; 
                     const porciones = receta.porciones || 'N/A'; 
                     const autor = receta.autor || 'Desconocido';
-
                     listaRecetas.innerHTML += `
-                        <div class="col-md-4">
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title">${titulo}</h5>
-                                    <p class="text-muted"><strong>Categoría:</strong> ${categoria}</p>
-                                    <p class="card-text"><strong>Descripción:</strong> ${descripcion}</p>
-                                    <p class="card-text"><strong>Porciones:</strong> ${porciones}</p>
-                                    <p class="text-muted"><strong>Autor:</strong> ${autor}</p>
-                                    <a href="recetaCompleta.html?id=${receta.id}" class="btn btn-primary">Ver receta</a>
-                                </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">${titulo}</h5>
+                                <p class="text-muted"><strong>Categoría:</strong> ${categoria}</p>
+                                <p class="card-text"><strong>Descripción:</strong> ${descripcion}</p>
+                                <p class="card-text"><strong>Porciones:</strong> ${porciones}</p>
+                                <p class="text-muted"><strong>Autor:</strong> ${autor}</p>
+                                <a href="recetaCompleta.html?id=${receta.id}" class="btn btn-primary">Ver receta</a>
                             </div>
                         </div>
-                    `;
+                    </div>
+                `;
                 });
-            } else {
-                console.error('Elemento #listaRecetas no encontrado en el DOM');
-            }
-        } catch (error) {
-            console.error('Error al cargar recetas:', error.message);
-        }
+            },
+        });
+    } catch (error) {
+        console.error('Error al cargar recetas:', error.message);
     }
+}
 
-    // llama a la función al cargar la página
-    cargarRecetas();
-});
+// llama a la función al cargar la página
+document.addEventListener('DOMContentLoaded', cargarRecetas);
