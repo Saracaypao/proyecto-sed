@@ -10,8 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     
     if (!token) {
-        console.log("No estás logueado. Redirigiendo al login...");
-        window.location.href = 'landingpage.html';  // Redirige al login
+        Swal.fire({
+            icon: 'warning',
+            title: 'No estás logueado',
+            text: 'Por favor, inicia sesión para continuar.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ir al login'
+        }).then(() => {
+            window.location.href = 'landingpage.html';  // Redirige al login
+        });
         return;
     }
 
@@ -37,7 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Verifica que los datos del formulario estén completos antes de enviarlos
             if (!nombreReceta || ingredientes.length === 0 || !preparacion || !categoria || !porciones || !descripcion) {
-                shownewRecipeMessage("Por favor, completa todos los campos.", "danger");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Campos incompletos',
+                    text: 'Por favor, completa todos los campos antes de enviar.',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Entendido'
+                });
                 return;
             }
 
@@ -65,33 +78,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!response.ok) {
                     const error = await response.json();
-                    shownewRecipeMessage("Error al agregar la receta", "danger");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error.mensaje || 'Error al agregar la receta.',
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Cerrar'
+                    });
                     throw new Error(error.mensaje || 'Error al agregar la receta');
                 }
 
                 const data = await response.json();
-                shownewRecipeMessage(data.mensaje, "success");
-                window.location.href = 'recetas.html';
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Receta agregada',
+                    text: data.mensaje,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    window.location.href = 'recetas.html';
+                });
             } catch (error) {
-                shownewRecipeMessage("Error de servidor. Intenta nuevamente más tarde.", "danger");
-                console.log(`Error: ${error.message}`);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error de servidor',
+                    text: 'Hubo un problema. Intenta nuevamente más tarde.',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Cerrar'
+                });
+                console.error(`Error: ${error.message}`);
             }
         });
     } else {
         console.error('Formulario no encontrado');
     }
 });
-
-
-// funcion para mostrar mensajes bonitos en el registro
-function shownewRecipeMessage(message, type) {
-    const newRecipeMessage = document.getElementById('newRecipeMessage');
-    newRecipeMessage.className = `alert alert-${type} text-center`;  // define el tipo de alerta (roja o verde)
-    newRecipeMessage.textContent = message;  // establece el mensaje
-    newRecipeMessage.classList.remove('d-none');  // muestra el mensaje
-
-    // oculta el mensaje después de 3 segundos
-    setTimeout(() => {
-        newRecipeMessage.classList.add('d-none');
-    }, 5000);
-}

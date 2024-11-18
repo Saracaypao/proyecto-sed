@@ -77,6 +77,8 @@ h2 {
     color: white;
     padding: 20px 0;
     text-align: center;
+    width: 100%;
+    position: relative;
 }
 .footer a {
     color: #ffc75f;

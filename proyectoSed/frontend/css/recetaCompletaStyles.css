@@ -78,12 +78,14 @@ body {
     background-color: #4CAF50;
 }
 .btn-edit:hover {
-    background-color: #45a049;
+    color: white;
+    background-color: #228527;
 }
 .btn-delete {
     background-color: #f44336;
 }
 .btn-delete:hover {
+    color: white;
     background-color: #d32f2f;
 }
 .footer {
@@ -94,7 +96,6 @@ body {
     margin-top: 50px;
     font-size: 0.9rem;
 }
-
 .footer {
     background-color: #343a40;
     color: white;
@@ -108,9 +109,65 @@ body {
 .footer a:hover {
     text-decoration: underline;
 }
-
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+.modal-header {
+    background-color: #e91a5f; 
+    color: white;
+    border-bottom: none;
+}
+.form-group label {
+    display: block; /* que el label ocupe toda la línea */
+    margin-bottom: 0.5rem; /* separacion del label con el select */
+}
+
+.form-select {
+    display: block;
+    width: 100%; /* Asegurar que el selector ocupa todo el ancho */
+    margin-top: 0; /* Quitar margen adicional */
+}
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.modal-body {
+    padding: 30px;
+}
+.form-group label {
+    color: #424242;
+    font-weight: 300;
+}
+.form-control, .form-select {
+    background-color: #e9ecef;
+    border: none;
+    border-radius: 0;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: #495057;
+    padding: 10px;
+}
+.form-control::placeholder, .form-select {
+    color: #5a636b;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+.form-control:focus, .form-select:focus {
+    background-color: #e9ecef;
+    border: 3px solid #adb5bd;
+    outline: none;
+    box-shadow: none;
+}
+.btn-primary {
+    background-color: #e91a5f;
+    border: none;
+    border-radius: 0;
+    padding: 10px 20px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.btn-primary:hover {
+    background-color: #d41651;
+    transform: translateY(-3px);
 }
 
