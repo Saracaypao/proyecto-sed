@@ -157,6 +157,11 @@ body {
     color: white;
     padding: 20px 0;
     text-align: center;
+    width: 100%;
+    position: relative;
+    margin-left: 0; /* Elimina márgenes que podrían estar afectando */
+    margin-right: 0; 
+    box-sizing: border-box; 
 }
 .footer a {
     color: #ffc75f;

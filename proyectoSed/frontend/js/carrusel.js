@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
         './assets/imagen4.jpg',
         './assets/imagen5.jpg',
         './assets/imagen6.jpg',
-        './assets/imagen8.jpg'
+        './assets/imagen8.jpg',
+        './assets/imagen9.jpg',
+        './assets/imagen10.jpg'
     ];
     
     const carouselItems = document.querySelectorAll('.carousel-item img');
