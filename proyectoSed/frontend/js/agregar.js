@@ -1,12 +1,12 @@
-// Función para decodificar el token JWT
+// funcion para decodificar el token JWT
 function decodeToken(token) {
-    const payload = token.split('.')[1]; // Obtener la parte central del token
-    const decoded = JSON.parse(atob(payload)); // Decodificar base64
+    const payload = token.split('.')[1]; // obteniendo la parte central del token
+    const decoded = JSON.parse(atob(payload)); // decodificando base64
     return decoded;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Verificar si el token está en localStorage
+    // verificar si el token está en localStorage
     const token = localStorage.getItem('token');
     
     if (!token) {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Ir al login'
         }).then(() => {
-            window.location.href = 'landingpage.html';  // Redirige al login
+            window.location.href = 'landingpage.html';  // redirige al login
         });
         return;
     }
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', async function (event) {
             event.preventDefault();
 
-            // Recopila los datos del formulario
+            // recopila los datos del formulario
             const nombreReceta = document.getElementById('nombreReceta').value;
             const ingredientesRaw = document.getElementById('ingredientes').value.trim();
             const preparacion = document.getElementById('preparacion').value;
@@ -39,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const porciones = document.getElementById('porciones').value;
             const descripcion = document.getElementById('descripcion').value;
 
-            // Procesa los ingredientes para asegurarse de que sea un array no vacío
+            // procesa los ingredientes para asegurarse de que sea un array no vacío
             const ingredientes = ingredientesRaw ? ingredientesRaw.split('\n').map(i => i.trim()).filter(i => i.length > 0) : [];
             
-            // Verifica que los datos del formulario estén completos antes de enviarlos
+            // verifica que los datos del formulario estén completos antes de enviarlos
             if (!nombreReceta || ingredientes.length === 0 || !preparacion || !categoria || !porciones || !descripcion) {
                 Swal.fire({
                     icon: 'error',
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Enviar los datos de la receta al servidor
+            // envia los datos de la receta al servidor
             const receta = {
                 nombreReceta,
                 ingredientes,  

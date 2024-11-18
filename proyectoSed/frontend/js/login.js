@@ -1,6 +1,4 @@
-
-
-// clase Auth para manejar la lógica de autenticación
+// clase auth para manejar la lógica de autenticación
 class Auth {
     async logIn(correo, contrasena) {
         try {
@@ -12,9 +10,9 @@ class Auth {
             
             if (response.ok) {
                 const data = await response.json();
-                const currentTime = Date.now(); // Hora actual en milisegundos
+                const currentTime = Date.now(); // hora actual en milisegundos
                 localStorage.setItem('token', data.token); // guardar el token en localstorage
-                localStorage.setItem('loginTime', currentTime); // Guardar hora de login
+                localStorage.setItem('loginTime', currentTime); // guardar hora de login
                 return response.status; // devolver el código de estado
             } else {
                 return response.status; // manejar errores
@@ -78,12 +76,12 @@ window.onload = () => {
     if (token && loginTime) {
         const currentTime = Date.now();
         const timeDifference = currentTime - loginTime;
-        const hourInMilliseconds = 60 * 60 * 1000; // Una hora en milisegundos
+        const hourInMilliseconds = 60 * 60 * 1000; // una hora en milisegundos
 
         if (timeDifference > hourInMilliseconds) {
-            localStorage.removeItem('token'); // Eliminar token si ha pasado más de una hora
-            localStorage.removeItem('loginTime'); // Eliminar hora de login
-            window.location.href = "landingpage.html"; // Redirigir a login
+            localStorage.removeItem('token'); // eliminar token si ha pasado más de una hora
+            localStorage.removeItem('loginTime'); // eliminar hora de login
+            window.location.href = "landingpage.html"; // redirigir a login
         }
     }
 };
@@ -101,8 +99,8 @@ function showLoginMessage(message, type) {
 }
 
 function logOut() {
-    localStorage.removeItem('token'); // Eliminar el token
-    localStorage.removeItem('loginTime'); // Eliminar la hora de login
-    window.location.href = "landingpage.html"; // Redirigir a la página de login
+    localStorage.removeItem('token'); // eliminar el token
+    localStorage.removeItem('loginTime'); // eliminar la hora de login
+    window.location.href = "landingpage.html"; // redirigir a la página de login
 }
 
