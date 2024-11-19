@@ -4,14 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Recetas y Categorías</title>
+    <title>Administrar Recetas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="./css/recetasAdminStyles.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .card {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .card-body {
+            border-radius: 15px;
+        }
+        .card-header {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+    </style>
 </head>
+    <script src="./js/recetasAdmin.js"></script>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Mi Recetario</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
@@ -22,200 +36,17 @@
         </div>
     </nav>
 
-    <div class="container">
-        <h2>Administrar recetas y categorías</h2>
+    <div class="container mt-4">
+        <h2 class="text-center">Administrar Recetas</h2>
 
-        <!-- Edición de Categorías -->
-        <div class="card">
-            <div class="card-body">
-                <h5>Editar categorías</h5>
-
-                <!-- Botón de agregar categoría abajo del título -->
-                <button class="btn btn-add-category mb-4" data-toggle="modal" data-target="#modalAgregarCategoria">Agregar categoría</button>
-
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre de Categoría</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Postres</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm btn-edit-category">Editar</button>
-                                <button class="btn btn-danger btn-sm btn-delete-category">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Ensaladas</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm btn-edit-category">Editar</button>
-                                <button class="btn btn-danger btn-sm btn-delete-category">Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Moderación de Recetas -->
-        <div class="card mt-4">
-            <div class="card-body">
-                <h5>Moderación de Recetas</h5>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Título de Receta</th>
-                            <th>Autor</th>
-                            <th>Fecha de Subida</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>101</td>
-                            <td>Tarta de Chocolate</td>
-                            <td>Juan Pérez</td>
-                            <td>2024-10-15</td>
-                            <td>
-                                <button class="btn btn-success btn-sm btn-approve">Aprobar</button>
-                                <button class="btn btn-danger btn-sm btn-reject">Rechazar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>102</td>
-                            <td>Ensalada César</td>
-                            <td>María Gómez</td>
-                            <td>2024-10-20</td>
-                            <td>
-                                <button class="btn btn-success btn-sm btn-approve">Aprobar</button>
-                                <button class="btn btn-danger btn-sm btn-reject">Rechazar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Agregar Categoría -->
-    <div class="modal fade" id="modalAgregarCategoria" tabindex="-1" role="dialog" aria-labelledby="modalAgregarCategoriaLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAgregarCategoriaLabel">Agregar Nueva Categoría</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="categoriaNombre">Nombre de la Categoría</label>
-                            <input type="text" class="form-control" id="categoriaNombre" placeholder="Nombre de la categoría" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="btnGuardarCategoria">Guardar Categoría</button>
-                </div>
-            </div>
+        <!-- Sección de Recetas -->
+        <div class="row mt-4" id="recetas-container">
+            <!-- Las recetas se cargarán aquí mediante JavaScript -->
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Aprobación de receta
-            $(".btn-approve").click(function() {
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "¿Quieres aprobar esta receta?",
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#28a745',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, aprobar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire('Aprobada!', 'La receta ha sido aprobada.', 'success');
-                    }
-                });
-            });
-
-            // Rechazo de receta
-            $(".btn-reject").click(function() {
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "¿Quieres rechazar esta receta?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: 'Sí, rechazar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire('Rechazada!', 'La receta ha sido rechazada.', 'error');
-                    }
-                });
-            });
-
-            // Edición de categoría
-            $(".btn-edit-category").click(function() {
-                Swal.fire({
-                    title: 'Editar Categoría',
-                    input: 'text',
-                    inputLabel: 'Nombre de la categoría',
-                    inputValue: $(this).closest('tr').find('td:eq(1)').text(),
-                    showCancelButton: true,
-                    confirmButtonText: 'Guardar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire('Guardado!', 'Los cambios han sido guardados.', 'success');
-                    }
-                });
-            });
-
-            // Eliminación de categoría
-            $(".btn-delete-category").click(function() {
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "¿Quieres eliminar esta categoría?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire('Eliminada!', 'La categoría ha sido eliminada.', 'success');
-                    }
-                });
-            });
-
-            // Guardar nueva categoría
-            $("#btnGuardarCategoria").click(function() {
-                const categoriaNombre = $("#categoriaNombre").val();
-                if (categoriaNombre) {
-                    Swal.fire('Guardada!', 'La categoría ha sido agregada correctamente.', 'success');
-                    $("#modalAgregarCategoria").modal('hide');
-                } else {
-                    Swal.fire('Error', 'El nombre de la categoría no puede estar vacío.', 'error');
-                }
-            });
-        });
-    </script>
+    <script src="./js/recetasAdmin.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

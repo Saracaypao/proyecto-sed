@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="./css/dashboardAdminStyles.css" rel="stylesheet">
 </head>
+    <script src="./js/dashboardAdmin.js"></script>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Mi Recetario</a>
@@ -23,37 +24,22 @@
 
     <div class="container">
         <h2>Bienvenido, Administrador</h2>
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-6 mb-4">
                 <div class="stat-card bg-recetas">
                     <h5>Total de recetas</h5>
-                    <h3>567</h3>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="stat-card bg-categorias">
-                    <h5>Total de categorías</h5>
-                    <h3>89</h3>
+                    <h3 id="totalRecetas"></h3>
                 </div>
             </div>
         </div>
 
         <!-- opciones de administración -->
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Gestionar categorías</h5>
-                        <p class="card-text">Agrega, edita o elimina categorías para organizar mejor las recetas.</p>
-                        <a href="recetasAdmin.html" class="btn btn-primary">Ir a categorías</a>
-                    </div>
-                </div>
-            </div>
+        <div class="row justify-content-center">
             <div class="col-md-6 mb-4">
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Moderar recetas</h5>
-                        <p class="card-text">Revisa y aprueba o rechaza las recetas subidas por los usuarios.</p>
+                        <p class="card-text">Edita o elimina las recetas subidas por los usuarios.</p>
                         <a href="recetasAdmin.html" class="btn btn-primary">Ir a moderación</a>
                     </div>
                 </div>
