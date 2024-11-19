@@ -40,7 +40,11 @@ const registrarUsuario = async (req, res) => {
         await nuevoUsuario.save();
 
         res.writeHead(201, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ mensaje: "Usuario registrado con éxito." }));
+        /*res.end(JSON.stringify({ mensaje: "Usuario registrado con éxito." }));*/
+        res.end(JSON.stringify({
+            mensaje: "Usuario registrado con éxito.",
+            usuario: nuevoUsuario // Incluir el usuario creado
+        }));
     } catch (error) {
         console.error(error);
         res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -110,7 +114,8 @@ const obtenerTodosUsuarios = async (req, res) => {
 
 // función para eliminar un usuario
 const eliminarUsuario = async (req, res) => {
-    const userId = req.url.split('/').pop(); // obtener el id del usuario desde la url
+    //const userId = req.url.split('/').pop(); // obtener el id del usuario desde la url
+    const userId = req.userIdToDelete; // Ahora usamos el ID adjuntado en la ruta
     const currentUser = req.user;
 
     // Verificar si el userId es un ObjectId válido

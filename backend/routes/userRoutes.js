@@ -38,6 +38,8 @@ const userRoutes = (req, res) => {
     // Ruta para eliminar un usuario
     else if (parsedUrl.pathname.startsWith('/api/user/deleteUser') && req.method === 'DELETE') {
         authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
+            const userId = parsedUrl.pathname.split('/').pop(); // Obtener el ID del usuario
+            req.userIdToDelete = userId; // Adjuntar el ID del usuario a eliminar
             authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
                 eliminarUsuario(req, res); // Llamamos al controlador que maneja la eliminación del usuario
             });

@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="./css/dashboardSuperAdminStyles.css" rel="stylesheet">
 </head>
+<script src="./js/dashboardSA.js"></script>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Mi Recetario</a>
@@ -28,13 +29,13 @@
             <div class="col-md-6 mb-4">
                 <div class="stat-card bg-recetas">
                     <h5>Total de usuarios</h5>
-                    <h3>1,567</h3>
+                    <h3 id="totalUsuarios"></h3> <!-- Aquí se actualizará el total de usuarios -->
                 </div>
             </div>
             <div class="col-md-6 mb-4">
                 <div class="stat-card bg-categorias">
-                    <h5>Total de Recetas</h5>
-                    <h3>89</h3>
+                    <h5>Total de recetas</h5>
+                    <h3 id="totalRecetas"></h3>
                 </div>
             </div>
         </div>

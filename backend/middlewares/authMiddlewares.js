@@ -7,7 +7,7 @@ const ROLES = require('../data/roles.js');
 const middlewares = {};
 const PREFIX = 'Bearer';
 
-// middleware para procesar el json en el body de la solicitud
+// Middleware para procesar el JSON en el body de la solicitud
 middlewares.parseJSONBody = (req, res, next) => {
     let body = '';
     req.on('data', chunk => {
@@ -25,6 +25,7 @@ middlewares.parseJSONBody = (req, res, next) => {
     });
 };
 
+// Middleware de autenticación
 middlewares.authentication = async (req, res, next) => {
     try {
         const { authorization } = req.headers;
@@ -48,8 +49,8 @@ middlewares.authentication = async (req, res, next) => {
         }
 
         const decoded = jwt.verify(token, secretKey);
-
         const userId = decoded.userId;
+
         const user = await User.findById(userId);
         if (!user) {
             res.writeHead(401, { 'Content-Type': 'application/json' });
@@ -65,22 +66,21 @@ middlewares.authentication = async (req, res, next) => {
         req.user = user;
         req.token = token;
 
-        // quitar este console.log luego
-        console.log('Token:', token);
-        console.log('Decoded Payload:', payload);
+        debug('Token:', token);
+        debug('Decoded Payload:', payload);
 
-        next(); 
+        next();
     } catch (error) {
         console.error(error);
         res.writeHead(500, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ error: error.message || 'Error interno del servidor' }));
+        res.end(JSON.stringify({ error: error.message || 'Error interno del servidor' }));
     }
 };
 
+// Middleware de autorización
 middlewares.authorization = (requiredRoles = [ROLES.SYSADMIN]) => {
     return (req, res, next) => {
         try {
-            // asegura que requiredRoles sea siempre un array
             if (!Array.isArray(requiredRoles)) {
                 requiredRoles = [requiredRoles];
             }
@@ -101,6 +101,5 @@ middlewares.authorization = (requiredRoles = [ROLES.SYSADMIN]) => {
         }
     };
 };
-
 
 module.exports = middlewares;

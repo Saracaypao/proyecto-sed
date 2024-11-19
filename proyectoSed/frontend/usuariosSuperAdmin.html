@@ -28,114 +28,29 @@
         <h2 class="text">Gestión de usuarios</h2>
         <button class="btn btn-add-user mb-3" data-toggle="modal" data-target="#addUserModal">Agregar usuario</button>
         
-        <div class="row">
-            <!-- Ejemplo de múltiples tarjetas de usuario -->
-            <div class="col-md-4 mb-4">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Juan Pérez</h5>
-                        <p class="card-text">juan.perez@example.com</p>
-                        <span class="badge badge-warning">Administrador</span>
-                        <div class="mt-3">
-                            <button class="btn btn-primary btn-action" data-toggle="modal" data-target="#editUserModal">Editar</button>
-                            <button class="btn btn-danger btn-action" onclick="confirmDelete(1)">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Más tarjetas aquí... -->
-            <div class="col-md-4 mb-4">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Eliseo Rodriguez</h5>
-                        <p class="card-text">eliseo.rodriguez@example.com</p>
-                        <span class="badge badge-warning">Administrador</span>
-                        <div class="mt-3">
-                            <button class="btn btn-primary btn-action" data-toggle="modal" data-target="#editUserModal">Editar</button>
-                            <button class="btn btn-danger btn-action" onclick="confirmDelete(1)">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Andrea Martinez</h5>
-                        <p class="card-text">andrea.martinez@example.com</p>
-                        <span class="badge badge-warning">Administrador</span>
-                        <div class="mt-3">
-                            <button class="btn btn-primary btn-action" data-toggle="modal" data-target="#editUserModal">Editar</button>
-                            <button class="btn btn-danger btn-action" onclick="confirmDelete(1)">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Rogelio Montero</h5>
-                        <p class="card-text">rogelio.montero@example.com</p>
-                        <span class="badge badge-warning">Administrador</span>
-                        <div class="mt-3">
-                            <button class="btn btn-primary btn-action" data-toggle="modal" data-target="#editUserModal">Editar</button>
-                            <button class="btn btn-danger btn-action" onclick="confirmDelete(1)">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Ana Chavez</h5>
-                        <p class="card-text">ana.chavez@example.com</p>
-                        <span class="badge badge-warning">Administrador</span>
-                        <div class="mt-3">
-                            <button class="btn btn-primary btn-action" data-toggle="modal" data-target="#editUserModal">Editar</button>
-                            <button class="btn btn-danger btn-action" onclick="confirmDelete(1)">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Pablo Escobar</h5>
-                        <p class="card-text">pablo.escobar@example.com</p>
-                        <span class="badge badge-warning">Administrador</span>
-                        <div class="mt-3">
-                            <button class="btn btn-primary btn-action" data-toggle="modal" data-target="#editUserModal">Editar</button>
-                            <button class="btn btn-danger btn-action" onclick="confirmDelete(1)">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="row" id="user-cards-container">
+            <!-- Las tarjetas de usuario se agregarán aquí dinámicamente -->
         </div>
-    </div>
+    </div>    
 
     <!-- Modal para agregar usuario -->
     <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel">Agregar Usuario</h5>
+                    <h5 class="modal-title" id="addUserModalLabel">Agregar usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form>
+                <form id="addUserForm" onsubmit="submitNewUser(event)">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="addUserName">Nombre</label>
                             <input type="text" class="form-control" id="addUserName" required>
                         </div>
                         <div class="form-group">
-                            <label for="addUserEmail">Correo Electrónico</label>
+                            <label for="addUserEmail">Correo electrónico</label>
                             <input type="email" class="form-control" id="addUserEmail" required>
                         </div>
                         <div class="form-group">
@@ -150,7 +65,7 @@
                             <input type="password" class="form-control" id="addUserPassword" required>
                         </div>
                         <div class="form-group">
-                            <label for="addUserConfirmPassword">Confirmar Contraseña</label>
+                            <label for="addUserConfirmPassword">Confirmar contraseña</label>
                             <input type="password" class="form-control" id="addUserConfirmPassword" required>
                         </div>
                     </div>
@@ -168,7 +83,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+                    <h5 class="modal-title" id="editUserModalLabel">Editar usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -180,7 +95,7 @@
                             <input type="text" class="form-control" id="editUserName" required>
                         </div>
                         <div class="form-group">
-                            <label for="editUserEmail">Correo Electrónico</label>
+                            <label for="editUserEmail">Correo electrónico</label>
                             <input type="email" class="form-control" id="editUserEmail" required>
                         </div>
                         <div class="form-group">
@@ -193,38 +108,16 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        <button type="submit" class="btn btn-primary" onclick="submitEditUser(event)">Guardar cambios</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function confirmDelete(userId) {
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "Esta acción no se puede deshacer.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'Eliminado',
-                        'El usuario ha sido eliminado.',
-                        'success'
-                    );
-                    // Aquí se puede agregar el código para eliminar el usuario
-                }
-            });
-        }
-    </script>
+    <script src="./js/usuariosSA.js"></script>
 </body>
 </html>

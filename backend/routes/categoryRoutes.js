@@ -46,6 +46,12 @@ const categoryRoutes = (req, res) => {
             });
         });
     }
+
+    // Ruta para obtener todas las categorías
+    else if (parsedUrl.pathname === '/api/category/allCategories' && req.method === 'GET') {
+        obtenerTodasCategorias(req, res);
+    }
+
     else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Ruta no encontrada' }));

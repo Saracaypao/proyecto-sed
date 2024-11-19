@@ -92,4 +92,30 @@ const eliminarCategoria = async (req, res) => {
     }
 };
 
+// función para obtener todas las categorías
+const obtenerTodasCategorias = async (req, res) => {
+    try {
+        // Buscar todas las categorías en la base de datos
+        const categorias = await Categoria.find();
+
+        // Si no hay categorías, respondemos con un mensaje adecuado
+        if (!categorias || categorias.length === 0) {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ mensaje: 'No se encontraron categorías.' }));
+            return;
+        }
+
+        // Si se encontraron categorías, devolvemos los datos en formato JSON
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(categorias));  // Enviar todas las categorías
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Error al obtener las categorías', details: error.message }));
+    }
+};
+
+module.exports = { agregarCategoria, editarCategoria, eliminarCategoria, obtenerTodasCategorias };
+
+
 module.exports = { agregarCategoria, editarCategoria, eliminarCategoria };
