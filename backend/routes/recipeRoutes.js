@@ -59,7 +59,7 @@ const recipeRoutes = (req, res) => {
     // Ruta para obtener una receta específica por ID
     else if (method === 'GET' && path.startsWith('/api/recipe/')) {
         const recetaId = path.split('/').pop(); // Extrae el ID de la URL
-        console.log('ID recibido:', recetaId); // Agrega este log
+        //console.log('ID recibido:', recetaId); // Agrega este log
         req.params = { id: recetaId };
     
         // Verificar si el ID es válido antes de pasar al controlador

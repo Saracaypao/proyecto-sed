@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputBusqueda = document.querySelector('.search-section input');
     const botonBusqueda = document.querySelector('.search-section button');
     const botonesCategoria = document.querySelectorAll('.category-button');
-    let categoriaSeleccionada = null; // Variable para almacenar la categoría seleccionada
+    let categoriaSeleccionada = null; 
 
     // funcion para la paginación
     const configurarPaginacion = (recetas) => {

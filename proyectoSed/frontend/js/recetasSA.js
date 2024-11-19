@@ -26,7 +26,7 @@ function cargarRecetas() {
             });
         })
         .catch(error => {
-            console.error('Error:', error);
+            //console.error('Error:', error);
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -123,7 +123,7 @@ function editarReceta(recetaId) {
                         cargarRecetas(); 
                     })
                     .catch(error => {
-                        console.error(error);
+                        //console.error(error);
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
@@ -137,7 +137,7 @@ function editarReceta(recetaId) {
             });
         })
         .catch(error => {
-            console.error('Error al cargar receta para editar:', error);
+            //console.error('Error al cargar receta para editar:', error);
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -178,7 +178,7 @@ function eliminarReceta(recetaId) {
                     cargarRecetas(); 
                 })
                 .catch((error) => {
-                    console.error('Error al eliminar la receta:', error);
+                    //console.error('Error al eliminar la receta:', error);
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',

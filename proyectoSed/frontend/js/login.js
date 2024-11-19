@@ -51,7 +51,7 @@ async function handleLogin(event) {
             }
             const token = localStorage.getItem('token');
             if (prueba(token).roles.includes("super_admin")) {
-                console.log(prueba);
+                //console.log(prueba);
                 window.location.href = "dashboardSuperAdmin.html";
                 return 
             }

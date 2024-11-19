@@ -10,7 +10,7 @@ const confirmarContrasena = document.getElementById('confirmarContrasena').value
 
 // validar si las contraseñas coinciden
 if (contrasena !== confirmarContrasena) {
-    console.log('Las contraseñas no coinciden.');
+    //console.log('Las contraseñas no coinciden.');
     showRegisterMessage("Las contraseñas no coinciden. Por favor, verifica e intenta nuevamente.", "danger");
     return;
 }
@@ -25,7 +25,7 @@ fetch('http://localhost:3000/api/user/newUser', {
 })
 .then(response => response.json())
 .then(data => {
-    console.log('Respuesta recibida del backend:', data);
+    //console.log('Respuesta recibida del backend:', data);
     const messageElement = document.getElementById('registerMessage');
     if (data.mensaje) {
         showRegisterMessage(data.mensaje, "success");

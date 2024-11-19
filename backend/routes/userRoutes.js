@@ -21,7 +21,7 @@ const userRoutes = (req, res) => {
             if (req.body.rol === 'admin') {
                 authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
                     authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
-                        console.log("Auth passed");
+                        //console.log("Auth passed");
                         registrarUsuario(req, res); // Llamamos al controlador que maneja el registro del usuario
                     });
                 });

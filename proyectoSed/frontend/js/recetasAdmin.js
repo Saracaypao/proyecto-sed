@@ -65,7 +65,7 @@ async function editarReceta(event) {
         const receta = await response.json();
         
         // Agrega un console.log para ver el nombre de la receta
-        console.log("Nombre de la receta a editar:", receta.nombreReceta);  
+        //console.log("Nombre de la receta a editar:", receta.nombreReceta);  
 
         Swal.fire({
             title: 'Editar Receta',
