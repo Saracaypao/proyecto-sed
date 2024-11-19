@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios - Dashboard Administrador</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="./css/usuariosSuperAdminStyles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Mi Recetario</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="dashboardSuperAdmin.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link active" href="usuariosSuperAdmin.html">Usuarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="recetasSuperAdmin.html">Recetas</a></li>
+                <li class="nav-item"><a class="nav-link" href="landingpage.html">Salir</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="text">Gestión de usuarios</h2>
+        <button class="btn btn-add-user mb-3" data-toggle="modal" data-target="#addUserModal">Agregar usuario</button>
+        
+        <div class="row" id="user-cards-container">
+            <!-- las tarjetas de usuario van aqui -->
+        </div>
+    </div>    
+
+    <!-- modal para agregar usuario -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Agregar usuario</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="addUserForm" onsubmit="submitNewUser(event)">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="addUserName">Nombre</label>
+                            <input type="text" class="form-control" id="addUserName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addUserEmail">Correo electrónico</label>
+                            <input type="email" class="form-control" id="addUserEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addUserRole">Rol</label>
+                            <select class="form-control" id="addUserRole">
+                                <option>Usuario</option>
+                                <option>Administrador</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="addUserPassword">Contraseña</label>
+                            <input type="password" class="form-control" id="addUserPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addUserConfirmPassword">Confirmar contraseña</label>
+                            <input type="password" class="form-control" id="addUserConfirmPassword" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal para editar usuario -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Editar usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="editUserName">Nombre</label>
+                            <input type="text" class="form-control" id="editUserName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserEmail">Correo electrónico</label>
+                            <input type="email" class="form-control" id="editUserEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserRole">Rol</label>
+                            <select class="form-control" id="editUserRole">
+                                <option>Usuario</option>
+                                <option>Administrador</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" onclick="submitEditUser(event)">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/usuariosSA.js"></script>
+</body>
+</html>

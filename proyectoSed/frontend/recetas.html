@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recetas - Mi recetario</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href= "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="./css/recetasStyles.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
+    <script src="./js/recetas.js"></script>
+</head>
+<body>
+
+<header class="header">
+    <div class="container d-flex flex-column align-items-center">
+        <h1 class="text-center mb-0">Mi recetario</h1>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="recetas.html"><i class="fas fa-utensils"></i> Recetas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="agregar.html"><i class="fas fa-plus-circle"></i> Agregar receta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="acerca.html"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                    <li class="nav-item"><a class="nav-link" href="landingpage.html"><i class="fas fa-sign-in-alt"></i> salir</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="container mt-5">
+    <!-- Sección de búsqueda -->
+    <div class="search-section d-flex justify-content-center align-items-center">
+        <input type="text" placeholder="Buscar recetas..." aria-label="Buscar recetas">
+        <button class="btn">Buscar</button>
+    </div>    
+
+    <!-- Sección de categorías -->
+    <div class="category-section">
+        <h4>Explora por categorías</h4>
+        <div class="d-flex justify-content-center">
+            <button class="btn category-button">Entradas</button>
+            <button class="btn category-button">Platos principales</button>
+            <button class="btn category-button">Complementos</button>
+            <button class="btn category-button">Bebidas</button>
+            <button class="btn category-button">Postres</button>
+        </div>
+    </div>
+
+    <!-- contenedor de paginación -->
+    <div id="paginacion-container">
+        <div class="d-flex justify-content-start mt-4" id="paginacion">
+            <!-- botones de paginación generados dinámicamente -->
+        </div>
+    </div>   
+    
+    <!-- Aquí se cargarán las recetas -->
+    <div class="row mt-4" id="listaRecetas">
+        <!-- Las recetas se cargarán dinámicamente desde el backend -->
+    </div>
+</div>
+
+<footer class="footer container-fluid">
+    <p>&copy; 2024 Mi Recetario. Todos los derechos reservados.</p>
+    <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
+</footer>    
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

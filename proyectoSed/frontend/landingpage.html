@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Mi recetario</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="./css/landingPageStyles.css" rel="stylesheet">
+</head>
+<script src="./js/login.js"></script>
+<script src="./js/register.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Mi recetario</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="btn btn-outline-light" href="#" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item ml-2">
+                    <a class="btn btn-success" href="#" data-toggle="modal" data-target="#registerModal">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- carousel -->
+    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="background-image: url('./assets/imagen1.jpeg');">
+                <div class="overlay"></div>
+                <div class="hero-text">
+                    <h1>Descubre una infinidad de recetas</h1>
+                    <p>Desde platillos tradicionales hasta innovadoras creaciones culinarias, encuentra la inspiración que necesitas para tu próxima comida.</p>
+                    <a href="#" class="btn btn-success" onclick="showRegisterModal()">Empieza ahora</a>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('./assets/imagen2.jpg');">
+                <div class="overlay"></div>
+                <div class="hero-text">
+                    <h1>Comparte tus recetas con la comunidad</h1>
+                    <p>Únete a un espacio donde los amantes de la cocina se conectan, intercambian recetas y comparten sus secretos culinarios.</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
+    </div>
+
+<!-- modal de iniciar sesión -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div id="loginMessage" class="alert d-none text-center" role="alert"></div>
+            <h2 class="text-center">Iniciar Sesión</h2>
+            <form onsubmit="return handleLogin(event);">
+                <div class="form-group">
+                    <label for="user">Correo</label>
+                    <input type="text" class="form-control" id="correoLogin" placeholder="Ingrese su correo" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" class="form-control" id="contrasenaLogin" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Ingresar</button>
+            </form>
+            <!--<p class="text-center mt-3">¿No tienes una cuenta? <a href="#" class="rs-link" onclick="showRegisterModal()">Regístrate aquí</a></p>-->
+        </div>
+    </div>
+</div>
+
+  <!-- modal de registro -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <h2 class="text-center">Registrarse</h2>
+            <div id="registerMessage"></div>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerUser">Usuario</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese su usuario">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correoRegister" placeholder="Ingrese su correo">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contraseña</label>
+                    <input type="password" class="form-control" id="contrasenaRegister" placeholder="Contraseña">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar contraseña</label>
+                    <input type="password" class="form-control" id="confirmarContrasena" placeholder="Confirmar contraseña">
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Registrar</button>
+            </form>
+            <!--<p class="text-center mt-3">¿Ya tienes una cuenta? <a href="#" class="rs-link" onclick="showSignUpModal()">Inicia sesión aquí</a></p>-->
+        </div>
+    </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

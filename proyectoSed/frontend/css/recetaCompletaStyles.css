@@ -1,0 +1,173 @@
+@charset "UTF-8";
+/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*/
+/*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap");
+
+body {
+    background-color: #f3f4f6;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+.header {
+    background-color: #eb0954;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+}
+.header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.btn-back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+}
+.btn-back i {
+    margin-right: 5px;
+}
+.recipe-details {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s;
+}
+.recipe-title {
+    color: #ff6f61;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.ingredients-list, .instructions-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 1.1rem;
+}
+.ingredients-list li::before, .instructions-list li::before {
+    content: "\f058";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #ff6f61;
+    margin-right: 10px;
+}
+.btn-edit, .btn-delete {
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+.btn-edit {
+    background-color: #4CAF50;
+}
+.btn-edit:hover {
+    color: white;
+    background-color: #228527;
+}
+.btn-delete {
+    background-color: #f44336;
+}
+.btn-delete:hover {
+    color: white;
+    background-color: #d32f2f;
+}
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 0.9rem;
+}
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+.footer a {
+    color: #ffc75f;
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.modal-header {
+    background-color: #e91a5f; 
+    color: white;
+    border-bottom: none;
+}
+.form-group label {
+    display: block; /* que el label ocupe toda la línea */
+    margin-bottom: 0.5rem; /* separacion del label con el select */
+}
+
+.form-select {
+    display: block;
+    width: 100%; /* Asegurar que el selector ocupa todo el ancho */
+    margin-top: 0; /* Quitar margen adicional */
+}
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.modal-body {
+    padding: 30px;
+}
+.form-group label {
+    color: #424242;
+    font-weight: 300;
+}
+.form-control, .form-select {
+    background-color: #e9ecef;
+    border: none;
+    border-radius: 0;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: #495057;
+    padding: 10px;
+}
+.form-control::placeholder, .form-select {
+    color: #5a636b;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+.form-control:focus, .form-select:focus {
+    background-color: #e9ecef;
+    border: 3px solid #adb5bd;
+    outline: none;
+    box-shadow: none;
+}
+.btn-primary {
+    background-color: #e91a5f;
+    border: none;
+    border-radius: 0;
+    padding: 10px 20px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.btn-primary:hover {
+    background-color: #d41651;
+    transform: translateY(-3px);
+}
+
