@@ -8,9 +8,8 @@
     <link href="./css/recetasSuperadminStyles.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
-    <!-- Navbar -->
+    <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Mi Recetario</a>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -26,10 +25,10 @@
     <div class="container">
         <h2>Gestión de recetas</h2>
         
-        <!-- Aprobación de Recetas -->
+        <!-- modificacion de recetas -->
         <div class="card mb-4">
             <div class="card-header">
-                <h5>Aprobación de recetas</h5>
+                <h5>Modificación de recetas</h5>
             </div>
             <div class="card-body">
                 <table class="table table-striped">
@@ -43,12 +42,12 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Ensalada de Frutas</td>
-                            <td>Juan Pérez</td>
-                            <td>Postres</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td>
-                                <button class="btn btn-success btn-sm btn-approve">Aprobar</button>
-                                <button class="btn btn-danger btn-sm btn-reject">Rechazar</button>
+                                <button class="btn btn-success btn-sm btn-approve">Editar</button>
+                                <button class="btn btn-danger btn-sm btn-reject">Eliminar</button>
                             </td>
                         </tr>
                     </tbody>
@@ -56,132 +55,8 @@
             </div>
         </div>
 
-        <!-- Gestión de Categorías -->
-        <div class="card">
-            <div class="card-header">
-                <h5>Gestión de categorías</h5>
-            </div>
-            <div class="card-body">
-                <form id="categoryForm">
-                    <div class="form-group">
-                        <label for="categoryName">Nombre de la categoría</label>
-                        <input type="text" class="form-control" id="categoryName" placeholder="Ejemplo: Sopas">
-                    </div>
-                    <button type="submit" class="btn">Agregar categoría</button>
-                </form>
-                <hr>
-                <h6>Categorías existentes</h6>
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Entradas
-                        <button class="btn btn-sm btn-outline-secondary btn-edit-category">Editar</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Aprobar receta
-            $('.btn-approve').on('click', function () {
-                Swal.fire({
-                    title: '¿Aprobar receta?',
-                    text: "Esta receta se hará pública.",
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#28a745',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, aprobar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            '¡Aprobada!',
-                            'La receta ha sido aprobada.',
-                            'success'
-                        );
-                        // Aquí va la lógica de aprobación
-                    }
-                });
-            });
-
-            // Rechazar receta
-            $('.btn-reject').on('click', function () {
-                Swal.fire({
-                    title: '¿Rechazar receta?',
-                    text: "Esta receta no se hará pública.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: 'Sí, rechazar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            '¡Rechazada!',
-                            'La receta ha sido rechazada.',
-                            'error'
-                        );
-                        // Aquí va la lógica de rechazo
-                    }
-                });
-            });
-
-            // Agregar categoría
-            $('#categoryForm').on('submit', function (e) {
-                e.preventDefault();
-                const categoryName = $('#categoryName').val().trim();
-                if (categoryName) {
-                    Swal.fire({
-                        title: 'Categoría agregada',
-                        text: `La categoría "${categoryName}" ha sido agregada exitosamente.`,
-                        icon: 'success',
-                        confirmButtonColor: '#007bff'
-                    });
-                    $('#categoryName').val(''); // Limpiar el campo
-                    // Lógica para guardar la categoría
-                } else {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'Por favor, ingresa un nombre de categoría.',
-                        icon: 'error',
-                        confirmButtonColor: '#d33'
-                    });
-                }
-            });
-
-            // Editar categoría
-            $('.btn-edit-category').on('click', function () {
-                const currentCategory = $(this).closest('li').text().trim();
-                Swal.fire({
-                    title: 'Editar categoría',
-                    input: 'text',
-                    inputValue: currentCategory,
-                    showCancelButton: true,
-                    confirmButtonText: 'Guardar',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonColor: '#007bff',
-                    cancelButtonColor: '#6c757d',
-                    inputValidator: (value) => {
-                        if (!value) {
-                            return '¡El nombre de la categoría no puede estar vacío!';
-                        }
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            '¡Actualizada!',
-                            `La categoría se ha cambiado a "${result.value}".`,
-                            'success'
-                        );
-                        // Aquí va la lógica para actualizar la categoría
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="./js/recetasSA.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

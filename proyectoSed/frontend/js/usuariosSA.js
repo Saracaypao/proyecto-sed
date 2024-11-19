@@ -1,16 +1,15 @@
 fetch('http://localhost:3000/api/user/allUsers')
     .then(response => {
-        console.log('Respuesta del servidor:', response); // Verifica la respuesta completa
+        console.log('Respuesta del servidor:', response); // verifica la respuesta completa
         return response.json();
     })
     .then(data => {
-        console.log('Datos recibidos:', data); // Verifica los datos que recibes
-        // Verificar si la respuesta contiene usuarios
+        console.log('Datos recibidos:', data); // verifica los datos que estamos recibiendo
+        // verificar si la respuesta contiene usuarios
         if (data.usuarios && Array.isArray(data.usuarios)) {
             const container = document.getElementById('user-cards-container');
-            container.innerHTML = ''; // Limpiar las tarjetas existentes
+            container.innerHTML = ''; 
 
-            // Iterar sobre los usuarios y crear las tarjetas
             data.usuarios.forEach(user => {
                 const userCard = document.createElement('div');
                 userCard.classList.add('col-md-4', 'mb-4');
@@ -58,7 +57,7 @@ fetch('http://localhost:3000/api/user/allUsers')
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                deleteUser(userId); // Llamar a la función para eliminar el usuario
+                deleteUser(userId); 
             }
         });
     }
@@ -68,7 +67,6 @@ fetch('http://localhost:3000/api/user/allUsers')
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                // Agregar el token si usas autenticación basada en tokens
                 'Authorization': `Bearer ${localStorage.getItem('token')}` 
             }
         })
@@ -85,7 +83,6 @@ fetch('http://localhost:3000/api/user/allUsers')
                 text: data.mensaje
             });
     
-            // Eliminar la tarjeta del usuario en la interfaz
             const userCard = document.getElementById(`user-${userId}`);
             if (userCard) {
                 userCard.remove();
@@ -105,14 +102,14 @@ fetch('http://localhost:3000/api/user/allUsers')
     function submitNewUser(event) {
         event.preventDefault();
     
-        // Obtener los valores del formulario
+        // obteniendo los valores del formulario
         const nombre = document.getElementById('addUserName').value.trim();
         const correo = document.getElementById('addUserEmail').value.trim();
         const contrasena = document.getElementById('addUserPassword').value;
         const confirmarContrasena = document.getElementById('addUserConfirmPassword').value;
         const rol = document.getElementById('addUserRole').value === 'Administrador' ? 'admin' : 'user';
     
-        // Validar campos obligatorios
+        // validando campos obligatorios
         if (!nombre || !correo || !contrasena || !confirmarContrasena) {
             Swal.fire({
                 icon: 'error',
@@ -122,7 +119,7 @@ fetch('http://localhost:3000/api/user/allUsers')
             return;
         }
     
-        // Validar que las contraseñas coincidan
+        // validando que las contraseñas coincidan
         if (contrasena !== confirmarContrasena) {
             Swal.fire({
                 icon: 'error',
@@ -132,7 +129,7 @@ fetch('http://localhost:3000/api/user/allUsers')
             return;
         }
     
-        // Enviar los datos al backend
+        // enviando los datos al backend
         fetch('http://localhost:3000/api/user/newUser', {
             method: 'POST',
             headers: {
@@ -160,7 +157,7 @@ fetch('http://localhost:3000/api/user/allUsers')
                     text: data.mensaje,
                 });
     
-                // Verificar si el backend devuelve el usuario creado
+                // verificar si el backend devuelve el usuario creado
                 if (data.usuario) {
                     const container = document.getElementById('user-cards-container');
                     const userCard = document.createElement('div');
@@ -183,7 +180,6 @@ fetch('http://localhost:3000/api/user/allUsers')
     
                 reloadUserCards();
 
-                // Limpiar el formulario y cerrar el modal
                 document.getElementById('addUserForm').reset();
                 $('#addUserModal').modal('hide');
             })
@@ -198,35 +194,33 @@ fetch('http://localhost:3000/api/user/allUsers')
     }
 
     function editUser(userId) {
-        // Obtener los datos del usuario desde el DOM o hacer una solicitud al backend
+
         const userCard = document.querySelector(`#user-${userId}`);
         const nombre = userCard.querySelector('.card-title').innerText;
         const correo = userCard.querySelector('.card-text').innerText;
         const rol = userCard.querySelector('.badge').innerText;
     
-        // Llenar el modal con los datos del usuario
         document.getElementById('editUserName').value = nombre;
         document.getElementById('editUserEmail').value = correo;
         document.getElementById('editUserRole').value = rol;
     
-        // Guardar el ID del usuario como atributo en el botón de guardar cambios
+        // guardar el id del usuario como atributo en el boton de guardar cambios
         const saveButton = document.querySelector('#editUserModal .btn-primary');
         saveButton.setAttribute('data-user-id', userId);
     
-        // Mostrar el modal
         $('#editUserModal').modal('show');
     }
 
     function submitEditUser(event) {
         event.preventDefault();
     
-        // Obtener los datos del formulario
+        // obteniendo los datos del formulario
         const userId = document.querySelector('#editUserModal .btn-primary').getAttribute('data-user-id');
         const nombre = document.getElementById('editUserName').value.trim();
         const correo = document.getElementById('editUserEmail').value.trim();
         const rol = document.getElementById('editUserRole').value;
     
-        // Validar los campos
+        // Validando los campos
         if (!nombre || !correo) {
             Swal.fire({
                 icon: 'error',
@@ -236,7 +230,7 @@ fetch('http://localhost:3000/api/user/allUsers')
             return;
         }
     
-        // Enviar los datos al backend
+        // enviando los datos al backend
         fetch(`http://localhost:3000/api/user/editUser/${userId}`, {
             method: 'PUT',
             headers: {
@@ -258,7 +252,6 @@ fetch('http://localhost:3000/api/user/allUsers')
                     text: data.mensaje,
                 });
     
-                // Actualizar la tarjeta del usuario en el DOM
                 const userCard = document.querySelector(`#user-${userId}`);
                 userCard.querySelector('.card-title').innerText = nombre;
                 userCard.querySelector('.card-text').innerText = correo;
@@ -266,7 +259,6 @@ fetch('http://localhost:3000/api/user/allUsers')
     
                 reloadUserCards();
 
-                // Cerrar el modal
                 $('#editUserModal').modal('hide');
             })
             .catch(error => {
@@ -289,9 +281,9 @@ fetch('http://localhost:3000/api/user/allUsers')
             })
             .then(data => {
                 const container = document.getElementById('user-cards-container');
-                container.innerHTML = ''; // Limpiar las tarjetas existentes
+                container.innerHTML = ''; // limpiar las tarjetas existentes
     
-                // Verificar si la respuesta contiene usuarios
+                // verificar si la respuesta contiene usuarios
                 if (data.usuarios && Array.isArray(data.usuarios)) {
                     data.usuarios.forEach(user => {
                         const userCard = document.createElement('div');
