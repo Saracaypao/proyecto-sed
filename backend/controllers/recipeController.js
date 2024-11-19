@@ -181,7 +181,6 @@ controller.obtenerRecetaPorId = async (req, res) => {
 };
 
 
-// Función para buscar recetas por filtros
 controller.buscarRecetasPorFiltro = async (req, res) => {
     const { nombreReceta, ingredientes, categoria } = req.query;
     const filtro = {};
@@ -191,12 +190,26 @@ controller.buscarRecetasPorFiltro = async (req, res) => {
     if (categoria) filtro.categoria = { $regex: new RegExp(categoria, 'i') };
 
     try {
-        const recetas = await Receta.find(filtro);
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-           .end(JSON.stringify({ recetas }));
+        const recetas = await Receta.find(filtro).populate('autor', 'nombre');
+        
+        // Verificar si cada receta tiene los campos completos
+        const recetasConDatosCompletos = recetas.map(receta => ({
+            id: receta._id,
+            titulo: receta.nombreReceta,
+            ingredientes: receta.ingredientes.join(', '),  // Asumiendo que ingredientes es un array
+            preparacion: receta.preparacion || 'Sin preparación',  // Asegúrate de que preparacion tenga valor por defecto
+            autor: receta.autor ? receta.autor.nombre : 'Desconocido',
+            categoria: receta.categoria || 'Sin categoría',  // Si la categoría no existe
+            descripcion: receta.descripcion || 'Sin descripción', 
+            porciones: receta.porciones || 'Sin porciones', 
+        }));
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ recetas: recetasConDatosCompletos }));
     } catch (error) {
-        res.writeHead(500, { 'Content-Type': 'application/json' })
-           .end(JSON.stringify({ mensaje: 'Error al buscar recetas', error: error.message }));
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ mensaje: 'Error al buscar recetas', error: error.message }));
     }
 };
 

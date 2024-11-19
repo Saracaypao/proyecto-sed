@@ -175,7 +175,7 @@ body {
     font-weight: bold;
     border: 1px solid #646464;
     border-radius: 0px;
-    padding: 8px 12px;
+    padding: 8px 14px;
     transition: background-color 0.3s, color 0.3s;
 }
 .pagination li a:hover {
