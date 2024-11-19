@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // funcion para buscar recetas
     const buscarRecetas = async (termino) => {
         try {
             const token = localStorage.getItem('token');
@@ -77,21 +76,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
             const data = await respuesta.json();
     
-            // asegurar consistencia en las propiedades
+            // Asegurar consistencia en las propiedades
             const recetasFormateadas = (data.recetas || []).map(receta => ({
-                id: receta._id || receta.id,
-                titulo: receta.nombreReceta || 'Sin título',
+                id: receta.id || receta._id,  // Usar id o _id según corresponda
+                titulo: receta.titulo || 'Sin título',
                 categoria: receta.categoria || 'Sin categoría',
                 descripcion: receta.descripcion || 'Sin descripción',
                 porciones: receta.porciones || 'N/A',
-                autor: receta.autor ? receta.autor.nombre : 'Desconocido',
+                autor: receta.autor || 'Desconocido',  // Asegúrate de que autor tenga un valor predeterminado
             }));
     
             configurarPaginacion(recetasFormateadas);
         } catch (error) {
             console.error('Error en la búsqueda:', error.message);
         }
-    };    
+    };     
 
     // al hacer clic en el botón de búsqueda
     if (botonBusqueda) {

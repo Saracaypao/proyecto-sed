@@ -196,7 +196,7 @@ async function eliminarReceta() {
                             text: 'La receta ha sido eliminada exitosamente.',
                             confirmButtonText: 'Aceptar'
                         }).then(() => {
-                            window.location.href = 'recetas.html'; // Redirigir después de confirmar
+                            volver() // modificar esto
                         });
                     } else {
                         throw new Error('No se pudo eliminar la receta');

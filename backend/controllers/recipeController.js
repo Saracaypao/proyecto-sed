@@ -195,7 +195,7 @@ controller.buscarRecetasPorFiltro = async (req, res) => {
         // Verificar si cada receta tiene los campos completos
         const recetasConDatosCompletos = recetas.map(receta => ({
             id: receta._id,
-            titulo: receta.nombreReceta,
+            titulo: receta.nombreReceta || 'Sin título',
             ingredientes: receta.ingredientes.join(', '),  // Asumiendo que ingredientes es un array
             preparacion: receta.preparacion || 'Sin preparación',  // Asegúrate de que preparacion tenga valor por defecto
             autor: receta.autor ? receta.autor.nombre : 'Desconocido',
