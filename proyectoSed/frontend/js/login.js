@@ -2,7 +2,7 @@
 class Auth {
     async logIn(correo, contrasena) {
         try {
-            const response = await fetch('http://localhost:3000/logIn', {
+            const response = await fetch('http://192.168.29.130:3000/logIn', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ correo, contrasena })
