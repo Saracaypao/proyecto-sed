@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="./css/dashboardAdminStyles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+    <script src="./js/dashboardAdmin.js"></script>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Mi Recetario</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link active" href="dashboardAdmin.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="recetasAdmin.html">Recetas</a></li>
+                <li class="nav-item"><a class="nav-link" href="landingpage.html">Salir</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Bienvenido, Administrador</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6 mb-4">
+                <div class="stat-card bg-recetas">
+                    <h5>Total de recetas</h5>
+                    <h3 id="totalRecetas"></h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- opciones de administración -->
+        <div class="row justify-content-center">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Moderar recetas</h5>
+                        <p class="card-text">Edita o elimina las recetas subidas por los usuarios.</p>
+                        <a href="recetasAdmin.html" class="btn btn-primary">Ir a moderación</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

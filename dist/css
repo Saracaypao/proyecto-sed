@@ -1,0 +1,111 @@
+@charset "UTF-8";/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */@import url(https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap);body{background-color:#f0f8ff;font-family:'Nunito Sans',sans-serif}.header{background-color:#e91a5f;color:#fff;padding:20px 0}.header h1{margin:0;text-transform:uppercase}.navbar{margin-top:10px}.navbar-nav .nav-item .nav-link{color:#fff;transition:background-color .3s,color .3s;padding:8px 15px;border-radius:5px}.navbar-nav .nav-item .nav-link:hover{background-color:#ff6f91;color:#fffbe7}.section-title{font-size:2rem;margin-bottom:20px;color:#c74e77;text-align:start}.about-section{padding:40px 20px;margin-top:30px;box-shadow:0 4px 8px rgba(0,0,0,.1);text-align:left}.about-section p{font-size:1.2rem;line-height:1.6;margin:15px 0;color:#424242}.feature-card{background:linear-gradient(135deg,#ff9671,#ffc75f);border-radius:10px;color:#fff;padding:20px;margin:10px;height:250px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .3s,box-shadow .3s;box-shadow:0 4px 10px rgba(0,0,0,.15)}.feature-card:hover{transform:translateY(-5px);box-shadow:0 6px 15px rgba(0,0,0,.2)}.feature-icon{font-size:2rem;margin-bottom:10px;text-align:center}.feature-title{font-size:1.5rem;font-weight:700;text-align:center}.feature-description{font-size:1rem;opacity:.9;text-align:center}.footer{background-color:#343a40;color:#fff;padding:20px 0;text-align:center}.footer a{color:#ffc75f;text-decoration:none}.footer a:hover{text-decoration:underline}/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */body{background-color:#f2f2f2;font-family:'Nunito Sans',sans-serif}.header{background-color:#e91a5f;color:#fff;padding:20px 0}.header h1{margin:0;text-transform:uppercase}.navbar{margin-top:10px}.navbar-nav .nav-item .nav-link{color:#fff;transition:background-color .3s,color .3s;padding:8px 15px;border-radius:5px}.navbar-nav .nav-item .nav-link:hover{background-color:#ff6f91;color:#fffbe7}.form-section{margin:50px auto;padding:30px;max-width:800px;animation:fadeIn 1s ease-out}.form-section h2{text-transform:uppercase;font-size:1.7rem;margin-bottom:20px;color:#080304b9;text-align:start}.form-group label{color:#424242;font-weight:300}.form-control{background-color:#e9ecef;border:none;border-radius:0;font-weight:300;font-size:.9rem;color:#495057;padding:10px;transition:background-color .2s}.form-control::placeholder{color:#5a636b;font-weight:300;font-size:.9rem}.form-control-file{background-color:#e9ecef;padding:6px 12px;border-radius:0;color:#5a636b;font-size:.9rem;outline:0}.form-control-file::file-selector-button{border:0 solid #ced4da;padding:6px 12px;margin-right:10px;background-color:#e9ecef;color:#5a636b;border-radius:0;cursor:pointer;transition:background-color .2s}.form-control-file:focus,.form-control:focus{background-color:#e9ecef;border:3px solid #adb5bd;outline:0;box-shadow:none;transition:none}.btn-primary{background-color:#e91a5f;border:none;border-radius:0;padding:10px 20px;transition:background-color .3s,transform .2s}.btn-primary:hover{background-color:#d41651;transform:translateY(-3px)}.footer{background-color:#343a40;color:#fff;padding:20px 0;text-align:center}.footer a{color:#ffc75f;text-decoration:none}.footer a:hover{text-decoration:underline}.form-select{--bs-form-select-bg-img:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");display:block;width:100%;padding:.75rem 4.5rem .75rem 1.5rem;font-size:.9rem;font-weight:300;line-height:1.5;color:#5a636b;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:#e9ecef;background-image:var(--bs-form-select-bg-img),var(--bs-form-select-bg-icon,none);background-repeat:no-repeat;background-position:right 1.5rem center;background-size:16px 12px;border:none;border-radius:0;outline:0;box-shadow:none;transition:background-color .2s}.form-select:focus{background-color:#e9ecef;border:3px solid #adb5bd;outline:0;box-shadow:none;transition:none}/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */body{font-family:"Nunito Sans",sans-serif;background-color:#f4f6f9}.navbar{background-color:#1a1a1a!important;box-shadow:0 4px 12px rgba(0,0,0,.1)}.navbar-brand{text-transform:uppercase;font-weight:700}.container{margin-top:40px}h2{font-weight:700;color:#343a40;text-align:start;margin-bottom:30px}.card{border:none;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.15);transition:transform .2s ease-in-out}.card:hover{transform:scale(1.05)}.stat-card{padding:30px;background-color:#343a40;color:#fff;border-radius:12px;text-align:center;transition:transform .2s ease-in-out}.stat-card h5{font-weight:500;font-size:1.2rem}.stat-card h3{font-weight:700;font-size:2.5rem}.bg-recetas{background-color:#1f2d3d}.bg-categorias{background-color:#4e5d6c}.btn-primary{background-color:#1a1a1a;border:none}.btn-primary:hover{background-color:#343a40}/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */body{font-family:"Nunito Sans",sans-serif;background-color:#f4f6f9}.navbar{background-color:#1a1a1a!important;box-shadow:0 4px 12px rgba(0,0,0,.1)}.navbar-brand{text-transform:uppercase;font-weight:700}.container{margin-top:40px}h2{font-weight:700;color:#343a40;text-align:start;margin-bottom:30px}.card{border:none;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.15);transition:transform .2s ease-in-out}.card:hover{transform:scale(1.05)}.stat-card{padding:30px;background-color:#343a40;color:#fff;border-radius:12px;text-align:center;transition:transform .2s ease-in-out}.stat-card h5{font-weight:500;font-size:1.2rem}.stat-card h3{font-weight:700;font-size:2.5rem}.bg-recetas{background-color:#1f2d3d}.bg-categorias{background-color:#4e5d6c}.btn-primary{background-color:#1a1a1a;border:none}.btn-primary:hover{background-color:#343a40}.chart{max-width:800px;height:450px;background-color:#fff;border-radius:10px;padding:20px;margin:20px auto;box-shadow:0 2px 15px rgba(0,0,0,.1);overflow:hidden}canvas{width:100%!important;height:auto}/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */body{background-color:#f2f2f2;font-family:"Nunito Sans",sans-serif}.header{background-color:#e91a5f;color:#fff;padding:20px 0;margin-bottom:0}.header h1{margin:0;font-family:"Nunito Sans",sans-serif;text-transform:uppercase}.navbar{margin-top:10px;font-family:"Nunito Sans",sans-serif}.navbar-nav .nav-item .nav-link{color:#fff;transition:background-color .3s,color .3s;padding:8px 15px;border-radius:5px}.navbar-nav .nav-item .nav-link:hover{background-color:#ff6f91;color:#fffbe7}.carousel{margin-top:0}h2{color:#080304b9}.card{margin-bottom:20px;border-radius:15px;overflow:hidden;border:none;transition:transform .3s;background-color:#fff;box-shadow:0 4px 10px rgba(0,0,0,.1)}.card:hover{transform:translateY(-12px);box-shadow:0 8px 20px rgba(0,0,0,.2)}.card img{height:220px;object-fit:cover}.card-title{color:#c74e77}.card-text{color:#555}.footer{background-color:#343a40;color:#fff;padding:20px 0;text-align:center;width:100%;position:relative}.footer a{color:#ffc75f;text-decoration:none}.footer a:hover{text-decoration:underline}.btn-primary{background-color:#e91a5f;border:none;border-radius:0}.btn-primary:hover{background-color:#ff6f91}/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */body{font-family:"Nunito Sans",sans-serif}.navbar{background-color:#1a1a1a!important}.nav-link,.navbar-brand,h1{font-family:"Nunito Sans",sans-serif;text-transform:uppercase}.carousel-item{height:100vh;background-size:cover;background-position:center}.overlay{background:rgba(0,0,0,.5);position:absolute;top:0;left:0;width:100%;height:100%}.hero-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;text-align:center}.btn-success{background-color:#e91a5f!important;border-color:#e91a5f!important;border-radius:0}.btn-outline-light{border-radius:0}.form-control{background-color:#f8f9fa}.modal-content{border-radius:.5rem;padding:1.5rem;max-width:500px;margin:auto;min-height:500px;display:flex;flex-direction:column}.modal-content form{display:flex;flex-direction:column;gap:1rem;flex-grow:1}.modal-content .form-group{margin-bottom:.5rem}.modal-content .btn{align-self:stretch;margin-top:auto}.modal-content h2{text-transform:uppercase}.options{display:flex;justify-content:space-between;font-size:.9rem;color:#555}.options a{color:#e91a5f;text-decoration:none}.options a:hover{text-decoration:underline}.form-control{background-color:#e9ecef;border:none;border-radius:0;font-weight:300;font-size:.9rem;color:#495057;padding:10px}.form-control::placeholder{color:#adb5bd;font-weight:300;font-size:.9rem;font-family:sans-serif}.rs-link{color:#ec4d82!important}.rs-link:hover{text-decoration:underline}/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */body{background-color:#f3f4f6;font-family:Poppins,sans-serif;color:#333}.header{background-color:#eb0954;color:#fff;padding:30px;text-align:center;position:relative}.header h1{margin:0;font-size:2.5rem;font-weight:700}.btn-back{position:absolute;left:20px;top:20px;background-color:transparent;color:#fff;border:none;font-size:1.5rem}.btn-back i{margin-right:5px}.recipe-details{background-color:#fff;border-radius:12px;padding:30px;margin-top:20px;box-shadow:0 4px 12px rgba(0,0,0,.1);animation:fadeIn 1s}.recipe-title{color:#ff6f61;font-size:2rem;font-weight:600}.ingredients-list,.instructions-list{list-style:none;padding-left:0;font-size:1.1rem}.ingredients-list li::before,.instructions-list li::before{content:"\f058";font-family:'Font Awesome 5 Free';font-weight:900;color:#ff6f61;margin-right:10px}.btn-delete,.btn-edit{color:#fff;border-radius:5px;padding:10px 20px;font-size:1rem;margin-top:10px}.btn-edit{background-color:#4caf50}.btn-edit:hover{color:#fff;background-color:#228527}.btn-delete{background-color:#f44336}.btn-delete:hover{color:#fff;background-color:#d32f2f}.footer{background-color:#343a40;color:#fff;padding:20px 0;text-align:center;margin-top:50px;font-size:.9rem}.footer{background-color:#343a40;color:#fff;padding:20px 0;text-align:center}.footer a{color:#ffc75f;text-decoration:none}.footer a:hover{text-decoration:underline}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.modal-header{background-color:#e91a5f;color:#fff;border-bottom:none}.form-group label{display:block;margin-bottom:.5rem}.form-select{display:block;width:100%;margin-top:0}.modal-title{font-size:1.5rem;font-weight:600}.modal-body{padding:30px}.form-group label{color:#424242;font-weight:300}.form-control,.form-select{background-color:#e9ecef;border:none;border-radius:0;font-weight:300;font-size:.9rem;color:#495057;padding:10px}.form-control::placeholder,.form-select{color:#5a636b;font-weight:300;font-size:.9rem}.form-control:focus,.form-select:focus{background-color:#e9ecef;border:3px solid #adb5bd;outline:0;box-shadow:none}.btn-primary{background-color:#e91a5f;border:none;border-radius:0;padding:10px 20px;transition:background-color .3s,transform .2s}.btn-primary:hover{background-color:#d41651;transform:translateY(-3px)}/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */body{font-family:"Nunito Sans",sans-serif;background-color:#f4f6f9}.navbar{background-color:#1a1a1a!important}.nav-link,.navbar-brand{color:#fff}.navbar-brand{text-transform:uppercase}.container{margin-top:40px}h2{font-weight:700;color:#343a40;text-align:start;margin-bottom:30px}.card{border:none;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.15);transition:transform .2s ease-in-out;background-color:#fff}.card:hover{transform:scale(1.05)}.table thead th{background-color:#1f2d3d;color:#fff}.btn-add-category{background-color:#4e5d6c;color:#fff;border-radius:5px;margin-bottom:20px}.btn-add-category:hover{background-color:#343a40}.btn-danger,.btn-success,.btn-warning{border:none;color:#fff}.btn-warning{background-color:#ffc107}.btn-warning:hover{background-color:#e0a800}.btn-danger{background-color:#dc3545}.btn-danger:hover{background-color:#c82333}.btn-success{background-color:#28a745}.btn-success:hover{background-color:#218838}/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */body{background-color:#f2f2f2;font-family:'Nunito Sans',sans-serif}.header{background-color:#e91a5f;color:#fff;padding:20px 0}.header h1{margin:0;font-family:'Nunito Sans',sans-serif;text-transform:uppercase}.navbar{margin-top:10px;font-family:'Nunito Sans',sans-serif}.navbar-nav .nav-item .nav-link{color:#fff;transition:background-color .3s,color .3s;padding:8px 15px;border-radius:5px}.navbar-nav .nav-item .nav-link:hover{background-color:#ff6f91;color:#fffbe7}.search-section{margin:40px 0;text-align:center}.search-section input{width:350px;border-radius:0;padding:12px;border:1px solid #ff9671;height:50px}.search-section button{margin-left:10px;border:none;background-color:#ff9671;border-radius:0;color:#fff;padding:12px 25px;height:50px;text-transform:uppercase}.search-section button:hover{background-color:#fa7f53;transform:scale(1.05);color:#fff}.search-section button:focus{border:3px solid #fa7f53;outline:0;box-shadow:none;transition:none}.search-section input:focus{width:350px;border-radius:0;padding:12px;border:2px solid #fa7f53;outline:0;box-shadow:none;transition:none}.category-section{margin-top:30px;text-align:center}.category-section h4{font-size:1.8rem;margin-bottom:15px;color:#080304b9}.category-button{margin:5px;border:none;color:#fff;background-color:#ff9671;border-radius:0;width:150px;height:50px;transition:background-color .3s,transform .3s;display:flex;align-items:center;justify-content:center}.category-button:hover{background-color:#ee754a;transform:scale(1.05);color:#fff}.category-button:focus{border:3px solid #fa7f53;outline:0;box-shadow:none;transition:none}.card{margin-bottom:20px;border-radius:15px;overflow:hidden;border:none;transition:transform .3s;background-color:#fff;box-shadow:0 4px 10px rgba(0,0,0,.1)}.card:hover{transform:translateY(-12px);box-shadow:0 8px 20px rgba(0,0,0,.2)}.card img{height:220px;object-fit:cover}.card-title{color:#c74e77}.card-text{color:#555}.btn-primary{background-color:#e91a5f;border:none;border-radius:0}.btn-primary:hover{background-color:#ff6f91}.btn-primary:focus{transform:none;transition:none;background-color:#eb0954;box-shadow:none}.footer{background-color:#343a40;color:#fff;padding:20px 0;text-align:center;width:100%;position:relative}.footer a{color:#ffc75f;text-decoration:none}.footer a:hover{text-decoration:underline}.pagination{margin-top:20px}.pagination li a{color:#646464;font-weight:700;border:1px solid #646464;border-radius:0;padding:8px 14px;transition:background-color .3s,color .3s}.pagination li a:hover{background-color:#646464;color:#fff}.pagination li.active a{background-color:#646464;color:#fff;border-color:#646464}/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */body{font-family:"Nunito Sans",sans-serif}.navbar{background-color:#1a1a1a!important}.nav-link,.navbar-brand{color:#fff}.navbar-brand{text-transform:uppercase}.container{margin-top:30px}h2{font-weight:700;color:#343a40;text-align:start;margin-bottom:20px}.card-header{background-color:#1f2d3d;color:#fff}#categoryForm{background-color:#4e5d6c;padding:20px;border-radius:8px}#categoryForm .form-group label{color:#fff}#categoryForm .form-control{background-color:#fff}#categoryForm button{background-color:#ffc107;border-color:#ffc107;color:#fff}#categoryForm button:hover{background-color:#e0a800;border-color:#e0a800}.modal-header{background-color:#343a40;color:#fff}.custom-save-btn{background-color:#1f2d3d;color:#fff;border:none}.custom-save-btn:hover{background-color:#2c3e50;color:#fff}/*!
+ * Bootswatch v5.3.3 (https://bootswatch.com)
+ * Theme: lux
+ * Copyright 2012-2024 Thomas Park
+ * Licensed under MIT
+ * Based on Bootstrap
+*//*!
+ * Bootstrap  v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */body{font-family:"Nunito Sans",sans-serif;background-color:#f4f6f9}.navbar{background-color:#1a1a1a!important}.nav-link,.navbar-brand{color:#fff}.navbar-brand{text-transform:uppercase}.container{margin-top:30px}h2{font-weight:700;color:#343a40;text-align:start;margin-bottom:20px}.btn-action{margin-right:5px}.card{border:none;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.15);transition:transform .3s ease-in-out;background-color:#4e5d6c;color:#fff}.card:hover{transform:scale(1.05)}.card-body h5{color:#ffc107;font-size:1.3rem}.card-text{color:#d1d9e0}.btn-primary{background-color:#1a1a1a;border:none}.btn-primary:hover{background-color:#343a40}.btn-add-user{background-color:#1f2d3d;color:#fff;border:none}.btn-add-user:hover{background-color:#2c3e50;color:#fff}.modal-header{background-color:#343a40;color:#fff}.modal-content{border-radius:12px}.modal-footer .btn-primary{background-color:#1a1a1a;border:none}

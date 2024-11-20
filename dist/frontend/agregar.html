@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar receta - Mi recetario</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href= "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="./css/agregarStyles.css" rel="stylesheet">  
+</head>
+    <script src="./js/login.js"></script>
+    <script src="./js/agregar.js"></script>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<header class="header">
+    <div class="container d-flex flex-column align-items-center">
+        <h1 class="text-center mb-0">Mi recetario</h1>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="recetas.html"><i class="fas fa-utensils"></i> Recetas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="agregar.html"><i class="fas fa-plus-circle"></i> Agregar receta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="acerca.html"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                    <li class="nav-item"><a class="nav-link" href="landingpage.html"><i class="fas fa-sign-in-alt"></i> salir</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <div class="form-section">
+        <h2>Agregar nueva receta</h2>
+        <div id="newRecipeMessage"></div>
+        <form>
+            <div class="form-group">
+                <label for="nombreReceta">Nombre de la receta</label>
+                <input type="text" class="form-control" id="nombreReceta" placeholder="Escribe el nombre de la receta" required>
+            </div>
+            <div class="form-group">
+                <label for="ingredientes">Ingredientes de la receta</label>
+                <textarea class="form-control" id="ingredientes" rows="4" placeholder="Lista de ingredientes" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción de la receta</label>
+                <textarea class="form-control" id="descripcion" rows="4" placeholder="Descripción" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="preparacion">Preparación de la receta</label>
+                <textarea class="form-control" id="preparacion" rows="4" placeholder="Preparacion" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="porciones">Porciones de la receta</label>
+                <input type="text" class="form-control" id="porciones" placeholder="Escribe las porciones/cantidad a obtener de la receta" required>
+            </div>
+            <div class="form-group">
+                <label for="categoria" >Categoría de la receta</label>
+                <select class="form-select" id="categoria">
+                  <option>Entradas</option>
+                  <option>Platos principales</option>
+                  <option>Complementos</option>
+                  <option>Bebidas</option>
+                  <option>Postres</option>
+                </select>
+              </div>
+              
+            <button type="submit" class="btn btn-primary d-block mx-auto">Agregar receta</button>
+        </form>
+    </div>
+</div>
+
+<footer class="footer mt-5">
+    <p>&copy; 2024 Mi recetario. Todos los derechos reservados.</p>
+    <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
