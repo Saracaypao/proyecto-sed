@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="css.css" rel="stylesheet">
+</head>
+<script src="./js/dashboardSA.js"></script>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Mi Recetario</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link active" href="dashboardSuperAdmin.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="usuariosSuperAdmin.html">Usuarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="recetasSuperAdmin.html">Recetas</a></li>
+                <li class="nav-item"><a class="nav-link" href="landingpage.html">Salir</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Bienvenido, Super Administrador</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="stat-card bg-recetas">
+                    <h5>Total de usuarios</h5>
+                    <h3 id="totalUsuarios"></h3> <!-- Aquí se actualizará el total de usuarios -->
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="stat-card bg-categorias">
+                    <h5>Total de recetas</h5>
+                    <h3 id="totalRecetas"></h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- opciones de superadministración -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gestionar usuarios</h5>
+                        <p class="card-text">Agrega, edita o elimina usuarios para gestionar las cuentas en la plataforma.</p>
+                        <a href="usuariosSuperAdmin.html" class="btn btn-primary">Ir a usuarios</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gestionar categorías</h5>
+                        <p class="card-text">Agrega, edita o elimina recetas en la plataforma para organizar y actualizar el contenido del recetario.</p>
+                        <a href="recetasSuperAdmin.html" class="btn btn-primary">Ir a recetas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- gráfico de categorías -->
+        <div class="d-flex justify-content-center">
+            <div class="chart">
+                <h5 class="text-center">Cantidad de recetas por categoría</h5>
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // ejemplo de gráfico de "cantidad de recetas por categoría"
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+        const categoryChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Postres', 'Entradas', 'Platos Principales', 'Complementos', 'Bebidas'],
+                datasets: [{
+                    data: [300, 150, 200, 170, 55],
+                    backgroundColor: ['#ffc107', '#28a745', '#007bff', '#ff6f91', '#c74e77']
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

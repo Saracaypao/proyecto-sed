@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
 "scripts": {
-  "build:js": "babel proyectoSed/frontend/js --out-dir dist/js --presets=@babel/preset-env",
-  "build:css": "cleancss -o dist/css/ proyectoSed/frontend/css/*.css",
-  "copy:html": "copyfiles -u 1 proyectoSed/frontend/**/*.html dist",
-  "copy:assets": "copyfiles -u 1 proyectoSed/frontend/assets/**/* dist/assets",
+  "build:js": "babel proyectoSed/frontend/js --out-dir proyectoSed/dist/js --presets=@babel/preset-env",
+  "build:css": "cleancss -o proyectoSed/dist/css/ proyectoSed/frontend/css/*.css",
+  "copy:html": "copyfiles -u 2 proyectoSed/frontend/**/*.html proyectoSed/dist",
+  "copy:assets": "copyfiles -u 2 proyectoSed/frontend/assets/**/* proyectoSed/dist/assets",
   "build": "npm run build:js && npm run build:css && npm run copy:html && npm run copy:assets"
 },
+
   "keywords": [],
   "author": "",
   "license": "ISC",

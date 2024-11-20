@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receta Completa - Mi Recetario</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="css.css" rel="stylesheet">
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<header class="header">
+    <button class="btn-back" onclick="volver()">
+        <i class="fas fa-arrow-left"></i> Regresar
+    </button>    
+    <h1>Receta completa</h1>
+</header>
+
+<div class="container">
+    <div class="recipe-details">
+        <h1 id="nombreReceta" class="recipe-title">Nombre de la receta</h1>
+        <hr>
+
+        <h5><strong>Categoría</strong> </h5>
+        <p id="categoria" class="entradas-text"></p>
+        <hr>
+        
+        <h5><strong>Descripción</strong></h5>
+        <p id="descripcion" class="description-text"></p>
+        <hr>
+
+        <h5><strong>Porciones</strong> </h5>
+        <p id="porciones" class="porciones-text"></p>
+        <hr>
+        
+        <h5><strong>Ingredientes</strong></h5>
+        <ul id="ingredientes" class="ingredients-list"></ul>
+        <hr>
+        
+        <h5><strong>Instrucciones</strong></h5>
+        <p id="preparacion" class="instructions-text"></p>
+        <hr>
+
+        <h5><strong>Autor:</strong> <span id="autor">Nombre del autor</span></h5>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-edit" data-toggle="modal" data-target="#editRecipeModal">
+                <i class="fas fa-edit"></i> Editar Receta
+            </button>
+            <button class="btn btn-delete ml-2" id="deleteRecipeBtn">
+                <i class="fas fa-trash-alt"></i> Eliminar Receta
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- modal para editar receta -->
+<div class="modal fade" id="editRecipeModal" tabindex="-1" aria-labelledby="editRecipeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editRecipeModalLabel">Editar receta</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editRecipeForm">
+                    <div class="form-group">
+                        <label for="editNombreReceta">Nombre de la receta</label>
+                        <input type="text" class="form-control" id="editNombreReceta" placeholder="Escribe el nombre de la receta" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editIngredientes">Ingredientes de la receta</label>
+                        <textarea class="form-control" id="editIngredientes" rows="4" placeholder="Lista de ingredientes" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="editDescripcion">Descripción de la receta</label>
+                        <textarea class="form-control" id="editDescripcion" rows="4" placeholder="Descripción" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="editInstrucciones">Preparación de la receta</label>
+                        <textarea class="form-control" id="editInstrucciones" rows="4" placeholder="Preparación" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPorciones">Porciones de la receta</label>
+                        <input type="text" class="form-control" id="editPorciones" placeholder="Escribe las porciones/cantidad a obtener de la receta" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCategoria">Categoría de la receta</label>
+                        <select class="form-select" id="editCategoria" required>
+                            <option value="Entradas">Entradas</option>
+                            <option value="Platos principales">Platos principales</option>
+                            <option value="Complementos">Complementos</option>
+                            <option value="Bebidas">Bebidas</option>
+                            <option value="Postres">Postres</option>
+                        </select>
+                    </div>                    
+                    <button type="submit" class="btn btn-primary d-block mx-auto">Actualizar receta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2024 Mi Recetario. Todos los derechos reservados.</p>
+    <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="./js/recetaCompleta.js"></script>
+</body>
+</html>

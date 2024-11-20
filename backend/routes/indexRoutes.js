@@ -24,6 +24,9 @@ const apiRouter = (req, res) => {
     else if (pathname.startsWith('/logIn') || pathname.startsWith('/whoAmI')) {
         authRoutes(req, res); // Delegar a las rutas de autenticación
     }
+    else if (pathname.startsWith('/') || pathname.startsWith('/')) {
+        res.end(JSON.stringify({ error: 'Ruta no encontrada' }));
+    }
     else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Ruta no encontrada' }));
