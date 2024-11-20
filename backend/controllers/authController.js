@@ -55,7 +55,6 @@ const whoAmI = async (req, res) => {
     }
 };
 
-// para obtener el rol del usuario
 const getUserRole = async (req, res) => {
     try {
         const { _id, roles } = req.user;

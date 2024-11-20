@@ -1,6 +1,6 @@
 require('dotenv').config();
 const http = require('http');
-const cors = require('cors'); // Importar CORS
+const cors = require('cors'); 
 const { dbConnection } = require('./services/db');
 const apiRouter = require('./routes/indexRoutes');
 
@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 const allowedOrigins = ['http://127.0.0.1:80', 'http://localhost:80', 'http://192.168.29.130:80', 'http://192.168.29.130:443', '*']; // Asegúrate de que esta lista sea correcta
 
 const server = http.createServer(async (req, res) => {
-    // Habilitar CORS de forma centralizada
+
     const origin = req.headers.origin;
             //res.setHeader('Access-Control-Allow-Origin', origin);
             res.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,7 +27,7 @@ const server = http.createServer(async (req, res) => {
                 return;
             }
 
-    apiRouter(req, res); // Delegar el manejo de rutas al apiRouter
+    apiRouter(req, res);
 });
 
 dbConnection()

@@ -7,7 +7,6 @@ const ROLES = require('../data/roles.js');
 const middlewares = {};
 const PREFIX = 'Bearer';
 
-// Middleware para procesar el JSON en el body de la solicitud
 middlewares.parseJSONBody = (req, res, next) => {
     let body = '';
     req.on('data', chunk => {
@@ -25,7 +24,6 @@ middlewares.parseJSONBody = (req, res, next) => {
     });
 };
 
-// Middleware de autenticación
 middlewares.authentication = async (req, res, next) => {
     try {
         const { authorization } = req.headers;
@@ -77,7 +75,6 @@ middlewares.authentication = async (req, res, next) => {
     }
 };
 
-// Middleware de autorización
 middlewares.authorization = (requiredRoles = [ROLES.SYSADMIN]) => {
     return (req, res, next) => {
         try {

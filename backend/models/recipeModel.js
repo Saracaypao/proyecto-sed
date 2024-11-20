@@ -51,7 +51,6 @@ const recetaSchema = new Schema({
     },
 });
 
-// Middleware para actualizar la fecha de actualización
 recetaSchema.pre('save', function (next) {
     this.actualizadoEn = Date.now();
     next();

@@ -6,48 +6,47 @@ const { authentication, authorization } = require('../middlewares/authMiddleware
 const categoryRoutes = (req, res) => {
     const parsedUrl = url.parse(req.url, true);
 
-    // Ruta para agregar una nueva categoría
+
     if (parsedUrl.pathname === '/api/category/newCategory' && req.method === 'POST') {
-        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
-            authorization(['admin', 'super_admin'])(req, res, () => {  // Verificar si el usuario es admin o super_admin
+        authentication(req, res, () => { 
+            authorization(['admin', 'super_admin'])(req, res, () => {  
                 let body = '';
                 req.on('data', chunk => {
-                    body += chunk; // Recibe los datos en trozos
+                    body += chunk; 
                 });
 
                 req.on('end', () => {
                     req.body = JSON.parse(body);
-                    agregarCategoria(req, res); // Llamamos al controlador que maneja la creación de categorías
+                    agregarCategoria(req, res); 
                 });
             });
         });
     }
-    // Ruta para editar una categoría
+
     else if (parsedUrl.pathname.startsWith('/api/category/editCategory') && req.method === 'PUT') {
-        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
-            authorization(['admin', 'super_admin'])(req, res, () => {  // Verificar si el usuario es admin o super_admin
+        authentication(req, res, () => { 
+            authorization(['admin', 'super_admin'])(req, res, () => {  
                 let body = '';
                 req.on('data', chunk => {
-                    body += chunk; // Recibe los datos en trozos
+                    body += chunk; 
                 });
 
                 req.on('end', () => {
                     req.body = JSON.parse(body);
-                    editarCategoria(req, res); // Llamamos al controlador que maneja la edición de categorías
+                    editarCategoria(req, res); 
                 });
             });
         });
     }
-    // Ruta para eliminar una categoría
+
     else if (parsedUrl.pathname.startsWith('/api/category/deleteCategory') && req.method === 'DELETE') {
-        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
-            authorization(['admin', 'super_admin'])(req, res, () => {  // Verificar si el usuario es admin o super_admin
-                eliminarCategoria(req, res); // Llamamos al controlador que maneja la eliminación de categorías
+        authentication(req, res, () => { 
+            authorization(['admin', 'super_admin'])(req, res, () => {  
+                eliminarCategoria(req, res); 
             });
         });
     }
 
-    // Ruta para obtener todas las categorías
     else if (parsedUrl.pathname === '/api/category/allCategories' && req.method === 'GET') {
         obtenerTodasCategorias(req, res);
     }

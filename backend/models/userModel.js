@@ -29,14 +29,14 @@ const userSchema = new Schema({
     },
     roles: {
         type: [String],
-        default: ['user'], // Asignamos el rol predeterminado de 'user'
+        default: ['user'], 
     },
 }, { timestamps: true });
 
-// Middleware para asignar rol predeterminado si no se especifica
+
 userSchema.pre('save', function(next) {
     if (!this.roles || this.roles.length === 0 || this.roles[0] === '') {
-        this.roles = ['user']; // Asignamos el rol 'user' por defecto
+        this.roles = ['user']; 
     }
     next();
 });

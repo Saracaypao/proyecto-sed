@@ -7,65 +7,62 @@ const { getUserRole } = require('../controllers/authController');
 const userRoutes = (req, res) => {
     const parsedUrl = url.parse(req.url, true);
 
-    // Ruta para crear un nuevo usuario
     if (parsedUrl.pathname === '/api/user/newUser' && req.method === 'POST') {
         let body = '';
         req.on('data', chunk => {
-            body += chunk; // Recibe los datos en trozos
+            body += chunk; 
         });
 
         req.on('end', () => {
             req.body = JSON.parse(body);
 
-            // Si el rol es admin, requiere autenticación del super_admin
             if (req.body.rol === 'admin') {
-                authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
-                    authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
+                authentication(req, res, () => { 
+                    authorization('super_admin')(req, res, () => {  
                         //console.log("Auth passed");
-                        registrarUsuario(req, res); // Llamamos al controlador que maneja el registro del usuario
+                        registrarUsuario(req, res);
                     });
                 });
             } else {
-                // No requiere autenticación si el rol no es admin
                 registrarUsuario(req, res);
             }
         });
     }
-    // Ruta para obtener todos los usuarios
+
     else if (parsedUrl.pathname === '/api/user/allUsers' && req.method === 'GET') {
-        obtenerTodosUsuarios(req, res); // Llamamos al controlador que maneja la obtención de usuarios
+        obtenerTodosUsuarios(req, res); 
     }
-    // Ruta para eliminar un usuario
+
     else if (parsedUrl.pathname.startsWith('/api/user/deleteUser') && req.method === 'DELETE') {
-        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
-            const userId = parsedUrl.pathname.split('/').pop(); // Obtener el ID del usuario
-            req.userIdToDelete = userId; // Adjuntar el ID del usuario a eliminar
-            authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
-                eliminarUsuario(req, res); // Llamamos al controlador que maneja la eliminación del usuario
+        authentication(req, res, () => { 
+            const userId = parsedUrl.pathname.split('/').pop(); 
+            req.userIdToDelete = userId; 
+            authorization('super_admin')(req, res, () => {  
+                eliminarUsuario(req, res); 
             });
         });
     }
-    // Ruta para editar un usuario
+
     else if (parsedUrl.pathname.startsWith('/api/user/editUser') && req.method === 'PUT') {
-        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
-            authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
+        authentication(req, res, () => {  
+            authorization('super_admin')(req, res, () => {  
                 let body = '';
                 req.on('data', chunk => {
-                    body += chunk; // Recibe los datos en trozos
+                    body += chunk; 
                 });
 
                 req.on('end', () => {
                     req.body = JSON.parse(body);
-                    editarUsuario(req, res); // Llamamos al controlador que maneja la edición del usuario
+                    editarUsuario(req, res);
                 });
             });
         });
     }
-    // Ruta para obtener todos los usuarios con rol 'admin'
+
     else if (parsedUrl.pathname === '/api/user/admins' && req.method === 'GET') {
-        authentication(req, res, () => {  // Asegurarse de que el usuario esté autenticado
-            authorization('super_admin')(req, res, () => {  // Verificar si el usuario es super_admin
-                obtenerAdmins(req, res); // Llamamos al controlador que maneja la obtención de administradores
+        authentication(req, res, () => {  
+            authorization('super_admin')(req, res, () => {  
+                obtenerAdmins(req, res); 
             });
         });
     }

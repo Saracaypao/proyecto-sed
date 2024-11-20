@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 
 const controller = {};
 
-// Función para agregar una receta
 controller.agregarReceta = async (req, res) => {
     try {
         const token = req.headers['authorization']?.split(' ')[1];
@@ -61,7 +60,7 @@ controller.agregarReceta = async (req, res) => {
     }
 };
 
-// Función para aceptar una receta
+
 controller.aceptarReceta = async (req, res) => {
     try {
         const { recipeId } = req.body;
@@ -77,10 +76,8 @@ controller.aceptarReceta = async (req, res) => {
                       .end(JSON.stringify({ error: 'Receta no encontrada' }));
         }
 
-        // Cambiar el estado de la receta a aprobada
         recipe.estado = 'aprobada';
 
-        // Guardar el cambio en la base de datos
         const recetaActualizada = await recipe.save();
 
         res.writeHead(200, { 'Content-Type': 'application/json' })
@@ -92,7 +89,6 @@ controller.aceptarReceta = async (req, res) => {
     }
 };
 
-// Función para rechazar una receta
 controller.rechazarReceta = async (req, res) => {
     try {
         const { recipeId } = req.body;
@@ -108,10 +104,8 @@ controller.rechazarReceta = async (req, res) => {
                       .end(JSON.stringify({ error: 'Receta no encontrada' }));
         }
 
-        // Cambiar el estado de la receta a 'rechazada'
         recipe.estado = 'rechazada';
 
-        // Guardar el cambio en la base de datos
         const recetaActualizada = await recipe.save();
 
         res.writeHead(200, { 'Content-Type': 'application/json' })
@@ -123,19 +117,17 @@ controller.rechazarReceta = async (req, res) => {
     }
 };
 
-// Función para obtener todas las recetas
 controller.obtenerTodasRecetas = async (req, res) => {
     try {
         const recetas = await Receta.find().populate('autor', 'nombre');
 
-        // Verificar si cada receta tiene los campos completos
         const recetasConDatosCompletos = recetas.map(receta => ({
             id: receta._id,
             titulo: receta.nombreReceta,
-            ingredientes: receta.ingredientes.join(', '),  // Asumiendo que ingredientes es un array
-            preparacion: receta.preparacion || 'Sin preparación',  // Asegúrate de que preparacion tenga valor por defecto
+            ingredientes: receta.ingredientes.join(', '),  
+            preparacion: receta.preparacion || 'Sin preparación', 
             autor: receta.autor ? receta.autor.nombre : 'Desconocido',
-            categoria: receta.categoria || 'Sin categoría',  // Si la categoría no existe
+            categoria: receta.categoria || 'Sin categoría', 
             descripcion: receta.descripcion || 'Sin descripción', 
             porciones: receta.porciones || 'Sin porciones', 
         }));
@@ -157,7 +149,6 @@ controller.obtenerRecetaPorId = async (req, res) => {
     try {
         const id = req.params.id;
 
-        // Comprobar si el ID es válido
         if (!mongoose.Types.ObjectId.isValid(id)) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'ID de receta no válido' }));
@@ -192,14 +183,13 @@ controller.buscarRecetasPorFiltro = async (req, res) => {
     try {
         const recetas = await Receta.find(filtro).populate('autor', 'nombre');
         
-        // Verificar si cada receta tiene los campos completos
         const recetasConDatosCompletos = recetas.map(receta => ({
             id: receta._id,
             titulo: receta.nombreReceta || 'Sin título',
-            ingredientes: receta.ingredientes.join(', '),  // Asumiendo que ingredientes es un array
-            preparacion: receta.preparacion || 'Sin preparación',  // Asegúrate de que preparacion tenga valor por defecto
+            ingredientes: receta.ingredientes.join(', '),  
+            preparacion: receta.preparacion || 'Sin preparación',  
             autor: receta.autor ? receta.autor.nombre : 'Desconocido',
-            categoria: receta.categoria || 'Sin categoría',  // Si la categoría no existe
+            categoria: receta.categoria || 'Sin categoría',  
             descripcion: receta.descripcion || 'Sin descripción', 
             porciones: receta.porciones || 'Sin porciones', 
         }));
@@ -213,7 +203,6 @@ controller.buscarRecetasPorFiltro = async (req, res) => {
     }
 };
 
-// Función para actualizar una receta
 controller.actualizarReceta = async (req, res) => {
     const recetaId = req.params.id;
     let body = '';
@@ -243,7 +232,6 @@ controller.actualizarReceta = async (req, res) => {
     });
 };
 
-// Función para eliminar una receta
 controller.eliminarReceta = async (req, res) => {
     const recetaId = req.params.id;
 
