@@ -6,7 +6,7 @@ const apiRouter = require('./routes/indexRoutes');
 
 const PORT = process.env.PORT || 3000;
 
-const allowedOrigins = ['http://127.0.0.1:5500', 'http://localhost:5500']; // Asegúrate de que esta lista sea correcta
+const allowedOrigins = ['http://127.0.0.1:80', 'http://localhost:80']; // Asegúrate de que esta lista sea correcta
 
 const server = http.createServer(async (req, res) => {
     // Habilitar CORS de forma centralizada
