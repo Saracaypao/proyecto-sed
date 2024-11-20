@@ -1,38 +1,42 @@
 require('dotenv').config();
 const http = require('http');
-const cors = require('cors'); 
 const { dbConnection } = require('./services/db');
 const apiRouter = require('./routes/indexRoutes');
 
 const PORT = process.env.PORT || 3000;
 
-const allowedOrigins = ['http://127.0.0.1:80', 'http://localhost:80', 'http://192.168.29.130:80', 'http://192.168.29.130:443', '*']; // Asegúrate de que esta lista sea correcta
+const allowedOrigins = [
+    'http://127.0.0.1:80',
+    'http://localhost:80',
+    'http://192.168.29.130:80',
+    'http://192.168.29.130:443'
+];
 
 const server = http.createServer(async (req, res) => {
-
     const origin = req.headers.origin;
-            //res.setHeader('Access-Control-Allow-Origin', origin);
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
-            if (req.method === 'OPTIONS') {
-                res.writeHead(204, {
-                    'Content-Length': '0',
-                    'Access-Control-Allow-Origin': origin || '*',
-                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-                    'Access-Control-Allow-Credentials': 'true'
-                });
-                res.end();
-                return;
-            }
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    } else {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+    if (req.method === 'OPTIONS') {
+        res.writeHead(204);
+        res.end();
+        return;
+    }
 
     apiRouter(req, res);
 });
 
 dbConnection()
     .then(() => {
-        server.listen(PORT, () => {
+        server.listen(PORT, '0.0.0.0', () => {
             console.log(`Servidor escuchando en el puerto ${PORT}`);
         });
     })
