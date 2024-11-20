@@ -14,12 +14,18 @@ const server = http.createServer(async (req, res) => {
             //res.setHeader('Access-Control-Allow-Origin', origin);
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-            res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-    if (req.method === 'OPTIONS') {
-        res.writeHead(204); // Responder a la preflight request
-        return res.end();
-    }
+            if (req.method === 'OPTIONS') {
+                res.writeHead(204, {
+                    'Content-Length': '0',
+                    'Access-Control-Allow-Origin': origin || '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                    'Access-Control-Allow-Credentials': 'true'
+                });
+                res.end();
+                return;
+            }
 
     apiRouter(req, res); // Delegar el manejo de rutas al apiRouter
 });
