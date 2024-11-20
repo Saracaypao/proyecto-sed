@@ -24,7 +24,7 @@ var Auth = /*#__PURE__*/function () {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return fetch('http://localhost:3000/logIn', {
+              return fetch('http://192.168.29.130:3000/logIn', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
